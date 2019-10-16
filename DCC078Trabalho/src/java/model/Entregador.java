@@ -11,4 +11,8 @@ package model;
  */
 public class Entregador extends Usuario {
     private Pedido pedido;
+
+    public Entregador(Long id, String nome) {
+        super(id, nome);
+    }
 }

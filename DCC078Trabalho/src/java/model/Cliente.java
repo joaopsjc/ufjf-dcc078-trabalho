@@ -11,4 +11,8 @@ package model;
  */
 public class Cliente extends Usuario {
     private MetodoPagamento metodoPagamento;
+
+    public Cliente(Long id, String nome) {
+        super(id, nome);
+    }
 }

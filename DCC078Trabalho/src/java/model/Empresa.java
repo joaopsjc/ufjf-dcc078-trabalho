@@ -12,4 +12,8 @@ package model;
 public class Empresa extends Usuario{
     private Cardapio cardapio;
 
+    public Empresa(Long id, String nome) {
+        super(id, nome);
+    }
+
 }

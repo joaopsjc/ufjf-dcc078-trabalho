@@ -10,8 +10,13 @@ package model;
  * @author andradeld
  */
 public abstract class Usuario {
-    private String id;
+    private Long id;
     private String nome;
     private Endereco endereco;
     private Contato contato;
+    
+    public Usuario(Long id, String nome){
+        this.id=id;
+        this.nome=nome;
+    }
 }
