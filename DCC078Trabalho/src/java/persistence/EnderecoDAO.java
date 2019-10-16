@@ -5,10 +5,26 @@
  */
 package persistence;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author ice
  */
 public class EnderecoDAO {
+        private static EnderecoDAO instance = new EnderecoDAO();
+    public static EnderecoDAO getInstance(){
+        return instance;
+    }
     
+    private void closeResources(Connection conn, Statement st) {
+        try {
+            if(st!=null) st.close();
+            if(conn!=null) conn.close();
+        } catch(SQLException e) {
+
+        }
+    } 
 }
