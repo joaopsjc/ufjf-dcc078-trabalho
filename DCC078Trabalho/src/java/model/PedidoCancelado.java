@@ -7,9 +7,11 @@ package model;
 
 /**
  *
- * @author jjsfa
+ * @author ice
  */
-public class Empresa extends Usuario{
-    private Cardapio cardapio;
-
+public class PedidoCancelado implements PedidoEstado{
+    
+    public String getEstado() {
+        return "Cancelado";
+    }
 }

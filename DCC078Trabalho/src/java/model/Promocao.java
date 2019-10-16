@@ -7,9 +7,9 @@ package model;
 
 /**
  *
- * @author jjsfa
+ * @author andradeld
  */
-public class Empresa extends Usuario{
-    private Cardapio cardapio;
-
+public interface Promocao {
+    public int obterDesconto();
+    public String obterPromocao();
 }

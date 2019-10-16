@@ -7,9 +7,12 @@ package model;
 
 /**
  *
- * @author jjsfa
+ * @author andradeld
  */
-public class Empresa extends Usuario{
-    private Cardapio cardapio;
-
+public class Pedido {
+    private Long id;
+    private Produto produto;
+    private String observacao;
+    private Entregador entregador;
+    private PedidoEstado estado;
 }

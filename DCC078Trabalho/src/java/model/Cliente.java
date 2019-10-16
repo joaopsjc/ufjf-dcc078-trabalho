@@ -7,9 +7,8 @@ package model;
 
 /**
  *
- * @author jjsfa
+ * @author andradeld
  */
-public class Empresa extends Usuario{
-    private Cardapio cardapio;
-
+public class Cliente extends Usuario {
+    private MetodoPagamento metodoPagamento;
 }
