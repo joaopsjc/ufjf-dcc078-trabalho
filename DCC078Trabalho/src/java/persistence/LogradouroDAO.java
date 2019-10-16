@@ -13,9 +13,9 @@ import java.sql.Statement;
  *
  * @author ice
  */
-public class EnderecoDAO {
-        private static EnderecoDAO instance = new EnderecoDAO();
-    public static EnderecoDAO getInstance(){
+public class LogradouroDAO {
+        private static LogradouroDAO instance = new LogradouroDAO();
+    public static LogradouroDAO getInstance(){
         return instance;
     }
     
@@ -27,4 +27,5 @@ public class EnderecoDAO {
 
         }
     } 
+    
 }
