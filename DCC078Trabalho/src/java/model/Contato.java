@@ -9,7 +9,7 @@ package model;
  *
  * @author andradeld
  */
-public class Contato {
-    private String telefone;
-    private String email;
+public interface Contato {
+    public String getValorContato();
+    public void setValorContato(String novoValor);
 }

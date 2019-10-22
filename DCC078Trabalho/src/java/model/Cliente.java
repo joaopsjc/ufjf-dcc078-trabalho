@@ -12,40 +12,40 @@ import java.util.List;
  * @author andradeld
  */
 public class Cliente extends Usuario {
-    private final int CPF;
+    private final long CPF;
 
-    public Cliente(int CPF, Long id, String nome, String login, String senha) {
+    public Cliente(long CPF, Long id, String nome, String login, String senha) {
         super(id, nome, login, senha);
         this.CPF = CPF;
     }
 
-    public Cliente(int CPF, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+    public Cliente(long CPF, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
         super(id, nome, login, dadosBancarios, senha);
         this.CPF = CPF;
     }
 
-    public Cliente(int CPF, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
+    public Cliente(long CPF, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
         super(id, nome, login, senha, enderecos);
         this.CPF = CPF;
     }
 
-    public Cliente(int CPF, Long id, String nome, List<Contato> contatos, String login, String senha) {
+    public Cliente(long CPF, Long id, String nome, List<Contato> contatos, String login, String senha) {
         super(id, nome, contatos, login, senha);
         this.CPF = CPF;
     }
 
-    public Cliente(int CPF, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
+    public Cliente(long CPF, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
         super(id, pedidos, nome, login, senha);
         this.CPF = CPF;
     }
 
-    public Cliente(int CPF, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+    public Cliente(long CPF, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
         super(id, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
         this.CPF = CPF;
     }
 
     
-    public int getCPF() {
+    public long getCPF() {
         return CPF;
     }
     
