@@ -15,7 +15,7 @@ public class Produto {
     private String descricao;
     private String categoria;
     private Double preco;
-    private produtoEstado estado;
+    private ProdutoEstado estado;
 
     public Produto(Long id, String nome, String descricao, String categoria, Double preco) {
         this.id = id;
@@ -23,7 +23,7 @@ public class Produto {
         this.descricao = descricao;
         this.categoria = categoria;
         this.preco = preco;
-        this.estado = new produtoEstadoDisponivel();
+        this.estado = new ProdutoEstadoDisponivel();
     }
 
     public Long getId() {
@@ -46,10 +46,9 @@ public class Produto {
         return preco;
     }
 
-    public produtoEstado getEstado() {
+    public ProdutoEstado getEstado() {
         return estado;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -64,6 +63,18 @@ public class Produto {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+    public void produtoIndisponivel()
+    {
+        this.estado = new ProdutoEstadoIndisponivel();
+    }
+    public void produtoDisponivel()
+    {
+        this.estado = new ProdutoEstadoDisponivel();
+    }
+    public void produtoBloqueado()
+    {
+        this.estado = new ProdutoEstadoBloqueado();
     }
     
 }

@@ -24,11 +24,11 @@ public class Pedido {
     private String observacao;
     private PedidoEstado estado;
     private Endereco endereco;
-    private float frete,
+    private double frete,
             precoProdutos;
 
     public Pedido(Long id, List<Produto> produtos, String observacao,
-            Endereco endereco, float frete) {
+            Endereco endereco, double frete) {
         this.id = id;
         this.produtos = produtos;
         this.observacao = observacao;
@@ -43,7 +43,7 @@ public class Pedido {
         }
     }
     public Pedido(Long id, String observacao,
-            Endereco endereco, float frete) {
+            Endereco endereco, double frete) {
         this.id = id;
         this.produtos = new ArrayList<>();
         this.observacao = observacao;
@@ -72,11 +72,11 @@ public class Pedido {
         return endereco;
     }
 
-    public float getFrete() {
+    public double getFrete() {
         return frete;
     }
 
-    public float getPrecoProdutos() {
+    public double getPrecoProdutos() {
         return precoProdutos;
     }
 
@@ -84,7 +84,7 @@ public class Pedido {
         this.observacao = observacao;
     }
 
-    public void setFrete(float frete) {
+    public void setFrete(double frete) {
         this.frete = frete;
     }
 
