@@ -50,7 +50,7 @@ public class EmpresaDAO {
                     Long id = rs.getLong("id");
                     String nome = rs.getString("nome");
                     
-                    listaEmpresas.add(new Empresa(id,nome));
+                    //listaEmpresas.add(new Empresa(id,nome));
                 }
             } catch(SQLException e) {
                 throw e;
