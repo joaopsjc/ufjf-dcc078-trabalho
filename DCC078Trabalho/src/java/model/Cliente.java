@@ -10,9 +10,19 @@ package model;
  * @author andradeld
  */
 public class Cliente extends Usuario {
-    private MetodoPagamento metodoPagamento;
+    private int CPF;
 
-    public Cliente(Long id, String nome) {
-        super(id, nome);
+    public Cliente(int CPF, Long id, String nome, String login, String senha) {
+        super(id, nome, login, senha);
+        this.CPF = CPF;
     }
+
+    public int getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(int CPF) {
+        this.CPF = CPF;
+    }
+    
 }
