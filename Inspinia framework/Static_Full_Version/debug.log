@@ -1,0 +1,7 @@
+[1109/135836:ERROR:process_info.cc(608)] range at 0x5cf244ec00000000, size 0x3d fully unreadable
+[1109/135836:ERROR:process_info.cc(608)] range at 0x5cf2455000000000, size 0x3d fully unreadable
+[1109/135836:ERROR:process_info.cc(608)] range at 0x0, size 0x3d fully unreadable
+[1109/135836:WARNING:in_range_cast.h(38)] value 263552375936 out of range
+[1109/135836:WARNING:in_range_cast.h(38)] value 263552372062 out of range
+[1109/135836:WARNING:in_range_cast.h(38)] value 263552375976 out of range
+[1109/135857:ERROR:http_transport_win.cc(50)] WinHttpSendRequest: O tempo limite da operação foi atingido  (0x2EE2)
