@@ -5,6 +5,8 @@
  */
 package model;
 
+import model.abstratos.Endereco;
+import model.interfaces.PedidoEstado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;

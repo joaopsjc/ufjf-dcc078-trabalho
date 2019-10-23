@@ -5,6 +5,11 @@
  */
 package model;
 
+import model.estados.ProdutoEstadoBloqueado;
+import model.estados.ProdutoEstadoDisponivel;
+import model.estados.ProdutoEstadoIndisponivel;
+import model.interfaces.ProdutoEstado;
+
 /**
  *
  * @author andradeld

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Empresa;
+import model.extensores.Empresa;
 import persistence.EmpresaDAO;
 
 /**

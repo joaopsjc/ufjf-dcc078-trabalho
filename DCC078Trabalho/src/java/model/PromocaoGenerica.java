@@ -5,18 +5,23 @@
  */
 package model;
 
+import model.interfaces.Promocao;
+
 /**
  *
  * @author ice
  */
 public class PromocaoGenerica implements Promocao{
-
+    String nome = "Promoção Genérica";
     public int obterDesconto() {
             return 10;
         }
 
     public String obterPromocao() {
-            return "Dia das Mães";
+            return nome;
         }
-    
+    public void setNome(String novoNome)
+    {
+        nome = novoNome;
+    }
 }

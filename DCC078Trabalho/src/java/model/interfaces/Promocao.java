@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.interfaces;
 
 /**
  *
- * @author ice
+ * @author andradeld
  */
-public class PedidoACaminho implements PedidoEstado {
-    
-    public String getEstado() {
-        return "A caminho";
-    }
+public interface Promocao {
+    public int obterDesconto();
+    public String obterPromocao();
 }

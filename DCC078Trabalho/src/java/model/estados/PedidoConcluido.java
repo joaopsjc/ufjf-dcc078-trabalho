@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.estados;
+
+import model.interfaces.PedidoEstado;
 
 /**
  *
  * @author ice
  */
-public class PedidoEmPreparo implements PedidoEstado {
+public class PedidoConcluido implements PedidoEstado {
     
     public String getEstado() {
-        return "Em preparo";
+        return "Concluido";
     }
 }

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.interfaces;
 
 /**
  *
  * @author andradeld
  */
-public interface Contato {
-    public String getValorContato();
-    public void setValorContato(String novoValor);
+public interface PedidoEstado {
+    public String getEstado();
 }

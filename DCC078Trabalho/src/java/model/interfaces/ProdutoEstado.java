@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.interfaces;
 
 /**
  *
- * @author Andre William
+ * @author JoaoPSJC
  */
-public class ProdutoEstadoIndisponivel implements ProdutoEstado{
+public interface ProdutoEstado{
     
 }

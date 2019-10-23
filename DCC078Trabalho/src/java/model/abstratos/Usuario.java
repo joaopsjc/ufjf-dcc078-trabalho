@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.abstratos;
 
+import model.interfaces.Contato;
 import java.util.ArrayList;
 import java.util.List;
+import model.DadoBancario;
+import model.Pedido;
 
 /**
  *

@@ -3,9 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.extensores;
 
+import model.abstratos.Endereco;
+import model.abstratos.Usuario;
+import model.interfaces.Contato;
 import java.util.List;
+import model.Cardapio;
+import model.DadoBancario;
+import model.Pedido;
+import model.Produto;
 
 /**
  *

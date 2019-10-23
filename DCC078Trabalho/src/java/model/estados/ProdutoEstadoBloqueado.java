@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.estados;
+
+import model.interfaces.ProdutoEstado;
 
 /**
  *
- * @author Andre William
+ * @author JoaoPSJC
  */
-public class ProdutoEstadoDisponivel implements ProdutoEstado{
+public class ProdutoEstadoBloqueado implements ProdutoEstado{
     
 }
