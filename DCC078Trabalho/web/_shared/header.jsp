@@ -81,6 +81,23 @@
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </div>
+                <ul class="nav navbar-top-links navbar-right">
+
+
+                    <li>
+                        
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            Usuário logado <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="profile.html">Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+                
 
             </nav>
         </div>
