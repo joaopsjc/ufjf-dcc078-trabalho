@@ -46,3 +46,11 @@ form.form-control {
 button i{
     padding-right:5px;
 }
+
+.loginscreen.middle-box{
+    width:400px;
+}
+
+.logo-name{
+    margin-bottom: 30px;
+}
