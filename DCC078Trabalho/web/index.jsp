@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="text-center m-t-lg">
                         <h1>
-                            Sistema de gestão de ONG's
+                            UFJF Food
                         </h1>
                         <small>Navegue pelo menu ao lado.</small>
                     </div>

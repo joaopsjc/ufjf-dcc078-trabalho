@@ -8,14 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sistema de gestão de ONGs</title>
+    <title>UFJF Food</title>
 
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="../../assets/css/animate.css" rel="stylesheet">
-    <link href="../../assets/css/style.css" rel="stylesheet">
-    <link href="../../assets/css/style_custom.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/css/animate.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/css/style.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/css/style_custom.css" rel="stylesheet">
 
 </head>
 
@@ -34,7 +34,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/Home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+                    <a href="FrontController?action=Home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Atividades</span><span class="fa arrow"></span></a>
@@ -84,3 +84,4 @@
 
             </nav>
         </div>
+        
