@@ -92,7 +92,7 @@
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Perfil</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="FrontController?action=DoLogout">Logout</a></li>
                         </ul>
                         
                     </li>

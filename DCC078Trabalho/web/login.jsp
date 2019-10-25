@@ -27,7 +27,8 @@
 
             </div>
             <h3>Bem vindo ao UFJF Food</h3>
-            <form class="m-t" role="form" action="index.html">
+            <form class="m-t" role="form" action="FrontController">
+                <input type="hidden" name="action" value="DoLogin" />
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Usuario" required="">
                 </div>
