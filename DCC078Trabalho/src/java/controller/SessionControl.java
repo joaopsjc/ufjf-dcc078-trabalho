@@ -40,6 +40,7 @@ public class SessionControl implements javax.servlet.Filter {
         add("/register.jsp");
         add("Register");
         add("DoRegister");
+        add("/erro.jsp");
     }};
     
     public void destroy() {
