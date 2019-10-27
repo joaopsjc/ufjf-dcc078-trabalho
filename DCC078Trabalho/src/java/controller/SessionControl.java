@@ -6,6 +6,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
   
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -24,6 +26,22 @@ import javax.servlet.http.HttpSession;
 
 public class SessionControl implements javax.servlet.Filter {
 
+    /*private final List<String> allowedPages = new ArrayList<String>(){
+        "DoLogin",
+        "Login",
+        "/login.jsp",
+        "/assets"
+    }; */
+    private static final List<String> allowedPages = new ArrayList<String>() {{
+        add("DoLogin");
+        add("Login");
+        add("/login.jsp");
+        add("/assets");
+        add("/register.jsp");
+        add("Register");
+        add("DoRegister");
+    }};
+    
     public void destroy() {
        // TODO Auto-generated method stub
   
@@ -40,7 +58,8 @@ public class SessionControl implements javax.servlet.Filter {
         
         String servletPath = httpRequest.getServletPath();
         
-        if ( action.equals("DoLogin") || action.equals("Login") || servletPath.equals("/login.jsp") || servletPath.startsWith("/assets")){
+        boolean allow = allowedPages.contains(servletPath) || allowedPages.contains(action);
+        if ( allow || servletPath.startsWith("/assets")){
             chain.doFilter(request, response);
             return;
         }
