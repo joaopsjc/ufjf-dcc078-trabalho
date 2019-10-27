@@ -83,8 +83,12 @@ public class Entregador extends Usuario {
         return avaliacao;
     }
 
-    public int getCPF() {
+    public int getDocumento() {
         return CPF;
+    }
+    public String getTipo()
+    {
+        return "Entregador";
     }
     
 }

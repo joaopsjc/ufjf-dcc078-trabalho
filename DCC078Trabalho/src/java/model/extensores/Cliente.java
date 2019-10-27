@@ -57,5 +57,8 @@ public class Cliente extends Usuario {
     public long getCPF() {
         return CPF;
     }
-    
+    public String getTipo()
+    {
+        return "Cliente";
+    }
 }

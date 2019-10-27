@@ -125,4 +125,8 @@ public class Empresa extends Usuario{
     {
         cardapio.addProduto(novoProduto);
     }
+    public String getTipo()
+    {
+        return "Empresa";
+    }
 }
