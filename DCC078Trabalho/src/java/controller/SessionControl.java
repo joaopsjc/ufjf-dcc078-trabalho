@@ -64,7 +64,7 @@ public class SessionControl implements javax.servlet.Filter {
             chain.doFilter(request, response);
             return;
         }
-        Integer userId = (Integer)sess.getAttribute("loggedUser");
+        Long userId = (Long)sess.getAttribute("loggedUser");
 
         if (userId==null){
             HttpServletResponse httpResponse = (HttpServletResponse) response;

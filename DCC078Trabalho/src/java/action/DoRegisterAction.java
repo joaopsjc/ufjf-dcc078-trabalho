@@ -37,7 +37,7 @@ public class DoRegisterAction implements Action{
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
-        Long tipoUsuario = Long.parseLong(request.getParameter("tipoUsuario"));
+        Long tipoUsuarioId = Long.parseLong(request.getParameter("tipoUsuario"));
         String tipoUsuarioText = request.getParameter("tipoUsuarioText");
         
         
@@ -55,8 +55,8 @@ public class DoRegisterAction implements Action{
             usuario.setLogin(login);
             usuario.setSenha(senha);
             usuario.setNome(nome);
-            usuario.setTipoUsuario(tipoUsuarioText);
-            usuario.setTipoUsuarioId(tipoUsuario);
+            TipoUsuario tipoUsuario = new TipoUsuario(tipoUsuarioId,tipoUsuarioText);
+            usuario.setTipoUsuario(tipoUsuario);
             UsuarioDAO.getInstance().insert(usuario);
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Registro realizado com sucesso!");

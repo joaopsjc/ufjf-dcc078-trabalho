@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.DadoBancario;
 import model.Pedido;
+import model.TipoUsuario;
 
 /**
  *
@@ -20,8 +21,7 @@ public abstract class Usuario {
     private String nome,
             login,
             senha;
-    private String tipoUsuario;
-    private Long tipoUsuarioId;
+    private TipoUsuario tipoUsuario;
     private final List<DadoBancario> dadosBancarios;
     private final List<Endereco> enderecos;
     private final List<Contato> contatos;
@@ -161,20 +161,12 @@ public abstract class Usuario {
         pedidos.add(novoPedido);
     }
 
-    public String getTipoUsuario() {
+    public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public void setTipoUsuario(String tipoUsuario) {
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    public Long getTipoUsuarioId() {
-        return tipoUsuarioId;
-    }
-
-    public void setTipoUsuarioId(Long tipoUsuarioId) {
-        this.tipoUsuarioId = tipoUsuarioId;
     }
     
     

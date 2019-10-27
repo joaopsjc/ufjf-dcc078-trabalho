@@ -29,13 +29,13 @@
 
             </div>
             <h3>Bem vindo ao UFJF Food</h3>
-            <form class="m-t" role="form" action="FrontController">
+            <form class="m-t" role="form" method="post" action="FrontController">
                 <input type="hidden" name="action" value="DoLogin" />
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Usuario" required="">
+                    <input type="email" name="login" class="form-control" placeholder="Usuario" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Senha" required="">
+                    <input type="password" name="senha" class="form-control" placeholder="Senha" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
@@ -52,6 +52,14 @@
     <!-- Sweet alert -->
     <script src="../DCC078Trabalho/assets/js/plugins/sweetalert/sweetalert2.min.js"></script>
     <script src="../DCC078Trabalho/assets/js/script.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            var msgError = "<%=request.getAttribute("messageError")%>";
+            if (msgError.length>0 && msgError != 'null')
+                UF.Alert.Error({message:msgError});
+        });
+    </script>
 
 </body>
 

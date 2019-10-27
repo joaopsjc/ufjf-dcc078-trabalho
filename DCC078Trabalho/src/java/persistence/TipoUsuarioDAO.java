@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.TipoUsuario;
+import model.abstratos.Usuario;
+import model.abstratos.UsuarioFactory;
 import model.extensores.Empresa;
 
 /**
@@ -25,7 +27,7 @@ public class TipoUsuarioDAO extends DAO{
         return instance;
     }
     
-    public List<TipoUsuario> getTiposUsuario()  throws SQLException, ClassNotFoundException{
+    public List<TipoUsuario> getTiposUsuario() throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         List<TipoUsuario> listaTiposUsuario = new ArrayList();
@@ -49,5 +51,29 @@ public class TipoUsuarioDAO extends DAO{
                 closeResources(conn, st);
             }
         return listaTiposUsuario;
+    }
+
+    public TipoUsuario getTipoUsuarioById(Long tipoUsuarioId)throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        TipoUsuario tipoUsuario = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select id,nome from tipoUsuario where id="+tipoUsuarioId);
+
+            if (rs.next())
+            {
+                Long id = rs.getLong("id");
+                String nome = rs.getString("nome");
+                tipoUsuario = new TipoUsuario(id,nome);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return tipoUsuario;
     }
 }
