@@ -13,6 +13,8 @@
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+    <!-- Sweet Alert -->
+    <link href="../DCC078Trabalho/assets/css/plugins/sweetalert/sweetalert2.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/css/animate.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/css/style.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/css/style_custom.css" rel="stylesheet">

@@ -18,6 +18,8 @@
 <script src="../DCC078Trabalho/assets/js/inspinia.js"></script>
 <script src="../DCC078Trabalho/assets/js/plugins/pace/pace.min.js"></script>
 <script src="../DCC078Trabalho/assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<!-- Sweet alert -->
+<script src="../DCC078Trabalho/assets/js/plugins/sweetalert/sweetalert2.min.js"></script>
 
 
 </body>

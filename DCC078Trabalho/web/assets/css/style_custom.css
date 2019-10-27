@@ -54,3 +54,113 @@ button i{
 .logo-name{
     margin-bottom: 30px;
 }
+
+/*-- Global --*/
+textarea {
+    resize: none;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-table-cell {
+    display: table-cell;
+}
+
+.vertical-align-middle {
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.display-table {
+    display: table;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.color-blue {
+    color: blue;
+}
+
+.color-green {
+    color: #0b846b;
+}
+
+.align-middle {
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    -ms-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.item-cancelled {
+    text-decoration: line-through;
+}
+
+.required-symbol:after {
+    content: " *";
+    font-weight: bold;
+    color: #ed5565;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*-- Animations --*/
+.clice-loader-contents {
+    margin-top: 15px;
+}
+
+.circle-loader {
+    margin: 0 auto;
+    fill: transparent;
+    stroke: #009688;
+    stroke-width: 5;
+    animation: dash 2s ease infinite,rotate 2s linear infinite;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1,95;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 85,95;
+        stroke-dashoffset: -25;
+    }
+
+    100% {
+        stroke-dasharray: 85,95;
+        stroke-dashoffset: -93;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
