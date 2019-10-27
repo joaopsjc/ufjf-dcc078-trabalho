@@ -12,16 +12,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import model.TipoUsuario;
 import model.abstratos.Usuario;
-import model.abstratos.UsuarioFactory;
+import controller.UsuarioFactory;
 
 /**
  *
  * @author jjsfa
  */
-public class UsuarioDAOv2 extends DAO{
+public class UsuarioDAODepreciado extends DAO{
     
-    private static final UsuarioDAOv2 instance = new UsuarioDAOv2();
-    public static UsuarioDAOv2 getInstance(){
+    private static final UsuarioDAODepreciado instance = new UsuarioDAODepreciado();
+    public static UsuarioDAODepreciado getInstance(){
         return instance;
     }
     
@@ -30,12 +30,12 @@ public class UsuarioDAOv2 extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into usuario(nome,login,senha,documento,tipoUsuario) values (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into usuario(nome,login,senha,tipoUsuarioId) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,usuario.getNome());
             st.setString(2,usuario.getLogin());
             st.setString(3,usuario.getSenha());
-            st.setString(5,usuario.getTipo());
-            st.setLong(4,usuario.getTipoUsuario().getId());
+            //substituido por getTipo()
+            //st.setLong(4,usuario.getTipoUsuario().getId());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -67,7 +67,8 @@ public class UsuarioDAOv2 extends DAO{
                 TipoUsuario tipo = TipoUsuarioDAO.getInstance().getTipoUsuarioById(tipoUsuarioId);
                 usuario = UsuarioFactory.create(tipo.getNome());
                 usuario.setId(id);
-                usuario.setTipoUsuario(tipo);
+                //substituido por getTipo()
+                //usuario.setTipoUsuario(tipo);
             }
         } catch(SQLException e) {
             throw e;

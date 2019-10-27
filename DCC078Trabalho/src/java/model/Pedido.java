@@ -10,6 +10,7 @@ import model.interfaces.PedidoEstado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import model.extensores.*;
 
 /**
  *
@@ -17,9 +18,9 @@ import java.util.Iterator;
  */
 public class Pedido {
     //campos só para o banco de dados?
-    //private Entregador entregador;
-    //private Cliente cliente;
-    //private Empresa empresa;
+    private Entregador entregador;
+    private Cliente cliente;
+    private Empresa empresa;
     
     private final Long id;
     private final List<Produto> produtos;
@@ -82,6 +83,18 @@ public class Pedido {
         return precoProdutos;
     }
 
+    public Entregador getEntregador() {
+        return entregador;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+    
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
@@ -90,6 +103,22 @@ public class Pedido {
         this.frete = frete;
     }
 
+    public void setEntregador(Entregador entregador) {
+        this.entregador = entregador;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
     public void addProduto(Produto novoProduto)
     {
         produtos.add(novoProduto);

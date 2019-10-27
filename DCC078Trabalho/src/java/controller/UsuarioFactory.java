@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.abstratos;
+package controller;
+
+import model.abstratos.Usuario;
 
 
 /**
@@ -15,7 +17,7 @@ public class UsuarioFactory {
         Usuario usuarioObject = null;
         String nomeClasse = "model.extensores."+ tipoUsuario;
         Class classe = null;
-        Object objeto =null;
+        Object objeto = null;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();

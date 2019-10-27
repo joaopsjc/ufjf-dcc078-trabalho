@@ -17,13 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.TipoUsuario;
 import model.abstratos.Usuario;
-import model.abstratos.UsuarioFactory;
+import controller.UsuarioFactory;
 import model.extensores.*;
-import persistence.ClienteDAO;
-import persistence.EmpresaDAO;
-import persistence.EntregadorDAO;
 import persistence.TipoUsuarioDAO;
-import persistence.UsuarioDAO;
+import persistence.UsuarioDAODepreciado;
 
 /**
  *
@@ -55,9 +52,7 @@ public class DoRegisterAction implements Action{
             usuario.setLogin(login);
             usuario.setSenha(senha);
             usuario.setNome(nome);
-            TipoUsuario tipoUsuario = new TipoUsuario(tipoUsuarioId,tipoUsuarioText);
-            usuario.setTipoUsuario(tipoUsuario);
-            UsuarioDAO.getInstance().insert(usuario);
+            UsuarioDAODepreciado.getInstance().insert(usuario);
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Registro realizado com sucesso!");
             request.getRequestDispatcher("register.jsp").forward(request, response);

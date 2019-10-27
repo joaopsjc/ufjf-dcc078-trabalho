@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.TipoUsuario;
 import model.abstratos.Usuario;
-import model.abstratos.UsuarioFactory;
+import controller.UsuarioFactory;
 import model.extensores.Empresa;
 
 /**

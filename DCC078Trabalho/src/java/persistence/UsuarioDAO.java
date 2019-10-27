@@ -10,11 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import model.TipoUsuario;
 import model.abstratos.Usuario;
-import model.abstratos.UsuarioFactory;
+import controller.UsuarioFactory;
 
 /**
  *
@@ -32,11 +29,12 @@ public class UsuarioDAO extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into usuario(nome,login,senha,tipoUsuarioId) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into usuario(nome,login,senha,documento,tipoUsuario) values (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,usuario.getNome());
             st.setString(2,usuario.getLogin());
             st.setString(3,usuario.getSenha());
-            st.setLong(4,usuario.getTipoUsuario().getId());
+            st.setLong(4,usuario.getDocumento());
+            st.setString(5,usuario.getTipo());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -58,17 +56,22 @@ public class UsuarioDAO extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select id,tipoUsuarioId from usuario where login='"+login+"'"
+            ResultSet rs = st.executeQuery("select id,nome,documento,tipoUsuario from usuario where login='"+login+"'"
             + " and senha='"+senha+"'");
 
             if (rs.next())
             {
                 Long id = rs.getLong("id");
-                Long tipoUsuarioId = rs.getLong("tipoUsuarioId");
-                TipoUsuario tipo = TipoUsuarioDAO.getInstance().getTipoUsuarioById(tipoUsuarioId);
-                usuario = UsuarioFactory.create(tipo.getNome());
+                Long documento = rs.getLong("documeto");
+                String nome = rs.getString("nome");
+                String tipoUsuario = rs.getString("tipoUsuario");
+                        
+                usuario = UsuarioFactory.create(tipoUsuario);
                 usuario.setId(id);
-                usuario.setTipoUsuario(tipo);
+                usuario.setNome(nome);
+                usuario.setLogin(login);
+                usuario.setSenha(senha);
+                usuario.setDocumento(documento);
             }
         } catch(SQLException e) {
             throw e;
@@ -77,4 +80,5 @@ public class UsuarioDAO extends DAO{
         }
         return usuario;
     }
+    
 }

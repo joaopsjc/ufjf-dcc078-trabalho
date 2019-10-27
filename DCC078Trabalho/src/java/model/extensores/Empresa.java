@@ -20,98 +20,93 @@ import model.Produto;
  */
 public class Empresa extends Usuario{
     private Cardapio cardapio;
-    private long CNPJ;
     private int avaliacao;
 
     public Empresa(){
         super();
     }
     
-    public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, String nome, String login, String senha) {
-        super(id, nome, login, senha);
+    public Empresa(Cardapio cardapio, long documento, int avaliacao, Long id, String nome, String login, String senha) {
+        super(id,documento, nome, login, senha);
         this.cardapio = cardapio;
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
-        super(id, nome, login, dadosBancarios, senha);
+    public Empresa(Cardapio cardapio, long documento, int avaliacao, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+        super(id,documento, nome, login, dadosBancarios, senha);
         this.cardapio = cardapio;
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
-        super(id, nome, login, senha, enderecos);
+    public Empresa(Cardapio cardapio, long documento, int avaliacao, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
+        super(id,documento, nome, login, senha, enderecos);
         this.cardapio = cardapio;
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, String nome, List<Contato> contatos, String login, String senha) {
-        super(id, nome, contatos, login, senha);
+    public Empresa(Cardapio cardapio, long documento, int avaliacao, Long id, String nome, List<Contato> contatos, String login, String senha) {
+        super(id,documento, nome, contatos, login, senha);
         this.cardapio = cardapio;
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
-        super(id, pedidos, nome, login, senha);
+    public Empresa(Cardapio cardapio, long documento, int avaliacao, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
+        super(id,documento, pedidos, nome, login, senha);
         this.cardapio = cardapio;
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Empresa(Cardapio cardapio, long documento, int avaliacao, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
         this.cardapio = cardapio;
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
-    public Empresa(long CNPJ, int avaliacao, Long id, String nome, String login, String senha) {
-        super(id, nome, login, senha);
+    public Empresa(long documento, int avaliacao, Long id, String nome, String login, String senha) {
+        super(id,documento, nome, login, senha);
         this.cardapio = new Cardapio();
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(long CNPJ, int avaliacao, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
-        super(id, nome, login, dadosBancarios, senha);
+    public Empresa(long documento, int avaliacao, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+        super(id,documento, nome, login, dadosBancarios, senha);
         this.cardapio = new Cardapio();
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(long CNPJ, int avaliacao, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
-        super(id, nome, login, senha, enderecos);
+    public Empresa(long documento, int avaliacao, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
+        super(id,documento, nome, login, senha, enderecos);
         this.cardapio = new Cardapio();
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(long CNPJ, int avaliacao, Long id, String nome, List<Contato> contatos, String login, String senha) {
-        super(id, nome, contatos, login, senha);
+    public Empresa(long documento, int avaliacao, Long id, String nome, List<Contato> contatos, String login, String senha) {
+        super(id,documento, nome, contatos, login, senha);
         this.cardapio = new Cardapio();
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(long CNPJ, int avaliacao, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
-        super(id, pedidos, nome, login, senha);
+    public Empresa(long documento, int avaliacao, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
+        super(id,documento, pedidos, nome, login, senha);
         this.cardapio = new Cardapio();
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(long CNPJ, int avaliacao, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Empresa(long documento, int avaliacao, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
         this.cardapio = new Cardapio();
-        this.CNPJ = CNPJ;
+
         this.avaliacao = avaliacao;
-    }
-    
-    public long getCNPJ() {
-        return CNPJ;
     }
 
     public int getAvaliacao() {
@@ -125,6 +120,7 @@ public class Empresa extends Usuario{
     {
         cardapio.addProduto(novoProduto);
     }
+    @Override
     public String getTipo()
     {
         return "Empresa";

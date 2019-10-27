@@ -17,46 +17,42 @@ import model.Pedido;
  * @author andradeld
  */
 public class Cliente extends Usuario {
-    private long CPF;
     
     public Cliente(){
         super();
     }
     
-    public Cliente(long CPF, Long id, String nome, String login, String senha) {
-        super(id, nome, login, senha);
-        this.CPF = CPF;
+    public Cliente(long documento, Long id, String nome, String login, String senha) {
+        super(id, documento, nome, login, senha);
+
     }
 
-    public Cliente(long CPF, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
-        super(id, nome, login, dadosBancarios, senha);
-        this.CPF = CPF;
+    public Cliente(long documento, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+        super(id, documento, nome, login, dadosBancarios, senha);
+
     }
 
-    public Cliente(long CPF, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
-        super(id, nome, login, senha, enderecos);
-        this.CPF = CPF;
+    public Cliente(long documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
+        super(id, documento, nome, login, senha, enderecos);
+
     }
 
-    public Cliente(long CPF, Long id, String nome, List<Contato> contatos, String login, String senha) {
-        super(id, nome, contatos, login, senha);
-        this.CPF = CPF;
+    public Cliente(long documento, Long id, String nome, List<Contato> contatos, String login, String senha) {
+        super(id, documento, nome, contatos, login, senha);
+
     }
 
-    public Cliente(long CPF, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
-        super(id, pedidos, nome, login, senha);
-        this.CPF = CPF;
+    public Cliente(long documento, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
+        super(id, documento, pedidos, nome, login, senha);
+
     }
 
-    public Cliente(long CPF, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
-        this.CPF = CPF;
+    public Cliente(long documento, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id, documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+
     }
 
-    
-    public long getCPF() {
-        return CPF;
-    }
+    @Override
     public String getTipo()
     {
         return "Cliente";

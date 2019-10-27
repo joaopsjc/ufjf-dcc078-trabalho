@@ -19,52 +19,51 @@ import model.Pedido;
 public class Entregador extends Usuario {
     private Entregador proxEntregador;
     private int avaliacao;
-    private int CPF;
 
     public Entregador(){
         super();
     }
     
-    public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, String nome, String login, String senha) {
-        super(id, nome, login, senha);
+    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, String senha) {
+        super(id,documento, nome, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        this.CPF = CPF;
+
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
-        super(id, nome, login, dadosBancarios, senha);
+    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+        super(id,documento, nome, login, dadosBancarios, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        this.CPF = CPF;
+
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
-        super(id, nome, login, senha, enderecos);
+    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
+        super(id,documento, nome, login, senha, enderecos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        this.CPF = CPF;
+
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, String nome, List<Contato> contatos, String login, String senha) {
-        super(id, nome, contatos, login, senha);
+    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, List<Contato> contatos, String login, String senha) {
+        super(id,documento, nome, contatos, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        this.CPF = CPF;
+
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
-        super(id, pedidos, nome, login, senha);
+    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
+        super(id,documento, pedidos, nome, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        this.CPF = CPF;
+
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        this.CPF = CPF;
+
     }
 
     public void setProxEntregador(Entregador proxEntregador) {
@@ -83,9 +82,7 @@ public class Entregador extends Usuario {
         return avaliacao;
     }
 
-    public int getDocumento() {
-        return CPF;
-    }
+    @Override
     public String getTipo()
     {
         return "Entregador";
