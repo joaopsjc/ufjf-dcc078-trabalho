@@ -8,23 +8,20 @@ package persistence;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import model.extensores.Cliente;
 
 /**
  *
  * @author ice
  */
-public class ClienteDAO {
+public class ClienteDAO  extends DAO{
         private static ClienteDAO instance = new ClienteDAO();
     public static ClienteDAO getInstance(){
         return instance;
     }
     
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
 
-        }
-    } 
+    public void insert(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

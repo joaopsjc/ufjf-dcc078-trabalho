@@ -8,23 +8,19 @@ package persistence;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import model.extensores.Entregador;
 
 /**
  *
  * @author ice
  */
-public class EntregadorDAO {
+public class EntregadorDAO  extends DAO{
         private static EntregadorDAO instance = new EntregadorDAO();
     public static EntregadorDAO getInstance(){
         return instance;
     }
-    
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
 
-        }
-    } 
+    public void insert(Entregador entregador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

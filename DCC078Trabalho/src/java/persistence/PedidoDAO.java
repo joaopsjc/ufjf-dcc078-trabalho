@@ -13,18 +13,9 @@ import java.sql.Statement;
  *
  * @author ice
  */
-public class PedidoDAO {
+public class PedidoDAO  extends DAO{
         private static PedidoDAO instance = new PedidoDAO();
     public static PedidoDAO getInstance(){
         return instance;
     }
-    
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
-
-        }
-    } 
 }

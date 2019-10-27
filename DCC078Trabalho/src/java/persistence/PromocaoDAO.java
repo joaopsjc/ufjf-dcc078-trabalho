@@ -13,18 +13,9 @@ import java.sql.Statement;
  *
  * @author ice
  */
-public class PromocaoDAO {
+public class PromocaoDAO  extends DAO{
         private static PromocaoDAO instance = new PromocaoDAO();
     public static PromocaoDAO getInstance(){
         return instance;
     }
-    
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
-
-        }
-    } 
 }

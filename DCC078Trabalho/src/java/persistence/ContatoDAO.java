@@ -13,18 +13,9 @@ import java.sql.Statement;
  *
  * @author ice
  */
-public class ContatoDAO {
+public class ContatoDAO  extends DAO{
         private static ContatoDAO instance = new ContatoDAO();
     public static ContatoDAO getInstance(){
         return instance;
     }
-    
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
-
-        }
-    } 
 }

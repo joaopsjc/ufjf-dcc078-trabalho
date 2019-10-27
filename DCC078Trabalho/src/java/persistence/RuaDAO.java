@@ -13,19 +13,11 @@ import java.sql.Statement;
  *
  * @author ice
  */
-public class RuaDAO {
+public class RuaDAO  extends DAO{
         private static RuaDAO instance = new RuaDAO();
     public static RuaDAO getInstance(){
         return instance;
     }
     
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
-
-        }
-    } 
     
 }

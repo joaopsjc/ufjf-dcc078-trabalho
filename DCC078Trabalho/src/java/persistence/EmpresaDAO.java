@@ -6,6 +6,7 @@
 package persistence;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,20 +18,12 @@ import model.extensores.Empresa;
  *
  * @author Anderson
  */
-public class EmpresaDAO {
+public class EmpresaDAO  extends DAO{
     private static EmpresaDAO instance = new EmpresaDAO();
     public static EmpresaDAO getInstance(){
         return instance;
     }
     
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
-
-        }
-    }  
     
     
     public List<Empresa> getEmpresas()  throws SQLException, ClassNotFoundException{
@@ -59,5 +52,8 @@ public class EmpresaDAO {
             }
         return listaEmpresas;
     }
+
+    
+    
 
 }

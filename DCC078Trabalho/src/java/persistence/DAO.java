@@ -11,12 +11,16 @@ import java.sql.Statement;
 
 /**
  *
- * @author ice
+ * @author jjsfa
  */
-public class MetodoPagamentoDAO  extends DAO{
-        private static MetodoPagamentoDAO instance = new MetodoPagamentoDAO();
-    public static MetodoPagamentoDAO getInstance(){
-        return instance;
-    }
+public abstract class DAO {
     
+    public void closeResources(Connection conn, Statement st) {
+        try {
+            if(st!=null) st.close();
+            if(conn!=null) conn.close();
+        } catch(SQLException e) {
+
+        }
+    }  
 }

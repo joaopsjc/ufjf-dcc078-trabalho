@@ -13,19 +13,10 @@ import java.sql.Statement;
  *
  * @author ice
  */
-public class LogradouroDAO {
+public class LogradouroDAO  extends DAO{
         private static LogradouroDAO instance = new LogradouroDAO();
     public static LogradouroDAO getInstance(){
         return instance;
     }
-    
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if(st!=null) st.close();
-            if(conn!=null) conn.close();
-        } catch(SQLException e) {
-
-        }
-    } 
     
 }
