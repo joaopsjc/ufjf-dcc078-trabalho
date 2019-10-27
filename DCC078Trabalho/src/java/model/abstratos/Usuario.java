@@ -169,7 +169,7 @@ public abstract class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
     
-    
+    public abstract String getTipo();
     
     
 }
