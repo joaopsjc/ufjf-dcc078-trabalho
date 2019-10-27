@@ -19,10 +19,14 @@ import model.Produto;
  * @author jjsfa
  */
 public class Empresa extends Usuario{
-    private final Cardapio cardapio;
-    private final long CNPJ;
+    private Cardapio cardapio;
+    private long CNPJ;
     private int avaliacao;
 
+    public Empresa(){
+        super();
+    }
+    
     public Empresa(Cardapio cardapio, long CNPJ, int avaliacao, Long id, String nome, String login, String senha) {
         super(id, nome, login, senha);
         this.cardapio = cardapio;

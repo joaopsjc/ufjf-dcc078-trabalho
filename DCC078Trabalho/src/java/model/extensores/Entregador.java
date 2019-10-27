@@ -19,8 +19,12 @@ import model.Pedido;
 public class Entregador extends Usuario {
     private Entregador proxEntregador;
     private int avaliacao;
-    private final int CPF;
+    private int CPF;
 
+    public Entregador(){
+        super();
+    }
+    
     public Entregador(Entregador proxEntregador, int avaliacao, int CPF, Long id, String nome, String login, String senha) {
         super(id, nome, login, senha);
         this.proxEntregador = proxEntregador;

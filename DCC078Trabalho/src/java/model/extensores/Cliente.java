@@ -17,8 +17,12 @@ import model.Pedido;
  * @author andradeld
  */
 public class Cliente extends Usuario {
-    private final long CPF;
-
+    private long CPF;
+    
+    public Cliente(){
+        super();
+    }
+    
     public Cliente(long CPF, Long id, String nome, String login, String senha) {
         super(id, nome, login, senha);
         this.CPF = CPF;

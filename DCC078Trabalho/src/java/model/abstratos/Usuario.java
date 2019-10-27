@@ -16,15 +16,24 @@ import model.Pedido;
  * @author andradeld
  */
 public abstract class Usuario {
-    private final Long id;
+    private Long id;
     private String nome,
             login,
             senha;
+    private String tipoUsuario;
+    private Long tipoUsuarioId;
     private final List<DadoBancario> dadosBancarios;
     private final List<Endereco> enderecos;
     private final List<Contato> contatos;
     private final List<Pedido> pedidos;
 
+    public Usuario(){
+        dadosBancarios = new ArrayList<>();
+        enderecos = new ArrayList<>();
+        contatos = new ArrayList<>();
+        pedidos = new ArrayList<>();
+    }
+    
     public Usuario(Long id, String nome, String login, String senha) {
         this.id = id;
         this.nome = nome;
@@ -119,6 +128,10 @@ public abstract class Usuario {
     public List<Pedido> getPedidos() {
         return pedidos;
     }
+    
+    public void setId(Long id){
+        this.id = id;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -147,4 +160,24 @@ public abstract class Usuario {
     {
         pedidos.add(novoPedido);
     }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Long getTipoUsuarioId() {
+        return tipoUsuarioId;
+    }
+
+    public void setTipoUsuarioId(Long tipoUsuarioId) {
+        this.tipoUsuarioId = tipoUsuarioId;
+    }
+    
+    
+    
+    
 }
