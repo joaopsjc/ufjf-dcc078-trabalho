@@ -12,21 +12,21 @@
                     <a href="FrontController?action=Home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Pedidos</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-list-ol"></i> <span class="nav-label">Pedidos</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="Frontcontroller?action=Home"><i class="fa fa-list-ul"></i> <span class="nav-label">Meus pedidos</span></a>
+                            <a href="Frontcontroller?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Meus pedidos</span></a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Cardápio</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="pe-is-f-burger-2-f"></i> <span class="nav-label">Cardápio</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="Frontcontroller?action=Home"><i class="fa fa-list-ul"></i> <span class="nav-label">Produtos</span></a>
+                            <a href="Frontcontroller?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Produtos</span></a>
                         </li>
                         <li>
-                            <a href="Frontcontroller?action=Home"><i class="fa fa-list-ul"></i> <span class="nav-label">Promoções</span></a>
+                            <a href="Frontcontroller?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Promoções</span></a>
                         </li>
                     </ul>
                 </li>

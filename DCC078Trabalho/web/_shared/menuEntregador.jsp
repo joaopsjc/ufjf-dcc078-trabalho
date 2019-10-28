@@ -12,16 +12,16 @@
                     <a href="FrontController?action=Home"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Pedidos</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Pedidos</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="Frontcontroller?action=Home"><i class="fa fa-list-ul"></i> <span class="nav-label">Pendentes</span></a>
+                            <a href="Frontcontroller?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Pendentes</span></a>
                         </li>
                         <li>
-                            <a href="Frontcontroller?action=Home"><i class="fa fa-list-ul"></i> <span class="nav-label">Realizados</span></a>
+                            <a href="Frontcontroller?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Realizados</span></a>
                         </li>
                         <li>
-                            <a href="Frontcontroller?action=Home"><i class="fa fa-list-ul"></i> <span class="nav-label">Disponíveis</span></a>
+                            <a href="Frontcontroller?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Disponíveis</span></a>
                         </li>
                     </ul>
                 </li>

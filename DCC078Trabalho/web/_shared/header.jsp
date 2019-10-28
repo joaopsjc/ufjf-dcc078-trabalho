@@ -14,6 +14,8 @@
 
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/font-awesome/pe-icon-set-food.min.css" rel="stylesheet">
+    
 
     <!-- Sweet Alert -->
     <link href="../DCC078Trabalho/assets/css/plugins/sweetalert/sweetalert2.css" rel="stylesheet">
@@ -47,9 +49,10 @@
                             <c:out value="${loggedUser.getNickname()}" /> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Perfil</a></li>
+                            <li><a href="profile.html"><i class="fa fa-user"></i> Perfil</a></li>
+                            <li><a href="profile.html"><i class="fa fa-key"></i> Alterar senha</a></li>
                             <li class="divider"></li>
-                            <li><a href="FrontController?action=DoLogout">Logout</a></li>
+                            <li><a href="FrontController?action=DoLogout"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                         
                     </li>
