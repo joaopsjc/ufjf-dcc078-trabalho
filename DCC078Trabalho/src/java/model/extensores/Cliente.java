@@ -9,7 +9,7 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
 import java.util.List;
-import model.DadoBancario;
+import model.DadosBancarios;
 import model.Pedido;
 
 /**
@@ -27,7 +27,7 @@ public class Cliente extends Usuario {
 
     }
 
-    public Cliente(String documento, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+    public Cliente(String documento, Long id, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
         super(id, documento, nome, login, dadosBancarios, senha);
 
     }
@@ -47,7 +47,7 @@ public class Cliente extends Usuario {
 
     }
 
-    public Cliente(String documento, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+    public Cliente(String documento, Long id, String nome, String login, String senha, List<DadosBancarios> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
         super(id, documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
 
     }

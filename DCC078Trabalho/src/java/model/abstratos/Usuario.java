@@ -8,7 +8,7 @@ package model.abstratos;
 import model.interfaces.Contato;
 import java.util.ArrayList;
 import java.util.List;
-import model.DadoBancario;
+import model.DadosBancarios;
 import model.Pedido;
 import model.TipoUsuario;
 
@@ -22,7 +22,7 @@ public abstract class Usuario {
             login,
             senha,
             documento;
-    private final List<DadoBancario> dadosBancarios;
+    private final List<DadosBancarios> dadosBancarios;
     private final List<Endereco> enderecos;
     private final List<Contato> contatos;
     private final List<Pedido> pedidos;
@@ -45,7 +45,7 @@ public abstract class Usuario {
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
     }
-    public Usuario(Long id, String documento, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+    public Usuario(Long id, String documento, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
@@ -90,7 +90,7 @@ public abstract class Usuario {
         this.pedidos = pedidos;
     }
     public Usuario(Long id, String documento, String nome, String login, String senha,
-             List<DadoBancario> dadosBancarios, List<Endereco> enderecos,
+             List<DadosBancarios> dadosBancarios, List<Endereco> enderecos,
              List<Contato> contatos,List<Pedido> pedidos) {
         this.id = id;
         this.documento = documento;
@@ -132,7 +132,7 @@ public abstract class Usuario {
         return documento;
     }
     
-    public List<DadoBancario> getDadosBancarios() {
+    public List<DadosBancarios> getDadosBancarios() {
         return dadosBancarios;
     }
 
@@ -173,7 +173,7 @@ public abstract class Usuario {
     {
         contatos.add(novoContato);
     }
-    public void addDadoBancario(DadoBancario novoDadoBancario)
+    public void addDadoBancario(DadosBancarios novoDadoBancario)
     {
         dadosBancarios.add(novoDadoBancario);
     }
