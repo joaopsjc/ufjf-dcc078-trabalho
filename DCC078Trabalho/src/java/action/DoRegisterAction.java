@@ -20,7 +20,7 @@ import model.abstratos.Usuario;
 import controller.UsuarioFactory;
 import model.extensores.*;
 import persistence.TipoUsuarioDAO;
-import persistence.UsuarioDAODepreciado;
+import persistence.UsuarioDAO;
 
 /**
  *
@@ -52,7 +52,7 @@ public class DoRegisterAction implements Action{
             usuario.setLogin(login);
             usuario.setSenha(senha);
             usuario.setNome(nome);
-            UsuarioDAODepreciado.getInstance().insert(usuario);
+            UsuarioDAO.getInstance().insert(usuario);
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Registro realizado com sucesso!");
             request.getRequestDispatcher("register.jsp").forward(request, response);

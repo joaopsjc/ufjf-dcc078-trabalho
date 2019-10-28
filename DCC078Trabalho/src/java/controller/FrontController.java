@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.abstratos.Usuario;
 
 /**
  *
@@ -36,8 +38,22 @@ public class FrontController extends HttpServlet {
             response.sendRedirect("index.jsp");
         actionObject = ActionFactory.create(action);
         if (actionObject != null){
+            setDynamicInfoLoggedUser(request);            
             actionObject.execute(request, response);
         }
+    }
+    
+    private void setDynamicInfoLoggedUser(HttpServletRequest request){
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession sess = httpRequest.getSession(false);
+
+        if (sess == null)
+            return;
+        
+        Usuario user = (Usuario)sess.getAttribute("loggedUser");
+        if (user == null)
+            return;
+        sess.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

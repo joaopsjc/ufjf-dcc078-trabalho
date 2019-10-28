@@ -115,6 +115,10 @@ public abstract class Usuario {
     public String getNome() {
         return nome;
     }
+    
+    public String getNickname(){
+        return this.nome.split(" ")[0];
+    }
 
     public String getLogin() {
         return login;

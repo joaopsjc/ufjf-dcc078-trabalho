@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.abstratos.Usuario;
-import persistence.UsuarioDAODepreciado;
+import persistence.UsuarioDAO;
 
 /**
  *
@@ -31,14 +31,13 @@ public class DoLoginAction implements Action{
         
         
         try{
-            Usuario usuario = UsuarioDAODepreciado.getInstance().authenticate(login,senha);
+            Usuario usuario = UsuarioDAO.getInstance().authenticate(login,senha);
             if (usuario == null){
                 request.setAttribute("messageError", "Login e/ou senha estão incorretos.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                
+                request.getRequestDispatcher("login.jsp").forward(request, response);                
             }else{
                 HttpSession sess = request.getSession(true);
-                sess.setAttribute("loggedUser", usuario.getId());
+                sess.setAttribute("loggedUser", usuario);
                 response.sendRedirect("FrontController?action=Home");
             }
         }catch (ServletException ex) {

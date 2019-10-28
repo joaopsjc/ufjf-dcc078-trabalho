@@ -55,9 +55,6 @@
                         </c:forEach>
                     </select>
                 </div>
-                <div class="form-group color-red">
-                    <c:out value="${messageInfo}" />
-                </div>
                 
                 <div class="form-group">
                         <div class="checkbox i-checks"><label> <input required="" type="checkbox"><i></i> Concordo com os termos </label></div>
