@@ -10,6 +10,7 @@ package model.interfaces;
  * @author andradeld
  */
 public interface Contato {
-    public String getValorContato();
-    public void setValorContato(String novoValor);
+    public String getValor();
+    public String getTipo();
+    public void setValor(String novoValor);
 }
