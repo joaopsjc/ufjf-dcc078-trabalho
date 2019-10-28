@@ -19,7 +19,6 @@ import model.TipoUsuario;
 import model.abstratos.Usuario;
 import controller.UsuarioFactory;
 import model.extensores.*;
-import persistence.TipoUsuarioDAO;
 import persistence.UsuarioDAO;
 
 /**
@@ -34,24 +33,23 @@ public class DoRegisterAction implements Action{
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
-        Long tipoUsuarioId = Long.parseLong(request.getParameter("tipoUsuario"));
-        String tipoUsuarioText = request.getParameter("tipoUsuarioText");
+        String tipoUsuario = request.getParameter("tipoUsuario");
+        String documento = request.getParameter("documento");
         
         
         try {
             if (!senha.equals(confirmSenha)){
                 request.setAttribute("messageError", "As senhas informadas não são idênticas");
                 request.setAttribute("messageSuccess", "");
-                List<TipoUsuario> listTipoUsuario = TipoUsuarioDAO.getInstance().getTiposUsuario();
-                request.setAttribute("listTipoUsuario", listTipoUsuario);
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
             
-            Usuario usuario = UsuarioFactory.create(tipoUsuarioText);
+            Usuario usuario = UsuarioFactory.create(tipoUsuario);
             usuario.setLogin(login);
             usuario.setSenha(senha);
             usuario.setNome(nome);
+            usuario.setDocumento(documento);
             UsuarioDAO.getInstance().insert(usuario);
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Registro realizado com sucesso!");

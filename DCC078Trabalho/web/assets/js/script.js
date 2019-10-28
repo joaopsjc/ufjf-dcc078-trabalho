@@ -148,3 +148,28 @@ UF.Alert.SweetAlert = function(params){
     
     return window.swal(sweetAlertConfig).then(onConfirm, onClose);
 }
+
+UF.ChangeMaskCPFCPNPJ = function(element, isCpnj){
+    if(isCpnj){
+        var mask = '99.999.999/9999-99';
+        var placeholder = '__.___.___/____-__';
+    }
+    else{
+        var mask = '999.999.999-99';
+        var placeholder = '___.___.___-__';
+    }
+    element.val('');
+    element.unmask();
+    element.mask(mask,{placeholder:placeholder});
+}
+
+UF.SetMaskToInputs = function(){
+    $('[data-mask]').each(function(i,el){
+        el = $(el);
+        var mask = el.attr('data-mask');
+        var placeholder = UF.Helpers.ReplaceAll(mask,'9','_');
+        el.mask(mask,{placeholder:placeholder});
+    })
+}
+
+UF.SetMaskToInputs();

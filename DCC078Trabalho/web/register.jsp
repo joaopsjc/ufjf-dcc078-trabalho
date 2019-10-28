@@ -34,7 +34,6 @@
             <p>Crie sua conta agora.</p>
             <form class="m-t" role="form" action="FrontController" method="post">
                 <input type="hidden" value="DoRegister" name="action"/>
-                <input type="hidden" value="" name="tipoUsuarioText"/>
                 <div class="form-group">
                     <input type="text" name="nome" class="form-control" placeholder="Nome" required="">
                 </div>
@@ -48,12 +47,15 @@
                     <input type="password" name="confirmSenha" class="form-control" placeholder="Confirme a senha" required="">
                 </div>
                 <div class="form-group">
-                    <select name="tipoUsuario" class="form-control" placeholder="Tipo de usuário" required="">
-                        <option value="">Tipo de usuário</option>
-                        <c:forEach items="${listTipoUsuario}" var="tipoUsuario">
-                            <option value="${tipoUsuario.id}">${tipoUsuario.nome}</option>  
-                        </c:forEach>
+                    <select name="tipoUsuario" class="form-control" placeholder="Tipo de usuï¿½rio" required="">
+                        <option value="">Tipo de usuï¿½rio</option>
+                        <option value="Cliente">Cliente</option>
+                        <option value="Empresa">Empresa</option>
+                        <option value="Entregador">Entregador</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="documento" class="form-control" placeholder="Documento" required="">
                 </div>
                 
                 <div class="form-group">
@@ -61,7 +63,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Criar conta</button>
 
-                <p class="text-muted text-center"><small>Já possui uma conta?</small></p>
+                <p class="text-muted text-center"><small>Jï¿½ possui uma conta?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="FrontController?action=Login">Login</a>
             </form>
         </div>
@@ -74,6 +76,8 @@
     <script src="../DCC078Trabalho/assets/js/plugins/iCheck/icheck.min.js"></script>
     <!-- Sweet alert -->
     <script src="../DCC078Trabalho/assets/js/plugins/sweetalert/sweetalert2.min.js"></script>
+    <!-- Jquery Mask -->
+    <script src="../DCC078Trabalho/assets/js/plugins/jquery.mask/jquery.mask.min.js"></script>
     
     <script src="../DCC078Trabalho/assets/js/script.js"></script>
     <script>
@@ -82,10 +86,6 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
-            $('[name=tipoUsuario]').on('change',function(ev){
-                $('[name=tipoUsuarioText]').val($(ev.target).find('option:selected').text());
-            });
-            $('[name=tipoUsuarioText]').val($('[name=tipoUsuario]').find('option:selected').text());
             var msgSuccess = "<%=request.getAttribute("messageSuccess")%>";
             var msgError = "<%=request.getAttribute("messageError")%>";
             if (msgError.length>0)
@@ -97,6 +97,7 @@
                         window.location = "FrontController?action=Login";
                     }
                 });
+            
         });
     </script>
 </body>

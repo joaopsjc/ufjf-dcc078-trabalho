@@ -24,42 +24,42 @@ public class Entregador extends Usuario {
         super();
     }
     
-    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, String senha) {
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha) {
         super(id,documento, nome, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
 
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
         super(id,documento, nome, login, dadosBancarios, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
 
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
         super(id,documento, nome, login, senha, enderecos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
 
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, List<Contato> contatos, String login, String senha) {
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, List<Contato> contatos, String login, String senha) {
         super(id,documento, nome, contatos, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
 
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
         super(id,documento, pedidos, nome, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
 
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, Long documento, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<DadoBancario> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
         super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;

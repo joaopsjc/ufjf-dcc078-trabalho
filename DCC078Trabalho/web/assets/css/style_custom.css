@@ -164,3 +164,7 @@ textarea {
         transform: rotate(360deg);
     }
 }
+
+.loginscreen.middle-box{
+    padding-top:7px;
+}

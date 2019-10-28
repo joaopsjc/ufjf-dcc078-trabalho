@@ -33,7 +33,7 @@ public class UsuarioDAO extends DAO{
             st.setString(1,usuario.getNome());
             st.setString(2,usuario.getLogin());
             st.setString(3,usuario.getSenha());
-            st.setLong(4,usuario.getDocumento());
+            st.setString(4,usuario.getDocumento());
             st.setString(5,usuario.getTipo());
             int affectedRows = st.executeUpdate();
 
@@ -62,7 +62,7 @@ public class UsuarioDAO extends DAO{
             if (rs.next())
             {
                 Long id = rs.getLong("id");
-                Long documento = rs.getLong("documeto");
+                String documento = rs.getString("documento");
                 String nome = rs.getString("nome");
                 String tipoUsuario = rs.getString("tipoUsuario");
                         

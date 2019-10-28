@@ -17,11 +17,11 @@ import model.TipoUsuario;
  * @author andradeld
  */
 public abstract class Usuario {
-    private Long id, 
-            documento;
+    private Long id;
     private String nome,
             login,
-            senha;
+            senha,
+            documento;
     private final List<DadoBancario> dadosBancarios;
     private final List<Endereco> enderecos;
     private final List<Contato> contatos;
@@ -34,7 +34,7 @@ public abstract class Usuario {
         pedidos = new ArrayList<>();
     }
     
-    public Usuario(Long id, Long documento, String nome, String login, String senha) {
+    public Usuario(Long id, String documento, String nome, String login, String senha) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
@@ -45,7 +45,7 @@ public abstract class Usuario {
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
     }
-    public Usuario(Long id, Long documento, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
+    public Usuario(Long id, String documento, String nome, String login, List<DadoBancario> dadosBancarios, String senha) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
@@ -56,7 +56,7 @@ public abstract class Usuario {
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
     }
-    public Usuario(Long id, Long documento, String nome, String login, String senha, List<Endereco> enderecos) {
+    public Usuario(Long id, String documento, String nome, String login, String senha, List<Endereco> enderecos) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
@@ -67,7 +67,7 @@ public abstract class Usuario {
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
     }
-    public Usuario(Long id, Long documento, String nome,List<Contato> contatos, String login, String senha) {
+    public Usuario(Long id, String documento, String nome,List<Contato> contatos, String login, String senha) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
@@ -78,7 +78,7 @@ public abstract class Usuario {
         this.contatos = contatos;
         pedidos = new ArrayList<>();
     }
-    public Usuario(Long id, Long documento,List<Pedido> pedidos, String nome, String login, String senha) {
+    public Usuario(Long id, String documento,List<Pedido> pedidos, String nome, String login, String senha) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
@@ -89,7 +89,7 @@ public abstract class Usuario {
         contatos = new ArrayList<>();
         this.pedidos = pedidos;
     }
-    public Usuario(Long id, Long documento, String nome, String login, String senha,
+    public Usuario(Long id, String documento, String nome, String login, String senha,
              List<DadoBancario> dadosBancarios, List<Endereco> enderecos,
              List<Contato> contatos,List<Pedido> pedidos) {
         this.id = id;
@@ -128,7 +128,7 @@ public abstract class Usuario {
         return senha;
     }
 
-    public Long getDocumento() {
+    public String getDocumento() {
         return documento;
     }
     
@@ -164,7 +164,7 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
-    public void setDocumento(Long documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
     

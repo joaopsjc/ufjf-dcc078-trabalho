@@ -20,6 +20,8 @@
 <script src="../DCC078Trabalho/assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
 <!-- Sweet alert -->
 <script src="../DCC078Trabalho/assets/js/plugins/sweetalert/sweetalert2.min.js"></script>
+<!-- Jquery Mask -->
+<script src="../DCC078Trabalho/assets/js/plugins/jquery.mask/jquery.mask.min.js"></script>
 
 
 </body>
