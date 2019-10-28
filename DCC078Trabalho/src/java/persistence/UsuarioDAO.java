@@ -102,5 +102,25 @@ public class UsuarioDAO extends DAO{
             closeResources(conn, st);
         }
     }
+
+    public void updateSenha(Usuario usuario, String senha) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update usuario set senha=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st.setString(1,senha);
+            st.setLong(2,usuario.getId());
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update user failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
     
 }
