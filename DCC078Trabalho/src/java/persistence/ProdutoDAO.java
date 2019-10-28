@@ -35,7 +35,7 @@ public class ProdutoDAO  extends DAO{
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
+                throw new SQLException("Creating produto failed, no rows affected.");
             }
         } catch(SQLException e) {
             throw e;

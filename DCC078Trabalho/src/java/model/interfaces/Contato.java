@@ -11,6 +11,8 @@ package model.interfaces;
  */
 public interface Contato {
     public String getValor();
+    public long getId();
     public String getTipo();
     public void setValor(String novoValor);
+    public void setId(Long novoID);
 }

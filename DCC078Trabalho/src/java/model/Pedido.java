@@ -10,6 +10,8 @@ import model.interfaces.PedidoEstado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import model.abstratos.Usuario;
+import model.estados.PedidoEmPreparo;
 import model.extensores.*;
 
 /**
@@ -18,23 +20,22 @@ import model.extensores.*;
  */
 public class Pedido {
     //campos só para o banco de dados?
-    private Entregador entregador;
-    private Cliente cliente;
-    private Empresa empresa;
+    private Usuario entregador,
+            cliente,
+            empresa;
     
     private final Long id;
     private final List<Produto> produtos;
-    private String observacao;
     private PedidoEstado estado;
     private Endereco endereco;
     private double frete,
             precoProdutos;
 
-    public Pedido(Long id, List<Produto> produtos, String observacao,
-            Endereco endereco, double frete) {
+    public Pedido(Long id, List<Produto> produtos,Endereco endereco,
+            double frete) {
         this.id = id;
+        estado = new PedidoEmPreparo();
         this.produtos = produtos;
-        this.observacao = observacao;
         this.endereco = endereco;
         this.frete = frete;
         precoProdutos = 0;
@@ -45,11 +46,34 @@ public class Pedido {
             precoProdutos+= produtoAtual.getPreco();
         }
     }
-    public Pedido(Long id, String observacao,
-            Endereco endereco, double frete) {
+    public Pedido(Long id, Endereco endereco, double frete) {
         this.id = id;
+        estado = new PedidoEmPreparo();
         this.produtos = new ArrayList<>();
-        this.observacao = observacao;
+        this.endereco = endereco;
+        this.frete = frete;
+        precoProdutos = 0;
+    }
+    public Pedido(Long id, List<Produto> produtos,Endereco endereco,
+            double frete, PedidoEstado pedidoEstado) {
+        this.id = id;
+        estado = pedidoEstado;
+        this.produtos = produtos;
+        this.endereco = endereco;
+        this.frete = frete;
+        precoProdutos = 0;
+        Iterator<Produto> produtoIterator = produtos.iterator();
+        while(produtoIterator.hasNext())
+        {
+            Produto produtoAtual = produtoIterator.next();
+            precoProdutos+= produtoAtual.getPreco();
+        }
+    }
+    public Pedido(Long id, Endereco endereco, double frete,
+            PedidoEstado pedidoEstado) {
+        this.id = id;
+        estado = pedidoEstado;
+        this.produtos = new ArrayList<>();
         this.endereco = endereco;
         this.frete = frete;
         precoProdutos = 0;
@@ -61,10 +85,6 @@ public class Pedido {
 
     public List<Produto> getProdutos() {
         return produtos;
-    }
-
-    public String getObservacao() {
-        return observacao;
     }
 
     public PedidoEstado getEstado() {
@@ -83,35 +103,31 @@ public class Pedido {
         return precoProdutos;
     }
 
-    public Entregador getEntregador() {
+    public Usuario getEntregador() {
         return entregador;
     }
 
-    public Cliente getCliente() {
+    public Usuario getCliente() {
         return cliente;
     }
 
-    public Empresa getEmpresa() {
+    public Usuario getEmpresa() {
         return empresa;
-    }
-    
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
     }
 
     public void setFrete(double frete) {
         this.frete = frete;
     }
 
-    public void setEntregador(Entregador entregador) {
+    public void setEntregador(Usuario entregador) {
         this.entregador = entregador;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Usuario cliente) {
         this.cliente = cliente;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(Usuario empresa) {
         this.empresa = empresa;
     }
 

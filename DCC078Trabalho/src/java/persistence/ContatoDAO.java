@@ -5,10 +5,14 @@
  */
 package persistence;
 
+import controller.ContatoFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.interfaces.Contato;
 
 /**
@@ -33,12 +37,41 @@ public class ContatoDAO  extends DAO{
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
+                throw new SQLException("Creating contato failed, no rows affected.");
             }
         } catch(SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
+    }
+
+    public List<Contato> getContatosByUserId(Long id_usuario) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Contato> contatos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from contato where id_usuario='"+id_usuario+"'");
+
+            while (rs.next())
+            {
+                
+                Long id = rs.getLong("id");
+                String valor  = rs.getString("valor");
+                String tipoContato = rs.getString("tipoContato");
+                Contato novoContato = ContatoFactory.create(tipoContato);  
+                novoContato.setValor(valor);
+                novoContato.setId(id);
+                contatos.add(novoContato);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return contatos;
     }
 }

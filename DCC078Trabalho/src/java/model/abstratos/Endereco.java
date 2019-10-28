@@ -15,20 +15,22 @@ public abstract class Endereco {
                 id;
     private String lagradouro,
             complemento,
-            referencia,
+            bairro,
             estado,
             cidade;
 
-    public Endereco(Long id, String lagradouro, int numero, String complemento, String referencia, String cidade, String estado, long cep) {
+    public Endereco(int numero, long cep, long id, String lagradouro, String complemento, String bairro, String estado, String cidade) {
+        this.numero = numero;
+        this.cep = cep;
         this.id = id;
         this.lagradouro = lagradouro;
-        this.numero = numero;
         this.complemento = complemento;
-        this.referencia = referencia;
-        this.cidade = cidade;
+        this.bairro = bairro;
         this.estado = estado;
-        this.cep = cep;
+        this.cidade = cidade;
     }
+
+    
 
     public String getLagradouro() {
         return lagradouro;
@@ -42,10 +44,6 @@ public abstract class Endereco {
         return complemento;
     }
 
-    public String getReferencia() {
-        return referencia;
-    }
-
     public String getCidade() {
         return cidade;
     }
@@ -56,6 +54,15 @@ public abstract class Endereco {
 
     public long getCep() {
         return cep;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+    
+    public String getTipo()
+    {
+        return "Endereco";
     }
     
     public long getId() {
@@ -69,13 +76,9 @@ public abstract class Endereco {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
+    
     public void setComplemento(String complemento) {
         this.complemento = complemento;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
     }
 
     public void setCidade(String cidade) {
@@ -88,6 +91,10 @@ public abstract class Endereco {
 
     public void setCep(long cep) {
         this.cep = cep;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public void setId(long id) {

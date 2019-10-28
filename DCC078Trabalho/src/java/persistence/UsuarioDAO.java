@@ -81,6 +81,39 @@ public class UsuarioDAO extends DAO{
         return usuario;
     }
 
+    public Usuario getUsuarioById(Long id_usuario) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        Usuario usuario = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from usuario where id='"+id_usuario+"'");
+
+            if (rs.next())
+            {
+                String nome = rs.getString("nome");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                String documento = rs.getString("documento");
+                String tipoUsuario = rs.getString("tipoUsuario");
+                        
+                usuario = UsuarioFactory.create(tipoUsuario);
+                usuario.setId(id_usuario);
+                usuario.setNome(nome);
+                usuario.setLogin(login);
+                usuario.setSenha(senha);
+                usuario.setDocumento(documento);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return usuario;
+    }
+    
     public void update(Usuario usuario) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
