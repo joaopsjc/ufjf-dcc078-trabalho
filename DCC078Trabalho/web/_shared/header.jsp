@@ -30,7 +30,7 @@
 <div id="wrapper">
     
     <%
-        String menuPageName = "_shared/"+(String)request.getSession().getAttribute("menuPageName");
+        String menuPageName = "/_shared/"+(String)request.getSession().getAttribute("menuPageName");
     %>
     <jsp:include page ='<%=menuPageName%>'/>
 
@@ -49,7 +49,7 @@
                             <c:out value="${loggedUser.getNickname()}" /> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html"><i class="fa fa-user"></i> Perfil</a></li>
+                            <li><a href="FrontController?action=Profile"><i class="fa fa-user"></i> Perfil</a></li>
                             <li><a href="profile.html"><i class="fa fa-key"></i> Alterar senha</a></li>
                             <li class="divider"></li>
                             <li><a href="FrontController?action=DoLogout"><i class="fa fa-sign-out"></i> Logout</a></li>
