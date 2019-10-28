@@ -26,7 +26,7 @@ public class ContatoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into usuario(id_usuario,valor,tipoContato) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into contato(id_usuario,valor,tipoContato) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,id_usuario);
             st.setString(2,contato.getValor());
             st.setString(3,contato.getTipo());

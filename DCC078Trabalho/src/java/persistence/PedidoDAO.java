@@ -29,8 +29,9 @@ public class PedidoDAO  extends DAO{
             st.setLong(1, pedido.getCliente().getId());
             st.setLong(2, pedido.getEmpresa().getId());
             st.setLong(3, pedido.getEntregador().getId());
-            //st.setLong(4, pedido.getEndereco().getId());
+            st.setLong(4, pedido.getEndereco().getId());
             st.setDouble(5, pedido.getFrete());
+            st.setString(6, pedido.getEstado().getEstado());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {

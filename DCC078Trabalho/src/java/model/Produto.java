@@ -16,9 +16,10 @@ import model.interfaces.ProdutoEstado;
  */
 public class Produto {
     private final Long id;
-    private String nome;
-    private String descricao;
-    private String categoria;
+    private String nome,
+            descricao,
+            categoria;
+    private int quantidade;
     private Double preco;
     private ProdutoEstado estado;
 
@@ -28,9 +29,19 @@ public class Produto {
         this.descricao = descricao;
         this.categoria = categoria;
         this.preco = preco;
+        this.quantidade = 0;
         this.estado = new ProdutoEstadoDisponivel();
     }
 
+    public Produto(Long id, String nome, String descricao, String categoria, int quantidade, Double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.estado = new ProdutoEstadoDisponivel();
+    }
     public Long getId() {
         return id;
     }
@@ -51,6 +62,10 @@ public class Produto {
         return preco;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+    
     public ProdutoEstado getEstado() {
         return estado;
     }
@@ -69,6 +84,11 @@ public class Produto {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
     public void produtoIndisponivel()
     {
         this.estado = new ProdutoEstadoIndisponivel();

@@ -25,7 +25,7 @@ public void insert(DadosBancarios dadosBancarios, Long id_usuario) throws SQLExc
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into usuario(id_usuario,nomeBanco,codigoBanco,agencia,numero) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into dadosBancarios(id_usuario,nomeBanco,codigoBanco,agencia,numero) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,id_usuario);
             st.setString(2,dadosBancarios.getNomeBanco());
             st.setLong(3,dadosBancarios.getCodigoBanco());
