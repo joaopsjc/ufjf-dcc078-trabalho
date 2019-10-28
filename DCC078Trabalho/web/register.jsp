@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <select name="tipoUsuario" class="form-control" placeholder="Tipo de usuï¿½rio" required="">
-                        <option value="">Tipo de usuï¿½rio</option>
+                        <option value="">Tipo de usuário</option>
                         <option value="Cliente">Cliente</option>
                         <option value="Empresa">Empresa</option>
                         <option value="Entregador">Entregador</option>
@@ -63,7 +63,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Criar conta</button>
 
-                <p class="text-muted text-center"><small>Jï¿½ possui uma conta?</small></p>
+                <p class="text-muted text-center"><small>Já possui uma conta?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="FrontController?action=Login">Login</a>
             </form>
         </div>
