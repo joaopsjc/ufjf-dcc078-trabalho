@@ -5,6 +5,7 @@
  */
 package model.estados;
 
+import model.Produto;
 import model.interfaces.ProdutoEstado;
 
 /**
@@ -14,5 +15,21 @@ import model.interfaces.ProdutoEstado;
 public class ProdutoEstadoDisponivel implements ProdutoEstado{
     public String getEstado() {
         return "Disponivel";
+    }
+    @Override
+    public boolean diposnivel(Produto produto) {
+        return false;
+    }
+
+    @Override
+    public boolean indisponivel(Produto produto) {
+        produto.setEstado(new ProdutoEstadoIndisponivel());
+        return true;
+    }
+
+    @Override
+    public boolean bloqueado(Produto produto) {
+        produto.setEstado(new ProdutoEstadoBloqueado());
+        return true;
     }
 }
