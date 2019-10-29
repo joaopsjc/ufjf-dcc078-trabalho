@@ -10,6 +10,7 @@ import controller.UsuarioFactory;
 import helper.Helper;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -46,8 +47,10 @@ public class NovoProdutoAction  implements Action{
             produto.setId_empresa(currentUser.getId());
             ProdutoDAO.getInstance().insert(produto);
             request.setAttribute("messageError", "");
-            request.setAttribute("messageSuccess", "Registro realizado com sucesso!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.setAttribute("messageSuccess", "Produto cadastrado com sucesso!");
+            List<Produto> listProdutos = ProdutoDAO.getInstance().getProdutosByEmpresa(currentUser.getId());
+            request.setAttribute("listProdutos", listProdutos);
+            request.getRequestDispatcher("Produto/resumoProdutosEmpresa.jsp").forward(request, response);
             
         } catch (ServletException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);

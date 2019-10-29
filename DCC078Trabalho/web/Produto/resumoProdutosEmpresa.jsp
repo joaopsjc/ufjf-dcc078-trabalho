@@ -33,7 +33,7 @@
                             <tbody>
                             <c:forEach items="${listProdutos}" var="produto">
                                 <tr>
-                                    <td><td><input type="checkbox"  checked class="i-checks" data-id="<c:out value="${produto.getId()}" />" name="check-grid"></td></td>
+                                    <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${produto.getId()}" />" name="check-grid"></td>
                                     <td><c:out value="${produto.getNome()}" /></td>
                                     <td><c:out value="${produto.getCategoria()}" /></td>
                                     <td><c:out value="${produto.getPreco()}" /></td>
