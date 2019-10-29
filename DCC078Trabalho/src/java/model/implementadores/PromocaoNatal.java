@@ -12,8 +12,8 @@ import model.interfaces.Promocao;
  * @author ice
  */
 public class PromocaoNatal implements Promocao{
-    
-    private String nome = "Promoção de Natal";
+    private Long id;
+    private final String nome = "Promoção de Natal";
     private final String tipo = "Natal";
     
     @Override
@@ -29,10 +29,16 @@ public class PromocaoNatal implements Promocao{
     public String getTipo() {
         return this.tipo;
     }
-    
-    public void setNome(String novoNome)
-    {
-        nome = novoNome;
-    }
 
+    @Override
+    public Long getId()
+    {
+        return id;
+    }
+    
+    @Override
+    public void setId(Long id_promocao)
+    {
+        this.id = id_promocao;
+    }
 }

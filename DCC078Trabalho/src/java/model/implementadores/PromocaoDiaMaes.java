@@ -12,7 +12,8 @@ import model.interfaces.Promocao;
  * @author ice
  */
 public class PromocaoDiaMaes implements Promocao{
-    private String nome = "Promoção Dia das Mães";
+    private Long id;
+    private final String nome = "Promoção Dia das Mães";
     private final String tipo = "DiaMaes";
     
     @Override
@@ -27,5 +28,17 @@ public class PromocaoDiaMaes implements Promocao{
     @Override
     public String getTipo() {
         return this.tipo;
+    }
+
+    @Override
+    public Long getId()
+    {
+        return id;
+    }
+    
+    @Override
+    public void setId(Long id_promocao)
+    {
+        this.id = id_promocao;
     }
 }

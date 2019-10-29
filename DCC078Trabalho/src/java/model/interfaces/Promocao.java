@@ -10,6 +10,11 @@ package model.interfaces;
  * @author andradeld
  */
 public interface Promocao {
+    
     public int obterDesconto();
     public String obterPromocao();
+    public String getTipo();
+    public Long getId();
+    public void setId(Long id_promocao);
+    
 }
