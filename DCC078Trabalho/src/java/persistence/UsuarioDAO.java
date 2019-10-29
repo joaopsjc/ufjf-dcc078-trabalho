@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import model.abstratos.Usuario;
 import controller.UsuarioFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -112,6 +114,40 @@ public class UsuarioDAO extends DAO{
             closeResources(conn, st);
         }
         return usuario;
+    }
+    public List<Usuario> getAll() throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from usuario");
+
+            while(rs.next())
+            {
+                Long id = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                String documento = rs.getString("documento");
+                String tipoUsuario = rs.getString("tipoUsuario");
+                        
+                Usuario novoUsuario = UsuarioFactory.create(tipoUsuario);
+                novoUsuario.setId(id);
+                novoUsuario.setNome(nome);
+                novoUsuario.setLogin(login);
+                novoUsuario.setSenha(senha);
+                novoUsuario.setDocumento(documento);
+                usuarios.add(novoUsuario);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return usuarios;
     }
     
     public void update(Usuario usuario) throws SQLException, ClassNotFoundException{
