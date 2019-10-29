@@ -5,6 +5,7 @@
  */
 package controller;
 
+import helper.Helper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,6 @@ public class SessionControl implements javax.servlet.Filter {
            FilterChain chain) throws IOException, ServletException {
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpSession sess = httpRequest.getSession(true);
 
         String action = (String)httpRequest.getParameter("action"); 
         action = action == null ? "" : action;
@@ -65,7 +65,7 @@ public class SessionControl implements javax.servlet.Filter {
             chain.doFilter(request, response);
             return;
         }
-        Usuario user = (Usuario)sess.getAttribute("loggedUser");
+        Usuario user = Helper.getLoggedUser(httpRequest);
 
         if (user==null){
             HttpServletResponse httpResponse = (HttpServletResponse) response;
