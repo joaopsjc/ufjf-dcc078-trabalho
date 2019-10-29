@@ -24,13 +24,13 @@ public class ProdutoDAO  extends DAO{
     public static ProdutoDAO getInstance(){
         return instance;
     }
-    public void insert(Produto produto, Long id_empresa) throws SQLException, ClassNotFoundException{
+    public void insert(Produto produto) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.prepareStatement("insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco) values (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1,id_empresa);
+            st.setLong(1,produto.getId_empresa());
             st.setString(2,produto.getNome());
             st.setString(3,produto.getCategoria());
             st.setString(4,produto.getDescricao());

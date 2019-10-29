@@ -173,3 +173,13 @@ UF.SetMaskToInputs = function(){
 }
 
 UF.SetMaskToInputs();
+
+UF.RegisterNamespace("Produto");
+
+UF.Produto.EditarProduto = function(element){
+    
+}
+
+UF.Produto.ExcluirProduto = function(element){
+    
+}

@@ -16,11 +16,11 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row toolbar-crud-grid">
-                            <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> Adicionar</button>
-                            <button class="btn btn-warning" type="submit"><i class="fa fa-edit"></i> Editar</button>
-                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> Excluir</button> 
+                            <a href="FrontController?action=FormNovoProduto"><button class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar</button></a>
+                            <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-warning" type="button"><i class="fa fa-edit"></i> Editar</button>
+                            <button onclick="UF.Produto.ExcluirProduto(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
                         </div>
-                        <table class="table table-bordered">
+                        <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>#</th>
