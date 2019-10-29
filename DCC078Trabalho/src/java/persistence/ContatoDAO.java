@@ -142,7 +142,7 @@ public class ContatoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update produto set id_usuario=?,valor=?,tipoContato=?, where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update produto set id_usuario=?,valor=?,tipoContato=? where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,contato.getIdUsuario());
             st.setString(2,contato.getValor());
             st.setString(3,contato.getTipo());
