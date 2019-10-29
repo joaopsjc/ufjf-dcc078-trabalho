@@ -50,7 +50,7 @@ public class PedidoDAO  extends DAO{
             closeResources(conn, st);
         }
     }
-    public Pedido getPedidoById(Long id_pedido) throws SQLException, ClassNotFoundException{
+    public Pedido getById(Long id_pedido) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         Pedido pedido = null;
@@ -71,7 +71,7 @@ public class PedidoDAO  extends DAO{
                 Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
                 Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
                 Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
-                Endereco endereco = EnderecoDAO.getInstance().getEnderecoById(id_endereco);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
                 pedido = new Pedido(id_pedido, endereco, frete,pedidoEstado);
@@ -110,7 +110,7 @@ public class PedidoDAO  extends DAO{
                 Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
                 Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
                 Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
-                Endereco endereco = EnderecoDAO.getInstance().getEnderecoById(id_endereco);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
                 Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
@@ -147,7 +147,7 @@ public class PedidoDAO  extends DAO{
                 
                 Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
                 Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
-                Endereco endereco = EnderecoDAO.getInstance().getEnderecoById(id_endereco);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
                 Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
@@ -183,7 +183,7 @@ public class PedidoDAO  extends DAO{
                 String estado = rs.getString("estado");
                 Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
                 Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
-                Endereco endereco = EnderecoDAO.getInstance().getEnderecoById(id_endereco);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
                 Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
@@ -218,7 +218,7 @@ public class PedidoDAO  extends DAO{
                 String estado = rs.getString("estado");
                 Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
                 Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
-                Endereco endereco = EnderecoDAO.getInstance().getEnderecoById(id_endereco);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
                 Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
@@ -232,5 +232,22 @@ public class PedidoDAO  extends DAO{
             closeResources(conn, st);
         }
         return pedidos;
+    }
+    
+    public void delete(Long id_pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("delete from pedido where id='"+id_pedido+"'",Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Delete pedido failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
     }
 }
