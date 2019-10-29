@@ -168,9 +168,9 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
-                    p.setEstado(ProdutoEstadoFactory.create(estado));
-                    listaProdutos.add(p);
+                    Produto novoProduto =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(novoProduto);
                 }
             } catch(SQLException e) {
                 throw e;
