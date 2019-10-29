@@ -49,7 +49,6 @@ public class UsuarioDAO extends DAO{
         }
     }
 
-    
     public Usuario authenticate(String login, String senha) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -83,7 +82,7 @@ public class UsuarioDAO extends DAO{
         return usuario;
     }
 
-    public Usuario getUsuarioById(Long id_usuario) throws SQLException, ClassNotFoundException{
+    public Usuario getById(Long id_usuario) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         Usuario usuario = null;
@@ -115,6 +114,7 @@ public class UsuarioDAO extends DAO{
         }
         return usuario;
     }
+    
     public List<Usuario> getAll() throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -192,4 +192,21 @@ public class UsuarioDAO extends DAO{
         }
     }
     
+
+    public void delete(Long id_usuario) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("delete from usuario where id='"+id_usuario+"'",Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Delete user failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
 }

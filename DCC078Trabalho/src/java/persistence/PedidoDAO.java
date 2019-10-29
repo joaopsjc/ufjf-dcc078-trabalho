@@ -68,9 +68,9 @@ public class PedidoDAO  extends DAO{
                 Long id_endereco = rs.getLong("id_endereco");
                 Double frete = rs.getDouble("frete");
                 String estado = rs.getString("estado");
-                Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
-                Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
-                Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
@@ -107,9 +107,9 @@ public class PedidoDAO  extends DAO{
                 Double frete = rs.getDouble("frete");
                 String estado = rs.getString("estado");
                 
-                Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
-                Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
-                Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
@@ -145,8 +145,8 @@ public class PedidoDAO  extends DAO{
                 Double frete = rs.getDouble("frete");
                 String estado = rs.getString("estado");
                 
-                Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
-                Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
@@ -181,8 +181,8 @@ public class PedidoDAO  extends DAO{
                 Long id_endereco = rs.getLong("id_endereco");
                 Double frete = rs.getDouble("frete");
                 String estado = rs.getString("estado");
-                Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
-                Usuario entregador = UsuarioDAO.getInstance().getUsuarioById(id_entregador);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
@@ -216,8 +216,8 @@ public class PedidoDAO  extends DAO{
                 Long id_endereco = rs.getLong("id_endereco");
                 Double frete = rs.getDouble("frete");
                 String estado = rs.getString("estado");
-                Usuario empresa = UsuarioDAO.getInstance().getUsuarioById(id_empresa);
-                Usuario cliente = UsuarioDAO.getInstance().getUsuarioById(id_cliente);
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
