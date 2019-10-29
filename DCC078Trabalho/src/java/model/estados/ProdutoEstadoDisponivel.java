@@ -13,6 +13,8 @@ import model.interfaces.ProdutoEstado;
  * @author JoaoPSJC
  */
 public class ProdutoEstadoDisponivel implements ProdutoEstado{
+    
+    @Override
     public String getEstado() {
         return "Disponivel";
     }
