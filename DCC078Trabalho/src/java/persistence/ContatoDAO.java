@@ -127,4 +127,21 @@ public class ContatoDAO  extends DAO{
             closeResources(conn, st);
         }
     }
+    
+    public void delete(Long id_contato) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("delete from contato where id='"+id_contato+"'",Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Delete endereco failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
 }
