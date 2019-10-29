@@ -234,6 +234,26 @@ public class PedidoDAO  extends DAO{
         return pedidos;
     }
     
+    public void updateEstado(Pedido pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update pedido set estado=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st.setString(1,pedido.getEstado().getEstado());
+            st.setLong(2,pedido.getId());
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update estado failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
     public void delete(Long id_pedido) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;

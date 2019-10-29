@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Produto;
-import model.estados.ProdutoEstadoFactory;
+import controller.ProdutoEstadoFactory;
 
 /**
  *

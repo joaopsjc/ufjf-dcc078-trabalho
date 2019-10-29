@@ -17,7 +17,7 @@ import model.Pedido;
 import model.Produto;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
-import model.estados.ProdutoEstadoFactory;
+import controller.ProdutoEstadoFactory;
 import model.interfaces.PedidoEstado;
 import model.interfaces.Promocao;
 
