@@ -14,6 +14,7 @@
 
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../DCC078Trabalho/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/pe-icon-set-food.min.css" rel="stylesheet">
     
 

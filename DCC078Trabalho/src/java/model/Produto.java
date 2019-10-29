@@ -8,6 +8,7 @@ package model;
 import model.estados.ProdutoEstadoBloqueado;
 import model.estados.ProdutoEstadoDisponivel;
 import model.estados.ProdutoEstadoIndisponivel;
+import model.extensores.Empresa;
 import model.interfaces.ProdutoEstado;
 
 /**
@@ -22,6 +23,7 @@ public class Produto {
     private int quantidade;
     private Double preco;
     private ProdutoEstado estado;
+    private Long id_empresa;
 
     public Produto(Long id, String nome, String descricao, String categoria, Double preco) {
         this.id = id;
@@ -40,6 +42,17 @@ public class Produto {
         this.categoria = categoria;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.estado = new ProdutoEstadoDisponivel();
+    }
+    
+    public Produto(Long id, String nome, String descricao, String categoria, int quantidade, Double preco, Long id_empresa) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.id_empresa = id_empresa;
         this.estado = new ProdutoEstadoDisponivel();
     }
     public Long getId() {

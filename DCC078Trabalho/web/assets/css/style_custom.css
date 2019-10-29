@@ -190,3 +190,9 @@ textarea {
 .form-group .input-group {
     width: 100%;
 }
+
+.toolbar-crud-grid{
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-top: 5px;
+}

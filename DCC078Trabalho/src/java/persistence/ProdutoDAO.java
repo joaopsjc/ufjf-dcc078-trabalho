@@ -7,9 +7,13 @@ package persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Produto;
+import model.extensores.Empresa;
 
 /**
  *
@@ -38,9 +42,39 @@ public class ProdutoDAO  extends DAO{
                 throw new SQLException("Creating produto failed, no rows affected.");
             }
         } catch(SQLException e) {
-            throw e;
+            throw e;//  
         } finally {
             closeResources(conn, st);
         }
+    }
+    
+    public List<Produto> getProdutosByEmpresa(Long id_empresa) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Produto> listaProdutos = new ArrayList();
+        try {
+                conn = DatabaseLocator.getInstance().getConection();
+                st = conn.createStatement();
+                
+                // execute the query, and get a java resultset
+                ResultSet rs = st.executeQuery("select id,id_empresa,nome,categoria,descricao,quantidade,preco from produto where id_empresa ="+id_empresa);
+                
+                // iterate through the java resultset
+                while (rs.next())
+                {
+                    Long id = rs.getLong("id");
+                    String nome = rs.getString("nome");
+                    String categoria = rs.getString("categoria");
+                    String descricao = rs.getString("descricao");
+                    int quantidade = rs.getInt("quantidade");
+                    double preco = rs.getDouble("preco");
+                    listaProdutos.add(new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa));
+                }
+            } catch(SQLException e) {
+                throw e;
+            } finally {
+                closeResources(conn, st);
+            }
+        return listaProdutos;
     }
 }
