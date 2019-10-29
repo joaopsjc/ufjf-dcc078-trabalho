@@ -12,7 +12,8 @@ package model.abstratos;
 public abstract class Endereco {
     private int numero;
     private long cep,
-                id;
+            id,
+            id_usuario;
     private String lagradouro,
             complemento,
             bairro,
@@ -64,6 +65,10 @@ public abstract class Endereco {
     {
         return "Endereco";
     }
+
+    public long getId_usuario() {
+        return id_usuario;
+    }
     
     public long getId() {
         return id;
@@ -99,6 +104,10 @@ public abstract class Endereco {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setId_usuario(long id_usuario) {
+        this.id_usuario = id_usuario;
     }
     
 }

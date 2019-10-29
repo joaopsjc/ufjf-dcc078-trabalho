@@ -14,6 +14,7 @@ public class DadosBancarios {
             codigoBanco,
             agencia,
             numero;
+    private Long id_usuario;
     private final String nomeBanco;
 
     public DadosBancarios(Long id, Long codigoBanco, Long agencia, Long numero, String nomeBanco) {
@@ -22,6 +23,7 @@ public class DadosBancarios {
         this.agencia = agencia;
         this.numero = numero;
         this.nomeBanco = nomeBanco;
+        id_usuario = null;
     }
 
     public Long getId() {
@@ -42,6 +44,14 @@ public class DadosBancarios {
 
     public String getNomeBanco() {
         return nomeBanco;
+    }
+
+    public Long getIdUsuario() {
+        return id_usuario;
+    }
+    
+    public void setIdUsuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
     
 }
