@@ -51,7 +51,7 @@ public class EnderecoDAO  extends DAO{
             closeResources(conn, st);
         }
     }
-    public Endereco getEnderecoById(Long id_endereco) throws SQLException, ClassNotFoundException{
+    public Endereco getById(Long id_endereco) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         Endereco endereco = null;
@@ -127,5 +127,50 @@ public class EnderecoDAO  extends DAO{
             closeResources(conn, st);
         }
         return enderecos;
+    }
+    
+    public void update(Endereco endereco) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update produto set id_usuario=?,numero=?,complemento=?,logradouro=?,bairro=?,cidade=?,estado=?,tipoEndereco=?,cep=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,endereco.getId_usuario());
+            st.setInt(2,endereco.getNumero());
+            st.setString(3,endereco.getComplemento());
+            st.setString(4,endereco.getLagradouro());
+            st.setString(5,endereco.getBairro());
+            st.setString(6,endereco.getCidade());
+            st.setString(7,endereco.getEstado());
+            st.setString(8,endereco.getTipo());
+            st.setLong(9,endereco.getCep());
+            st.setLong(10,endereco.getId());
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update endereco failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    public void delete(Long id_endereco) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("delete from endereco where id='"+id_endereco+"'",Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Delete endereco failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
     }
 }
