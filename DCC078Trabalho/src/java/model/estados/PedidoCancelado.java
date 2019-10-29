@@ -5,6 +5,7 @@
  */
 package model.estados;
 
+import model.Pedido;
 import model.interfaces.PedidoEstado;
 
 /**
@@ -15,5 +16,21 @@ public class PedidoCancelado implements PedidoEstado{
     
     public String getEstado() {
         return "Cancelado";
+    }
+    
+    public boolean aCaminho(Pedido pedido) {
+        return false;
+    }
+    
+    public boolean cancelado(Pedido pedido) {
+        return false;
+    }
+    
+    public boolean concluido(Pedido pedido) {
+        return false;
+    }
+    
+    public boolean emPreparo(Pedido pedido) {
+        return false;
     }
 }
