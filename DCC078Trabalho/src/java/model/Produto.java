@@ -57,7 +57,7 @@ public class Produto {
     }
 
     public Produto() {
-        
+        this.estado = new ProdutoEstadoDisponivel();
     }
     public Long getId() {
         return id;
@@ -120,7 +120,7 @@ public class Produto {
     }
     
     public String getNomeEstado(){
-        return this.estado.getEstado();
+        return estado.getEstado();
     }
 
     public Long getId_empresa() {
@@ -133,6 +133,10 @@ public class Produto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setEstado(ProdutoEstado estado) {
+        this.estado = estado;
     }
     
 }

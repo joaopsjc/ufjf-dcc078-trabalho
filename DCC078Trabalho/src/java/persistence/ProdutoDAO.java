@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Produto;
+import model.estados.ProdutoEstadoFactory;
 
 /**
  *
@@ -28,13 +29,14 @@ public class ProdutoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco) values (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,produto.getId_empresa());
             st.setString(2,produto.getNome());
             st.setString(3,produto.getCategoria());
             st.setString(4,produto.getDescricao());
             st.setInt(5,produto.getQuantidade());
             st.setDouble(6,produto.getPreco());
+            st.setString(7,produto.getNomeEstado());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -67,7 +69,10 @@ public class ProdutoDAO  extends DAO{
                     String descricao = rs.getString("descricao");
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
-                    listaProdutos.add(new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa));
+                    String estado = rs.getString("estado");
+                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    p.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(p);
                 }
             } catch(SQLException e) {
                 throw e;
@@ -97,7 +102,10 @@ public class ProdutoDAO  extends DAO{
                     String descricao = rs.getString("descricao");
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
-                    listaProdutos.add(new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa));
+                    String estado = rs.getString("estado");
+                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    p.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(p);
                 }
             } catch(SQLException e) {
                 throw e;
@@ -127,7 +135,9 @@ public class ProdutoDAO  extends DAO{
                     String descricao = rs.getString("descricao");
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
-                    produto = new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    String estado = rs.getString("estado");
+                    produto =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    produto.setEstado(ProdutoEstadoFactory.create(estado));
                 }
             } catch(SQLException e) {
                 throw e;
@@ -157,7 +167,10 @@ public class ProdutoDAO  extends DAO{
                     String descricao = rs.getString("descricao");
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
-                    listaProdutos.add(new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa));
+                    String estado = rs.getString("estado");
+                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    p.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(p);
                 }
             } catch(SQLException e) {
                 throw e;

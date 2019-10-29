@@ -196,3 +196,7 @@ textarea {
     padding-bottom: 15px;
     padding-top: 5px;
 }
+
+.table-th-check{
+    width: 39px;
+}
