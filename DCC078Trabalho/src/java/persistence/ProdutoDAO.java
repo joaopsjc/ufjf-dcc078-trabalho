@@ -124,7 +124,7 @@ public class ProdutoDAO  extends DAO{
                 st = conn.createStatement();
                 
                 // execute the query, and get a java resultset
-                ResultSet rs = st.executeQuery("select * from produto where id = '"+ id +"'");
+                ResultSet rs = st.executeQuery("select * from produto where id = "+ id +"");
                 
                 // iterate through the java resultset
                 if (rs.next())
@@ -185,14 +185,15 @@ public class ProdutoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update produto set id_empresa=?, nome=?, categoria=?, descricao=?, quantidade=?, preco=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update produto set id_empresa=?, nome=?, categoria=?, descricao=?, quantidade=?, preco=?, estado=? where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,produto.getId_empresa());
             st.setString(2,produto.getNome());
             st.setString(3,produto.getCategoria());
             st.setString(4,produto.getDescricao());
             st.setInt(5,produto.getQuantidade());
             st.setDouble(6,produto.getPreco());
-            st.setLong(7,produto.getId());
+            st.setString(7,produto.getNomeEstado());
+            st.setLong(8,produto.getId());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {

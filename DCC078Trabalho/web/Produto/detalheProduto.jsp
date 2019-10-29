@@ -16,7 +16,9 @@
                     </div>
                     <div class="ibox-content">
                         <form method="post" class="form-horizontal" action="FrontController">
-                            <input type="hidden" name="action" value="NovoProduto"/>
+                            <input type="hidden" name="action" value="SaveProduto"/>
+                            <input type="hidden" name="id" value="<c:out value="${currentProduto.getId()}"/>"/>
+                            <input type="hidden" name="estado" value="<c:out value="${currentProduto.getNomeEstado()}"/>"/>
                                 
                             <div class="form-group group-label">
                                 <div class="col-sm-12">
@@ -45,9 +47,7 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <textarea class="form-control" name="descricao">
-                                            <c:out value="${currentProduto.getDescricao()}"/>
-                                        </textarea>
+                                        <textarea class="form-control" name="descricao"><c:out value="${currentProduto.getDescricao()}"></c:out></textarea>
                                     </div>
                                 </div>
                             </div>
