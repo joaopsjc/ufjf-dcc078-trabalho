@@ -14,6 +14,7 @@ import model.interfaces.Contato;
 public class ContatoNumero implements Contato{
     String valor;
     Long id;
+    Long id_usuario;
     
     @Override
     public String getValor() {
@@ -36,4 +37,16 @@ public class ContatoNumero implements Contato{
     public void setId(Long novoID) {
         id = novoID;
     }
+
+    @Override
+    public long getIdUsuario() {
+        return id_usuario;
+    }
+
+    @Override
+    public void setIdUsuario(Long novoIdUsuario) {
+        this.id_usuario = novoIdUsuario;
+    }
+    
+    
 }
