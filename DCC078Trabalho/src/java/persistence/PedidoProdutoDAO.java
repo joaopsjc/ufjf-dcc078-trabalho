@@ -37,9 +37,10 @@ public class PedidoProdutoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto) values (?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,id_promocao) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,id_pedido);
             st.setLong(2,id_produto);
+            st.setLong(3,id_promocao);
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -200,5 +201,25 @@ public class PedidoProdutoDAO  extends DAO{
             closeResources(conn, st);
         }
         return promocao;
+    }
+    public void updatePromocao(Long id_produto, Long id_pedido, Long id_promocao) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update pedidoProduto set id_promocao=? where id_pedido=? AND id_produto=?",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,id_promocao);
+            st.setLong(2,id_pedido);
+            st.setLong(3,id_produto);
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update promocao em pedidoPromocao failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
     }
 }
