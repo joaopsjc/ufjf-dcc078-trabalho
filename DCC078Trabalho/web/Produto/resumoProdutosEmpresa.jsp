@@ -15,15 +15,21 @@
                         </div>
                     </div>
                     <div class="ibox-content">
+                        <form method="GET" action="FrontController" id="form-detalhe-produto">
+                            <input type="hidden" name="id" value="" />
+                            <input type="hidden" name="action" value="FormDetalheProduto" />
+                        </form>
                         <div class="row toolbar-crud-grid">
                             <a href="FrontController?action=FormNovoProduto"><button class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar</button></a>
-                            <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-warning" type="button"><i class="fa fa-edit"></i> Editar</button>
+                            <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
                             <button onclick="UF.Produto.ExcluirProduto(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
+                            <button onclick="UF.Produto.BloquearProduto(this)" class="btn btn-warning" type="button"><i class="fa fa-lock"></i> Bloquear</button> 
+                            <button onclick="UF.Produto.DesbloquearProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-unlock"></i> Desbloquear</button> 
                         </div>
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="table-th-check">#</th>
                                 <th>Nome</th>
                                 <th>Categoria</th>
                                 <th>Preço</th>

@@ -15,7 +15,7 @@ public class ProdutoEstadoIndisponivel implements ProdutoEstado{
 
     @Override
     public String getEstado() {
-        return "Indisponível";
+        return "Indisponivel";
     }
     
 }

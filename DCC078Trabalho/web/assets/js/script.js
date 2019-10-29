@@ -189,11 +189,14 @@ UF.RegisterNamespace("Produto");
 
 UF.Produto.EditarProduto = function(element){
     var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
-    if (selectedIds.length==0){
-        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+    if (selectedIds.length!=1){
+        UF.Alert.Error({message:"É necessário selecionar um produto!"});
         return;
     }
-    UF.Alert.Success({message:"Produtos editados"});
+    var form = $('#form-detalhe-produto');
+    form.find('[name=id]').val(selectedIds[0]);
+    form.submit();
+    
 }
 
 UF.Produto.ExcluirProduto = function(element){
@@ -201,6 +204,21 @@ UF.Produto.ExcluirProduto = function(element){
     if (selectedIds.length==0){
         UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
         return;
-    }
-    UF.Alert.Success({message:"Produtos excluídos"});
+    }UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=ExcluirProduto",	
+	type : 'post',	
+	data : {
+            id: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Produto(s) excluído(s) com sucesso"});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });
+    
 }
