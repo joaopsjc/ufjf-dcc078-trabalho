@@ -204,21 +204,55 @@ UF.Produto.ExcluirProduto = function(element){
     if (selectedIds.length==0){
         UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
         return;
-    }UF.Alert.ShowLoading();
+    }
+    UF.Alert.ShowLoading();
     $.ajax({
 	url : "FrontController?action=ExcluirProduto",	
 	type : 'post',	
 	data : {
-            id: selectedIds.join(',')
+            selectedIds: selectedIds.join(',')
 	},	
 	complete  : function(response){	
             UF.Alert.CloseLoading();
             if (response.responseText=="")
-                UF.Alert.Success({message:"Produto(s) excluído(s) com sucesso"});
+                UF.Alert.Success({message:"Produto(s) excluído(s) com sucesso",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ResumoProdutos";
+                    }});
             else
                 UF.Alert.Error({message:response.responseText});
             
 	}	
     });
+    
+}
+
+UF.Produto.BloquearDesbloquearProduto = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    var isBloquear = element.getAttribute('data-type')=="Bloquear";
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=BloquearDesbloquearProduto",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(','),
+            isBloquear: isBloquear
+	},	
+	complete : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Produto(s) "+(isBloquear? "bloqueado(s)" : "desbloqueado(s)") + " com sucesso",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ResumoProdutos";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    }); 
     
 }
