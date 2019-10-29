@@ -23,10 +23,10 @@
                     <a href="#"><i class="fa fa-cutlery"></i> <span class="nav-label">Fazer pedido</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="/Membro/list"><i class="fa fa-caret-right"></i> <span class="nav-label">Restaurantes</span></a>
+                            <a href="FrontController?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Restaurantes</span></a>
                         </li>
                         <li>
-                            <a href="/Membro/list"><i class="fa fa-caret-right"></i> <span class="nav-label">Promoções</span></a>
+                            <a href="FrontController?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Promoções</span></a>
                         </li>
                     </ul>
                 </li>
