@@ -46,6 +46,36 @@ public class ContatoDAO  extends DAO{
         }
     }
 
+    public Contato getById(Long id_contato) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        Contato contato = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from contato where id='"+id_contato+"'");
+
+            if (rs.next())
+            {
+                
+                Long id_usuario = rs.getLong("id_usuario");
+                String valor  = rs.getString("valor");
+                String tipoContato = rs.getString("tipoContato");
+                Contato novoContato = ContatoFactory.create(tipoContato);  
+                novoContato.setValor(valor);
+                novoContato.setId(id_contato);
+                novoContato.setIdUsuario(id_usuario);
+                contato = novoContato;
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return contato;
+    }
+
     public List<Contato> getContatosByUserId(Long id_usuario) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -65,6 +95,7 @@ public class ContatoDAO  extends DAO{
                 Contato novoContato = ContatoFactory.create(tipoContato);  
                 novoContato.setValor(valor);
                 novoContato.setId(id);
+                novoContato.setIdUsuario(id_usuario);
                 contatos.add(novoContato);
             }
         } catch(SQLException e) {
