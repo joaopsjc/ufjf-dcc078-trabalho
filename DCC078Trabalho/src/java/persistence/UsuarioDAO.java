@@ -190,8 +190,7 @@ public class UsuarioDAO extends DAO{
         } finally {
             closeResources(conn, st);
         }
-    }
-    
+    }    
 
     public void delete(Long id_usuario) throws SQLException, ClassNotFoundException{
         Connection conn = null;
