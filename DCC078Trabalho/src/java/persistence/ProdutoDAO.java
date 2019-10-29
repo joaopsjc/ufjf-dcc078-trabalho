@@ -76,6 +76,35 @@ public class ProdutoDAO  extends DAO{
             }
         return listaProdutos;
     }
+    public Produto getById(Long id) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        Produto produto = null;
+        try {
+                conn = DatabaseLocator.getInstance().getConection();
+                st = conn.createStatement();
+                
+                // execute the query, and get a java resultset
+                ResultSet rs = st.executeQuery("select * from produto where id = '"+ id +"'");
+                
+                // iterate through the java resultset
+                if (rs.next())
+                {
+                    Long id_empresa = rs.getLong("id_empresa");
+                    String nome = rs.getString("nome");
+                    String categoria = rs.getString("categoria");
+                    String descricao = rs.getString("descricao");
+                    int quantidade = rs.getInt("quantidade");
+                    double preco = rs.getDouble("preco");
+                    produto = new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                }
+            } catch(SQLException e) {
+                throw e;
+            } finally {
+                closeResources(conn, st);
+            }
+        return produto;
+    }
     public List<Produto> getAll() throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -123,7 +152,24 @@ public class ProdutoDAO  extends DAO{
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Update user failed, no rows affected.");
+                throw new SQLException("Update produto failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    public void delete(Long id_produto) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("delete from produto where id='"+id_produto+"'",Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Delete produto failed, no rows affected.");
             }
         } catch(SQLException e) {
             throw e;
