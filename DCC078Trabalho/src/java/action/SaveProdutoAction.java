@@ -20,7 +20,7 @@ import model.Produto;
 import model.abstratos.Usuario;
 import model.estados.ProdutoEstadoBloqueado;
 import model.estados.ProdutoEstadoDisponivel;
-import model.estados.ProdutoEstadoFactory;
+import controller.ProdutoEstadoFactory;
 import persistence.ProdutoDAO;
 import persistence.UsuarioDAO;
 
