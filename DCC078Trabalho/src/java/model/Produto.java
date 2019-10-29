@@ -102,4 +102,8 @@ public class Produto {
         this.estado = new ProdutoEstadoBloqueado();
     }
     
+    public String getNomeEstado(){
+        return this.estado.getEstado();
+    }
+    
 }

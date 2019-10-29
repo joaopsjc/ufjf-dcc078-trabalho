@@ -12,5 +12,8 @@ import model.interfaces.ProdutoEstado;
  * @author JoaoPSJC
  */
 public class ProdutoEstadoBloqueado implements ProdutoEstado{
-    
+    @Override
+    public String getEstado() {
+        return "Bloqueado";
+    }
 }

@@ -10,5 +10,5 @@ package model.interfaces;
  * @author JoaoPSJC
  */
 public interface ProdutoEstado{
-    
+    public String getEstado();
 }
