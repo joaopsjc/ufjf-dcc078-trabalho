@@ -19,6 +19,7 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.estados.ProdutoEstadoFactory;
 import model.interfaces.PedidoEstado;
+import model.interfaces.Promocao;
 
 /**
  *
@@ -31,7 +32,7 @@ public class PedidoProdutoDAO  extends DAO{
     }
     
     
-    public void insert(Long id_produto, Long id_pedido) throws SQLException, ClassNotFoundException{
+    public void insert(Long id_produto, Long id_pedido, Long id_promocao) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -178,5 +179,26 @@ public class PedidoProdutoDAO  extends DAO{
             closeResources(conn, st);
         }
         return pedidos;
+    }
+    public Promocao getPromocaoByPedidoProdutoId(Long id_produto, Long id_pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        Promocao promocao = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT * FROM pedidoProduto where id_pedido='"+id_pedido+"' AND" + "id_produto='"+id_produto+"'");
+            if (rs.next())
+            {
+                Long id_promocao = rs.getLong("id_promocao");
+                promocao = PromocaoDAO.getInstance().getById(id_promocao);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return promocao;
     }
 }
