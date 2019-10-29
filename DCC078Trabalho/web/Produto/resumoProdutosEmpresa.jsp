@@ -23,8 +23,8 @@
                             <a href="FrontController?action=FormNovoProduto"><button class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar</button></a>
                             <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
                             <button onclick="UF.Produto.ExcluirProduto(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
-                            <button onclick="UF.Produto.BloquearProduto(this)" class="btn btn-warning" type="button"><i class="fa fa-lock"></i> Bloquear</button> 
-                            <button onclick="UF.Produto.DesbloquearProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-unlock"></i> Desbloquear</button> 
+                            <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Bloquear" class="btn btn-warning" type="button"><i class="fa fa-lock"></i> Bloquear</button> 
+                            <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Desbloquear" class="btn btn-primary" type="button"><i class="fa fa-unlock"></i> Desbloquear</button> 
                         </div>
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>

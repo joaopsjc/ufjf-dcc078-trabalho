@@ -135,10 +135,13 @@ public class Pedido {
         this.endereco = endereco;
     }
     
+    public void setEstado(PedidoEstado estado) {
+        this.estado = estado;
+    }
+    
     public void addProduto(Produto novoProduto)
     {
         produtos.add(novoProduto);
         precoProdutos+= novoProduto.getPreco();
-    }
-    
+    }   
 }

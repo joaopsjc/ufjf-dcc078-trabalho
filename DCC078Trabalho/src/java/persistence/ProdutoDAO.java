@@ -11,8 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.Produto;
+import model.estados.ProdutoEstadoBloqueado;
+import model.estados.ProdutoEstadoDisponivel;
+import model.estados.ProdutoEstadoIndisponivel;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 import controller.ProdutoEstadoFactory;
 
 /**
@@ -211,7 +216,7 @@ public class ProdutoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from produto where id='"+id_produto+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from produto where id="+id_produto,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete produto failed, no rows affected.");
@@ -221,5 +226,41 @@ public class ProdutoDAO  extends DAO{
         } finally {
             closeResources(conn, st);
         }
+    }
+    
+    private void delete(String id_produto) throws SQLException, ClassNotFoundException{
+        this.delete(Long.parseLong(id_produto));
+    }
+
+    public void deleteByIds(List<String> ids) throws SQLException, ClassNotFoundException {
+        for(Iterator i = ids.iterator();i.hasNext();)
+            delete((String)i.next());
+    }
+
+    
+    public void bloquearDesbloquearByIds(String selectedIds, boolean isBloquear) throws SQLException, ClassNotFoundException  {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            String query;
+            String estadoBloqueado = new ProdutoEstadoBloqueado().getEstado();
+            String estadoDisponivel = new ProdutoEstadoDisponivel().getEstado();
+            String estadoIndisponivel = new ProdutoEstadoIndisponivel().getEstado();
+            if (isBloquear)
+                query = "update produto set estado='"+estadoBloqueado+"' where id in ("+selectedIds+")";
+            else
+                query = "update produto set estado=case when quantidade=0 then '"+estadoIndisponivel+"' else '"+estadoDisponivel+"' end where id in ("+selectedIds+")";
+            st = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Bloqueio e desbloquei de produtos failhou, 0 linhas afetadas.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+//UPDATE produto set estado=case when quantidade=0 then 'Indisponivel' else 'Disponivel' end where id in (3,4)
     }
 }
