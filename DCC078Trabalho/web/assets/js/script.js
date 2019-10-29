@@ -80,6 +80,17 @@ UF.Helpers.ReplaceAll = function (target, search, replacement) {
         return target;
 }
 
+UF.Helpers.GetSelectedIdsFromGrid = function(grid){
+    if (typeof(grid)=="string")
+        grid = $("#"+grid);
+    var result = [];
+    grid.find('input[type=checkbox]:checked').each(function(i,el){
+        el = $(el);
+        result.push(el.attr('data-id'))
+    });
+    return result;
+}
+
 UF.RegisterNamespace('Alert');
 
 UF.Alert.SweetAlertConfigDefault = {
@@ -177,9 +188,19 @@ UF.SetMaskToInputs();
 UF.RegisterNamespace("Produto");
 
 UF.Produto.EditarProduto = function(element){
-    
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    UF.Alert.Success({message:"Produtos editados"});
 }
 
 UF.Produto.ExcluirProduto = function(element){
-    
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    UF.Alert.Success({message:"Produtos excluídos"});
 }
