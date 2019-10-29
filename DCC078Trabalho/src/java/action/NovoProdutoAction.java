@@ -48,7 +48,7 @@ public class NovoProdutoAction  implements Action{
             ProdutoDAO.getInstance().insert(produto);
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Produto cadastrado com sucesso!");
-            List<Produto> listProdutos = ProdutoDAO.getInstance().getProdutosByEmpresa(currentUser.getId());
+            List<Produto> listProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(currentUser.getId());
             request.setAttribute("listProdutos", listProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosEmpresa.jsp").forward(request, response);
             
