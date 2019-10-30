@@ -182,6 +182,112 @@ public class UsuarioDAO extends DAO{
         }
         return usuarios;
     }
+
+    public List<Usuario> getAllEmpresas() throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from usuario where tipoUsuario = 'Empresa'");
+
+            while(rs.next())
+            {
+                Long id = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                String documento = rs.getString("documento");
+                String tipoUsuario = rs.getString("tipoUsuario");
+                        
+                Usuario novoUsuario = UsuarioFactory.create(tipoUsuario);
+                novoUsuario.setId(id);
+                novoUsuario.setNome(nome);
+                novoUsuario.setLogin(login);
+                novoUsuario.setSenha(senha);
+                novoUsuario.setDocumento(documento);
+                usuarios.add(novoUsuario);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return usuarios;
+    }
+
+    public List<Usuario> getAllClientes() throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from usuario where tipoUsuario = 'Cliente'");
+
+            while(rs.next())
+            {
+                Long id = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                String documento = rs.getString("documento");
+                String tipoUsuario = rs.getString("tipoUsuario");
+                        
+                Usuario novoUsuario = UsuarioFactory.create(tipoUsuario);
+                novoUsuario.setId(id);
+                novoUsuario.setNome(nome);
+                novoUsuario.setLogin(login);
+                novoUsuario.setSenha(senha);
+                novoUsuario.setDocumento(documento);
+                usuarios.add(novoUsuario);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return usuarios;
+    }
+    
+
+    public List<Usuario> getAllEntregadores() throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from usuario where tipoUsuario = 'Entregador'");
+
+            while(rs.next())
+            {
+                Long id = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                String documento = rs.getString("documento");
+                String tipoUsuario = rs.getString("tipoUsuario");
+                        
+                Usuario novoUsuario = UsuarioFactory.create(tipoUsuario);
+                novoUsuario.setId(id);
+                novoUsuario.setNome(nome);
+                novoUsuario.setLogin(login);
+                novoUsuario.setSenha(senha);
+                novoUsuario.setDocumento(documento);
+                usuarios.add(novoUsuario);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return usuarios;
+    }
     
     public void update(Usuario usuario) throws SQLException, ClassNotFoundException{
         Connection conn = null;
