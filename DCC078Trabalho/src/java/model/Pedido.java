@@ -10,6 +10,7 @@ import model.interfaces.PedidoEstado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Observable;
 import model.abstratos.Usuario;
 import model.estados.PedidoEmPreparo;
 import model.extensores.*;
@@ -18,7 +19,7 @@ import model.extensores.*;
  *
  * @author andradeld
  */
-public class Pedido {
+public class Pedido extends Observable {
     //campos só para o banco de dados?
     private Usuario entregador,
             cliente,
@@ -137,11 +138,13 @@ public class Pedido {
     
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
+        setChanged(); //observer
+        notifyObservers(); //observer
     }
     
     public void addProduto(Produto novoProduto)
     {
         produtos.add(novoProduto);
         precoProdutos+= novoProduto.getPreco();
-    }   
+    }
 }
