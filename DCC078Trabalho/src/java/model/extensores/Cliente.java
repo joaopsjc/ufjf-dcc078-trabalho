@@ -11,12 +11,21 @@ import model.interfaces.Contato;
 import java.util.List;
 import model.DadosBancarios;
 import model.Pedido;
+import java.util.Observable;
+import java.util.Observer;
+import model.interfaces.PedidoEstado;
+
+import javax.mail.*;  
+import javax.mail.internet.*;  
+import java.util.Properties;
 
 /**
  *
  * @author andradeld
  */
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Observer {
+    
+    private Observable pedido;
     
     public Cliente(){
         super();
@@ -56,5 +65,63 @@ public class Cliente extends Usuario {
     public String getTipo()
     {
         return "Cliente";
+    }
+    
+    
+    public Observable getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Observable pedido) {
+        this.pedido = pedido;
+    }
+    
+    public Cliente(Observable pedido) {
+        this.pedido = pedido;
+        pedido.addObserver(this);
+    }
+
+    @Override
+    public void update(Observable pedidoSubject, Object arg1) {
+        if (pedidoSubject instanceof Pedido) {
+            Pedido pedido = (Pedido) pedidoSubject;
+            PedidoEstado estado = pedido.getEstado();
+            
+            System.out.println("Estado pedido alterado para "+ estado+ "!");
+            /*Enviar email, faltar inserir email e senha e testar, line 93 e 94*/
+ /*               String host="mail.javatpoint.com";
+                final String user="sonoojaiswal@javatpoint.com";
+                final String password="xxxxx";
+
+                String to="anderson.andrade@gmail.com";
+
+                 //Get the session object
+                 Properties props = new Properties();
+                 props.put("mail.smtp.host",host);
+                 props.put("mail.smtp.auth", "true");
+
+                 Session session = Session.getDefaultInstance(props,
+                  new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                      return new PasswordAuthentication(user,password);
+                    }
+                  });
+
+                 //Compose the message
+                  try {
+                   MimeMessage message = new MimeMessage(session);
+                   message.setFrom(new InternetAddress(user));
+                   message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+                   message.setSubject("javatpoint");
+                   message.setText("O seu pedido teve o estado alterado para " + estado);
+
+                  //send the message
+                   Transport.send(message);
+
+                   System.out.println("message sent successfully...");
+
+                   } catch (MessagingException e) {e.printStackTrace();}  
+*/
+        }
     }
 }
