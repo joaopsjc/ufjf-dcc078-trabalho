@@ -31,7 +31,7 @@ public class GetProdutosByEmpresaIdAction implements Action{
             Long id_empresa = Long.parseLong(request.getParameter("empresaId"));
             String url = request.getHeader("referer");
             List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(id_empresa);
-            request.setAttribute("produtosByCategoria", listaProdutos);
+            request.setAttribute("produtosByEmpresaId", listaProdutos);
             request.getRequestDispatcher(url).forward(request, response);
             
         } catch (ServletException ex) {

@@ -32,7 +32,7 @@ public class GetProdutosByEmpresaNomeAction implements Action{
             String url = request.getHeader("referer");
             Usuario empresa = UsuarioDAO.getInstance().getByName(nomeEmpresa);
             List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(empresa.getId());
-            request.setAttribute("produtosByCategoria", listaProdutos);
+            request.setAttribute("produtosByEmpresaNome", listaProdutos);
             request.getRequestDispatcher(url).forward(request, response);
             
         } catch (ServletException ex) {
