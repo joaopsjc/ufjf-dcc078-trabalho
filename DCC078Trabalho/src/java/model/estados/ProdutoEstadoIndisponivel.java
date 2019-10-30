@@ -20,7 +20,7 @@ public class ProdutoEstadoIndisponivel implements ProdutoEstado{
     }
 
     @Override
-    public boolean diposnivel(Produto produto) {
+    public boolean disponivel(Produto produto) {
         produto.setEstado(new ProdutoEstadoDisponivel());
         return true;
     }
@@ -34,6 +34,5 @@ public class ProdutoEstadoIndisponivel implements ProdutoEstado{
     public boolean bloqueado(Produto produto) {
         return false;
     }
-
     
 }

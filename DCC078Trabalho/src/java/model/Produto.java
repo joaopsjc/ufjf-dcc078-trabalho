@@ -139,4 +139,12 @@ public class Produto {
         this.estado = estado;
     }
     
+    public ProdutoMemento saveToMemento()
+    {
+        return new ProdutoMemento(estado);
+    }
+    public void restoreFromMemento(ProdutoMemento memento)
+    {
+        estado = memento.getEstadoSalvo();
+    }
 }

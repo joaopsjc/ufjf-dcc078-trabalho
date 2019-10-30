@@ -6,6 +6,7 @@
 package action;
 
 import controller.Action;
+import helper.Helper;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -31,9 +32,7 @@ public class AlterarSenhaAction implements Action{
         String messageError = "";
         request.setAttribute("messageSuccess", "");
         try {
-            HttpSession sess = request.getSession(true);
-            
-            Usuario currentUser = (Usuario)sess.getAttribute("loggedUser");
+            Usuario currentUser = Helper.getLoggedUser(request);
             Usuario usuario = UsuarioDAO.getInstance().authenticate(currentUser.getLogin(),senha);
             if (usuario == null)
                 messageError = "Senha incorreta!";

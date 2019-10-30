@@ -21,6 +21,7 @@ import model.abstratos.Usuario;
 import model.estados.ProdutoEstadoBloqueado;
 import model.estados.ProdutoEstadoDisponivel;
 import controller.ProdutoEstadoFactory;
+import model.estados.ProdutoEstadoIndisponivel;
 import persistence.ProdutoDAO;
 import persistence.UsuarioDAO;
 
@@ -40,8 +41,12 @@ public class SaveProdutoAction  implements Action{
         String estado = request.getParameter("estado");
         
         Usuario currentUser = Helper.getLoggedUser(request);
-        try {            
-            Produto produto = new Produto();
+        try {
+            Produto produto;
+            if (id.length() != 0)
+                produto= ProdutoDAO.getInstance().getById(id);
+            else
+                produto= new Produto();
             produto.setCategoria(categoria);
             produto.setNome(nome);
             produto.setDescricao(descricao);
@@ -51,12 +56,10 @@ public class SaveProdutoAction  implements Action{
             if (estado.length()>0)
                 produto.setEstado(ProdutoEstadoFactory.create(estado));
             
-            if (!(produto.getEstado() instanceof ProdutoEstadoBloqueado)){
-                if (quantidade==0)
-                    produto.produtoIndisponivel();
-                else
-                    produto.produtoDisponivel();
-            }            
+            if (quantidade==0)
+                produto.getEstado().indisponivel(produto);
+            else
+                produto.getEstado().disponivel(produto);
             
             if (id.length() != 0)
                 produto.setId(Long.parseLong(id));
