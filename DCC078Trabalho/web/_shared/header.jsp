@@ -41,6 +41,14 @@
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </div>
+                <c:if test = "${loggedUser.getTipo() == 'Cliente'}">
+                    <form role="search" class="navbar-form-custom" action="FrontController">
+                        <input type="hidden" value="GetProdutosByGlobalSearch" name="action"/>
+                        <div class="form-group">
+                            <input type="text" placeholder="Pesquise por produtos ou categorias..." class="form-control" name="stringSearch" id="stringSearch">
+                        </div>
+                    </form>
+                </c:if>
                 <ul class="nav navbar-top-links navbar-right">
 
 

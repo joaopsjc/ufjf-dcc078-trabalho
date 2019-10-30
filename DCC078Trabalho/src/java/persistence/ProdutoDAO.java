@@ -87,7 +87,7 @@ public class ProdutoDAO  extends DAO{
         return listaProdutos;
     }
     
-    public List<Produto> getProdutosByCategoria(String categoria) throws SQLException, ClassNotFoundException{
+    public List<Produto> getProdutosByCategoria(String stringSearch) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         List<Produto> listaProdutos = new ArrayList();
@@ -96,8 +96,9 @@ public class ProdutoDAO  extends DAO{
                 st = conn.createStatement();
                 
                 // execute the query, and get a java resultset
-                ResultSet rs = st.executeQuery("select * from produto where categoria ='"+categoria+"'");
-                
+                stringSearch = stringSearch.toLowerCase();
+                ResultSet rs = st.executeQuery("select * from produto where lower(categoria) like '%"+stringSearch+"%'"
+                +" or lower(nome) like '%"+stringSearch+"%'");
                 // iterate through the java resultset
                 while (rs.next())
                 {
@@ -108,7 +109,7 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    Produto p =  new Produto(id,nome,descricao, stringSearch, quantidade, preco,id_empresa);
                     p.setEstado(ProdutoEstadoFactory.create(estado));
                     listaProdutos.add(p);
                 }

@@ -21,16 +21,16 @@ import persistence.ProdutoDAO;
  *
  * @author jjsfa
  */
-public class GetProdutosByCategoriaAction implements Action{
+public class GetProdutosByGlobalSearchAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String categoria = request.getParameter("categoriaProduto");
+            String stringSearch = request.getParameter("stringSearch");
             String url = request.getHeader("referer");
-            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByCategoria(categoria);
-            request.setAttribute("produtosByCategoria", listaProdutos);
-            request.getRequestDispatcher(url).forward(request, response);
+            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByCategoria(stringSearch);
+            request.setAttribute("listProdutos", listaProdutos);
+            request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
             
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
