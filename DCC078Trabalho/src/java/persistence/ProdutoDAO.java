@@ -120,6 +120,10 @@ public class ProdutoDAO  extends DAO{
         return listaProdutos;
     }
     
+    public Produto getById(String id) throws SQLException, ClassNotFoundException{
+        return getById(Long.parseLong(id));
+    }
+    
     public Produto getById(Long id) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;

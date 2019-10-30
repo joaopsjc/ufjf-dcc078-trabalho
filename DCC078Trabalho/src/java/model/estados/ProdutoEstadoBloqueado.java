@@ -19,20 +19,19 @@ public class ProdutoEstadoBloqueado implements ProdutoEstado{
         return "Bloqueado";
     }
     @Override
-    public boolean diposnivel(Produto produto) {
-        produto.setEstado(new ProdutoEstadoDisponivel());
-        return true;
+    public boolean disponivel(Produto produto) {
+        return false;
     }
 
     @Override
     public boolean indisponivel(Produto produto) {
-        produto.setEstado(new ProdutoEstadoIndisponivel());
-        return true;
+        return false;
     }
 
     @Override
     public boolean bloqueado(Produto produto) {
         return false;
     }
+    
     
 }

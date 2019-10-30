@@ -19,7 +19,7 @@ public class ProdutoEstadoDisponivel implements ProdutoEstado{
         return "Disponivel";
     }
     @Override
-    public boolean diposnivel(Produto produto) {
+    public boolean disponivel(Produto produto) {
         return false;
     }
 

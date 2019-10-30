@@ -13,7 +13,7 @@ import model.Produto;
  */
 public interface ProdutoEstado{
     public String getEstado();
-    public boolean diposnivel(Produto produto);
+    public boolean disponivel(Produto produto);
     public boolean indisponivel(Produto produto);
     public boolean bloqueado(Produto produto);
 }
