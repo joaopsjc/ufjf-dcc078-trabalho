@@ -91,6 +91,19 @@ UF.Helpers.GetSelectedIdsFromGrid = function(grid){
     return result;
 }
 
+UF.Helpers.SetCheckAllGrid = function(grid){
+    if (typeof(grid)=="string")
+        grid = $("#"+grid);
+    var gridId = '#'+grid.attr('id');
+    var check = $(gridId+'-check-all');
+    check.on('ifUnchecked', function(event){
+        $(gridId).find('td .i-checks').iCheck('uncheck');
+    });
+    check.on('ifChecked', function(event){
+        $(gridId).find('td .i-checks').iCheck('check');
+    });
+}
+
 UF.RegisterNamespace('Alert');
 
 UF.Alert.SweetAlertConfigDefault = {

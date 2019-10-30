@@ -29,7 +29,7 @@
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="table-th-check">#</th>
+                                <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-resumo-check-all" " name="check-grid"></th>
                                 <th>Nome</th>
                                 <th>Categoria</th>
                                 <th>Preço</th>
@@ -60,6 +60,8 @@
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
-            });
+            }); 
+            
+            UF.Helpers.SetCheckAllGrid('produto-grid-resumo');
         });
     </script>
