@@ -32,7 +32,7 @@ public class AlterarSenhaAction implements Action{
         String messageError = "";
         request.setAttribute("messageSuccess", "");
         try {
-            Usuario currentUser = Helper.getLoggedUser(request);
+            Usuario currentUser = Helper.getInstance().getLoggedUser(request);
             Usuario usuario = UsuarioDAO.getInstance().authenticate(currentUser.getLogin(),senha);
             if (usuario == null)
                 messageError = "Senha incorreta!";

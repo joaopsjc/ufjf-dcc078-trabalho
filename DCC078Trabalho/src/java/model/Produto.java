@@ -24,6 +24,7 @@ public class Produto {
     private Double preco;
     private ProdutoEstado estado;
     private Long id_empresa;
+    private ProdutoMemento estadoDesbloqueado = new ProdutoMemento();
 
     public Produto(Long id, String nome, String descricao, String categoria, Double preco) {
         this.id = id;
@@ -139,12 +140,23 @@ public class Produto {
         this.estado = estado;
     }
     
-    public ProdutoMemento saveToMemento()
+    public void saveToMemento()
     {
-        return new ProdutoMemento(estado);
+        estadoDesbloqueado  = new ProdutoMemento(estado);
     }
-    public void restoreFromMemento(ProdutoMemento memento)
+    
+    public void restoreFromMemento()
     {
-        estado = memento.getEstadoSalvo();
+        this.estado = estadoDesbloqueado.getEstadoSalvo();
     }
+    
+    public ProdutoEstado getEstadoSalvo(){
+        return estadoDesbloqueado.getEstadoSalvo();
+    }
+    
+    public void saveToMemento(ProdutoEstado novoestado)
+    {
+        estadoDesbloqueado  = new ProdutoMemento(novoestado);
+    }
+    
 }

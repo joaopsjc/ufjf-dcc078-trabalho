@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.estados.ProdutoEstadoIndisponivel;
 import model.interfaces.ProdutoEstado;
 
 /**
@@ -17,6 +18,11 @@ public class ProdutoMemento {
     public ProdutoMemento(ProdutoEstado estado) {
         this.estado = estado;
     }
+
+    ProdutoMemento() {
+        this.estado = new ProdutoEstadoIndisponivel();
+    }
+    
     public ProdutoEstado getEstadoSalvo()
     {
         return estado;

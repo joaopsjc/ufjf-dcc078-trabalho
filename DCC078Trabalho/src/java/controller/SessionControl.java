@@ -65,7 +65,7 @@ public class SessionControl implements javax.servlet.Filter {
             chain.doFilter(request, response);
             return;
         }
-        Usuario user = Helper.getLoggedUser(httpRequest);
+        Usuario user = Helper.getInstance().getLoggedUser(httpRequest);
 
         if (user==null){
             HttpServletResponse httpResponse = (HttpServletResponse) response;

@@ -30,8 +30,9 @@ public class ResumoProdutosAction implements Action{
     public void execute(HttpServletRequest request,HttpServletResponse response)
             throws IOException{ 
         try{
-            Usuario usuario = Helper.getLoggedUser(request);
+            Usuario usuario = Helper.getInstance().getLoggedUser(request);
             List<Produto> listProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(usuario.getId());
+            Helper.getInstance().setListProdutos(listProdutos);
             request.setAttribute("listProdutos", listProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosEmpresa.jsp").forward(request, response);
         } catch(SQLException ex){

@@ -240,31 +240,26 @@ public class ProdutoDAO  extends DAO{
         for(Iterator i = ids.iterator();i.hasNext();)
             delete((String)i.next());
     }
-
     
-    public void bloquearDesbloquearByIds(String selectedIds, boolean isBloquear) throws SQLException, ClassNotFoundException  {
+    public void updateEstado(Produto produto) throws SQLException, ClassNotFoundException  {
         Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            String query;
-            String estadoBloqueado = new ProdutoEstadoBloqueado().getEstado();
-            String estadoDisponivel = new ProdutoEstadoDisponivel().getEstado();
-            String estadoIndisponivel = new ProdutoEstadoIndisponivel().getEstado();
-            if (isBloquear)
-                query = "update produto set estado='"+estadoBloqueado+"' where id in ("+selectedIds+")";
-            else
-                query = "update produto set estado=case when quantidade=0 then '"+estadoIndisponivel+"' else '"+estadoDisponivel+"' end where id in ("+selectedIds+")";
-            st = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update produto set estado='"+produto.getNomeEstado()+"' where id="+produto.getId(),Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Bloqueio e desbloquei de produtos failhou, 0 linhas afetadas.");
+                throw new SQLException("Atualização do estado do produto falhou, 0 linhas afetadas.");
             }
         } catch(SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
-//UPDATE produto set estado=case when quantidade=0 then 'Indisponivel' else 'Disponivel' end where id in (3,4)
+    }
+    
+    public void updateEstadoByList(List<Produto> produtos) throws SQLException, ClassNotFoundException  {
+        for(Iterator i = produtos.iterator();i.hasNext();)
+            updateEstado((Produto)i.next());
     }
 }

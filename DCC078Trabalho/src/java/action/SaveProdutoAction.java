@@ -40,7 +40,7 @@ public class SaveProdutoAction  implements Action{
         Double preco = Double.parseDouble(request.getParameter("preco"));
         String estado = request.getParameter("estado");
         
-        Usuario currentUser = Helper.getLoggedUser(request);
+        Usuario currentUser = Helper.getInstance().getLoggedUser(request);
         try {
             Produto produto;
             if (id.length() != 0)

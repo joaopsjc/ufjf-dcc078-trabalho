@@ -6,6 +6,7 @@
 package model.estados;
 
 import model.Produto;
+import model.ProdutoMemento;
 import model.interfaces.ProdutoEstado;
 
 /**
@@ -13,6 +14,7 @@ import model.interfaces.ProdutoEstado;
  * @author JoaoPSJC
  */
 public class ProdutoEstadoBloqueado implements ProdutoEstado{
+    
     
     @Override
     public String getEstado() {
@@ -31,6 +33,11 @@ public class ProdutoEstadoBloqueado implements ProdutoEstado{
     @Override
     public boolean bloqueado(Produto produto) {
         return false;
+    }
+    @Override
+    public boolean desbloqueado(Produto produto) {
+        produto.restoreFromMemento();
+        return true;
     }
     
     

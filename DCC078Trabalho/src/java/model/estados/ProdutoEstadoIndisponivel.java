@@ -32,6 +32,13 @@ public class ProdutoEstadoIndisponivel implements ProdutoEstado{
 
     @Override
     public boolean bloqueado(Produto produto) {
+        produto.saveToMemento();
+        produto.setEstado(new ProdutoEstadoBloqueado());
+        return true;
+    }
+
+    @Override
+    public boolean desbloqueado(Produto produto) {
         return false;
     }
     
