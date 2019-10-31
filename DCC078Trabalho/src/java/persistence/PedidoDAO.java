@@ -134,7 +134,7 @@ public class PedidoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from pedido where id_cliente='"+id_cliente+"'");
+            ResultSet rs = st.executeQuery("select * from pedido where id_cliente="+id_cliente);
 
             while (rs.next())
             {                
@@ -170,7 +170,7 @@ public class PedidoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from pedido where id_empresa='"+id_empresa+"'");
+            ResultSet rs = st.executeQuery("select * from pedido where id_empresa="+id_empresa);
 
             while (rs.next())
             {
@@ -206,7 +206,7 @@ public class PedidoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from pedido where id_entregador='"+id_entregador+"'");
+            ResultSet rs = st.executeQuery("select * from pedido where id_entregador="+id_entregador);
 
             while (rs.next())
             {
@@ -239,7 +239,7 @@ public class PedidoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update pedido set estado=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update pedido set estado='?' where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,pedido.getEstado().getEstado());
             st.setLong(2,pedido.getId());
             int affectedRows = st.executeUpdate();
@@ -259,7 +259,7 @@ public class PedidoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from pedido where id='"+id_pedido+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from pedido where id="+id_pedido,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete pedido failed, no rows affected.");

@@ -15,7 +15,7 @@
                     <a href="#"><i class="fa fa-list-ol"></i> <span class="nav-label">Pedidos</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="FrontController?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Meus pedidos</span></a>
+                            <a href="FrontController?action=listaPedidosCliente"><i class="fa fa-caret-right"></i> <span class="nav-label">Meus pedidos</span></a>
                         </li>
                     </ul>
                 </li>
