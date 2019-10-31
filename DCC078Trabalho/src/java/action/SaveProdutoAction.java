@@ -69,12 +69,7 @@ public class SaveProdutoAction  implements Action{
                 ProdutoDAO.getInstance().update(produto);
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Produto cadastrado com sucesso!");
-            List<Produto> listProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(currentUser.getId());
-            request.setAttribute("listProdutos", listProdutos);
-            request.getRequestDispatcher("Produto/resumoProdutosEmpresa.jsp").forward(request, response);
-            
-        } catch (ServletException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("FrontController?action=ResumoProdutos");
         } catch (SQLException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

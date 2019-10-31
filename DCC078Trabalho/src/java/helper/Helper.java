@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import model.Pedido;
 import model.Produto;
 import model.abstratos.Usuario;
 
@@ -20,7 +21,6 @@ import model.abstratos.Usuario;
  */
 public class Helper {
     
-    private List<Produto> produtosResumo;
     
     private static Helper instance = new Helper();
     public static Helper getInstance(){
@@ -34,14 +34,14 @@ public class Helper {
         return user;
     }
     
-    public List<Produto> getListProdutos(){
-        return produtosResumo;
+    public List<Produto> getListProdutos(HttpServletRequest httpRequest){
+        return getLoggedUser(httpRequest).getProdutos();
     }
     
-    public List<Produto> getListProdutos(String selectedIds){
+    public List<Produto> getListProdutosByIds(String selectedIds,HttpServletRequest request){
         List<String> listSelectedIds = stringTolist(selectedIds);
         List<Produto> result = new ArrayList<Produto>();
-        for(Iterator i = produtosResumo.iterator();i.hasNext();){
+        for(Iterator i = getListProdutos(request).iterator();i.hasNext();){
             Produto p = (Produto)i.next();
             if (listSelectedIds.contains(p.getId().toString()))
                 result.add(p);
@@ -49,24 +49,34 @@ public class Helper {
         return result;
     }
     
-    public void setListProdutos(List<Produto> produtos){
+    public void setListProdutos(List<Produto> produtos,HttpServletRequest request){
         Produto p2;
-        if (this.produtosResumo != null){
+        List<Produto> listProdutos = getListProdutos(request);
+        if (listProdutos != null){
             for(Iterator i = produtos.iterator();i.hasNext();){
                 Produto p = (Produto)i.next();
-                for(Iterator j = produtosResumo.iterator();j.hasNext();){
+                for(Iterator j = listProdutos.iterator();j.hasNext();){
                     p2 = (Produto)j.next();
                     if (p2.getId()==p.getId())
                         p.saveToMemento(p2.getEstadoSalvo());
-                }                
+                }   
 
             }
         }
-        this.produtosResumo = produtos;
+        getLoggedUser(request).setProdutos(produtos);
     }
     
     public List<String> stringTolist(String selectedIds){
         return new ArrayList<String>(Arrays.asList(selectedIds.split(",")));
+    }
+
+    public Pedido getCarrinhoByClienteId(HttpServletRequest httpRequest) {
+        Pedido pedido = getLoggedUser(httpRequest).getCarrinho();
+        return pedido;
+    }
+
+    public void addCarrinho(Pedido carrinho,HttpServletRequest httpRequest) {
+        getLoggedUser(httpRequest).setCarrinho(carrinho);
     }
     
 }

@@ -31,7 +31,7 @@ public class BloquearDesbloquearProdutoAction implements Action{
         try {
             String selectedIds= request.getParameter("selectedIds");
             boolean isBloquear= request.getParameter("isBloquear").equals("true");
-            List<Produto> listProdutos = Helper.getInstance().getListProdutos(selectedIds);
+            List<Produto> listProdutos = Helper.getInstance().getListProdutosByIds(selectedIds,request);
             executarBloqueioDesbloqueioProdutos(listProdutos,isBloquear);
             ProdutoDAO.getInstance().updateEstadoByList(listProdutos);
             response.setContentType("application/json");

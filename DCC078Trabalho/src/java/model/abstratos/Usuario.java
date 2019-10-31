@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.DadosBancarios;
 import model.Pedido;
-import model.TipoUsuario;
+import model.Produto;
 
 /**
  *
@@ -26,12 +26,15 @@ public abstract class Usuario {
     private final List<Endereco> enderecos;
     private final List<Contato> contatos;
     private final List<Pedido> pedidos;
+    private List<Produto> produtos;
+    private Pedido carrinho;
 
     public Usuario(){
         dadosBancarios = new ArrayList<>();
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
+        produtos = new ArrayList<>();
     }
     
     public Usuario(Long id, String documento, String nome, String login, String senha) {
@@ -44,6 +47,7 @@ public abstract class Usuario {
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
+        produtos = new ArrayList<>();
     }
     public Usuario(Long id, String documento, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
         this.id = id;
@@ -55,6 +59,7 @@ public abstract class Usuario {
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
+        produtos = new ArrayList<>();
     }
     public Usuario(Long id, String documento, String nome, String login, String senha, List<Endereco> enderecos) {
         this.id = id;
@@ -66,6 +71,7 @@ public abstract class Usuario {
         this.enderecos = enderecos;
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
+        produtos = new ArrayList<>();
     }
     public Usuario(Long id, String documento, String nome,List<Contato> contatos, String login, String senha) {
         this.id = id;
@@ -77,6 +83,7 @@ public abstract class Usuario {
         enderecos = new ArrayList<>();
         this.contatos = contatos;
         pedidos = new ArrayList<>();
+        produtos = new ArrayList<>();
     }
     public Usuario(Long id, String documento,List<Pedido> pedidos, String nome, String login, String senha) {
         this.id = id;
@@ -88,6 +95,7 @@ public abstract class Usuario {
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         this.pedidos = pedidos;
+        produtos = new ArrayList<>();
     }
     public Usuario(Long id, String documento, String nome, String login, String senha,
              List<DadosBancarios> dadosBancarios, List<Endereco> enderecos,
@@ -101,6 +109,7 @@ public abstract class Usuario {
         this.enderecos = enderecos;
         this.contatos = contatos;
         this.pedidos = pedidos;
+        produtos = new ArrayList<>();
     }
 
     public String getTipo()
@@ -185,13 +194,25 @@ public abstract class Usuario {
     {
         pedidos.add(novoPedido);
     }
-    /*
-    Substituido pelo método getTipo()
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public void setCarrinho(Pedido carrinho) {
+        this.carrinho = carrinho;
+    }
+
+    public Pedido getCarrinho() {
+        if (this.carrinho == null)
+            this.carrinho = new Pedido();
+        return this.carrinho;
     }
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }*/
 }
