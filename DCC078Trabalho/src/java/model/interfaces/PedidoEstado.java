@@ -22,4 +22,7 @@ public interface PedidoEstado {
     public boolean concluido(Pedido pedido);
     
     public boolean emPreparo(Pedido pedido);
+    
+    public boolean aguardandoRestaurante(Pedido pedido);
+    public boolean aguardandoEntregador(Pedido pedido);
 }

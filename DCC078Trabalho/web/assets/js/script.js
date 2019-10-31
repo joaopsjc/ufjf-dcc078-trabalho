@@ -307,16 +307,33 @@ UF.Cliente.AdicionarProdutosCarrinho = function(){
 
 UF.RegisterNamespace("Carrinho");
 
-UF.Carrinho.FinalizarPedido = function(element){
-    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("carrinho-grid-resumo");
-    if (selectedIds.length!=1){
-        UF.Alert.Error({message:"É necessário selecionar um produto!"});
-        return;
-    }
-    var form = $('#form-detalhe-produto');
-    form.find('[name=id]').val(selectedIds[0]);
-    form.submit();
+UF.Carrinho.RealizarPedido = function(element){
     
+    var qtdItens = [];
+    $('#carrinho-grid-resumo input[type=number]').each(function(i,el){
+        qtdItens.push($(el).val());
+    });
+    qtdItens.join();   
+    
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=RealizarPedidoCarrinho",	
+	type : 'post',
+	data : {
+            qtdItens: qtdItens.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText.length==0){
+                UF.Alert.Success({message:"Pedido realizado",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=Home";
+                    }});   
+            }else{
+                UF.Alert.Error({message:response.responseText}); 
+            }
+	}	
+    });    
 }
 
 UF.Carrinho.RemoverDoCarrinho = function(element){

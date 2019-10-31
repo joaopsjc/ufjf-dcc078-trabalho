@@ -21,8 +21,7 @@ public class PedidoEmPreparo implements PedidoEstado {
     
     @Override
     public boolean aCaminho(Pedido pedido) {
-        pedido.setEstado(new PedidoACaminho());
-        return true;
+        return false;
     }
     
     @Override
@@ -39,5 +38,16 @@ public class PedidoEmPreparo implements PedidoEstado {
     @Override
     public boolean emPreparo(Pedido pedido) {
         return false;
+    }
+
+    @Override
+    public boolean aguardandoRestaurante(Pedido pedido) {
+        return false;
+    }
+
+    @Override
+    public boolean aguardandoEntregador(Pedido pedido) {
+        pedido.setEstado(new PedidoAguardandoEntregador());
+        return true;
     }
 }

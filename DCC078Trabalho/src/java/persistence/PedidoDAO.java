@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.Pedido;
@@ -33,16 +34,34 @@ public class PedidoDAO  extends DAO{
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.prepareStatement("insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1, pedido.getCliente().getId());
-            st.setLong(2, pedido.getEmpresa().getId());
-            st.setLong(3, pedido.getEntregador().getId());
-            st.setLong(4, pedido.getEndereco().getId());
+            if (pedido.getCliente()!=null)
+                st.setLong(1, pedido.getCliente().getId());
+            else
+                st.setNull(1, Types.INTEGER);
+            if (pedido.getEmpresa()!=null)
+                st.setLong(2, pedido.getEmpresa().getId());
+            else
+                st.setNull(2, Types.INTEGER);
+            if (pedido.getEntregador()!=null)
+                st.setLong(3, pedido.getEntregador().getId());
+            else
+                st.setNull(3, Types.INTEGER);
+            if (pedido.getEndereco()!=null)
+                st.setLong(4, pedido.getEndereco().getId());
+            else
+                st.setNull(4, Types.INTEGER);
+            
             st.setDouble(5, pedido.getFrete());
             st.setString(6, pedido.getEstado().getEstado());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
                 throw new SQLException("Creating pedido failed, no rows affected.");
+            }
+            ResultSet rs = st.getGeneratedKeys();
+
+            if (rs.next()) {
+                pedido.setId(rs.getLong(1));
             }
         } catch(SQLException e) {
             throw e;
