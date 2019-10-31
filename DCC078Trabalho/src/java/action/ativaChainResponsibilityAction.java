@@ -13,9 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;import model.entregadorChainResponsibility;
+import javax.servlet.http.HttpServletResponse;import model.Pedido;
+import model.entregadorChainResponsibility;
 import model.extensores.Entregador;
-import persistence.UsuarioDAO;
+import persistence.PedidoDAO;
 
 /**
  *
@@ -26,13 +27,19 @@ public class ativaChainResponsibilityAction implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            Long id_pedido = Long.parseLong(request.getParameter("pedidoId"));
+            Pedido novoPedido = PedidoDAO.getInstance().getById(id_pedido);
             String url = request.getHeader("referer");
-            // FUNÇÃO DE CHAMAR A CADEIA DE RESPONSABILIDADE AINDA NÃO FOI FEITA
-            entregadorChainResponsibility.getInstance().getPrimeiroEntregador();
+            Entregador primeiroEntregador = (Entregador) entregadorChainResponsibility.getInstance().getPrimeiroEntregador();
+            primeiroEntregador.novaReponsabilidade(novoPedido);
             request.getRequestDispatcher(url).forward(request, response);
             
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ativaChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ativaChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
     }
