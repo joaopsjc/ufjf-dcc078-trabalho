@@ -124,6 +124,10 @@ public class Entregador extends Usuario {
         return avaliacao;
     }
 
+    public Pedido getPedidoDisponivel() {
+        return pedidoDisponivel;
+    }
+
     @Override
     public String getTipo()
     {
