@@ -16,12 +16,13 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row toolbar-crud-grid">
-                            <button onclick="UF.Cliente.AdicionarProdutosCarrinho(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                            <button onclick="UF.Carrinho.RemoverDoCarrinho(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Remover do carrinho</button>
+                            <button onclick="UF.Carrinho.FinalizarPedido(this)" class="btn btn-primary" type="button"><i class="fa fa-check"></i> Finalizar pedido</button>
                         </div>
-                        <table id="produto-grid-resumo"class="table table-bordered">
+                        <table id="carrinho-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-resumo-check-all" name="check-grid"></th>
+                                <th class="table-th-check"><input type="checkbox"  class="i-checks" id="carrinho-grid-resumo-check-all" name="check-grid"></th>
                                 <th>Nome</th>
                                 <th>Categoria</th>
                                 <th>Restaurante</th>
@@ -56,6 +57,6 @@
                 radioClass: 'iradio_square-green',
             }); 
             
-            UF.Helpers.SetCheckAllGrid('produto-grid-resumo');
+            UF.Helpers.SetCheckAllGrid('carrinho-grid-resumo');
         });
     </script>

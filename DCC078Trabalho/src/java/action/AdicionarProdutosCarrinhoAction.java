@@ -37,7 +37,7 @@ public class AdicionarProdutosCarrinhoAction implements Action{
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             int qtdItensCarrinho = pedido.getCountProdutos();
-            String resultStr = "{\"message\":\"teste\",\"qtdItensCarrinho\":"+qtdItensCarrinho+"}";
+            String resultStr = "{\"message\":\"Sucesso\",\"qtdItensCarrinho\":"+qtdItensCarrinho+"}";
             response.getWriter().write(resultStr);
         
         } catch (SQLException ex) {

@@ -150,6 +150,11 @@ public class Pedido extends Observable {
         produtos.add(novoProduto);
         precoProdutos+= novoProduto.getProduto().getPreco();
     }
+    public void removeProduto(PedidoProduto produto)
+    {
+        precoProdutos-= produto.getProduto().getPreco();
+        produtos.remove(produto);
+    }
 
     public void addListaProdutos(List<Produto> listProdutos) {
         for(Iterator i = listProdutos.iterator();i.hasNext();){
@@ -167,6 +172,10 @@ public class Pedido extends Observable {
             
     }
     
+    private PedidoProduto getPedidoProdutoByProdutoId(String id){
+        return getPedidoProdutoByProdutoId(Long.parseLong(id));
+    }
+    
     private PedidoProduto getPedidoProdutoByProdutoId(Long id){
         for(Iterator i = produtos.iterator();i.hasNext();){
             PedidoProduto pedidoproduto = (PedidoProduto)i.next();
@@ -178,5 +187,14 @@ public class Pedido extends Observable {
 
     public int getCountProdutos() {
         return produtos.size();
+    }
+
+    public void removeListaProdutos(List<String> idsList) {
+        for(Iterator i = idsList.iterator();i.hasNext();){
+            String idProduto = (String)i.next();
+            PedidoProduto pedidoProduto = getPedidoProdutoByProdutoId(idProduto);
+            if (pedidoProduto != null)
+                removeProduto(pedidoProduto);
+        }
     }
 }
