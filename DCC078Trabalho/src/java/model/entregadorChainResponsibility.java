@@ -19,19 +19,31 @@ public class entregadorChainResponsibility {
     public static entregadorChainResponsibility getInstance(){
         return instance;
     }
-    public void addToChain(Entregador novoEntregador)
+    public boolean addToChain(Entregador novoEntregador)
     {
+
         if(primeiroEntregador==null)
         {
             primeiroEntregador = novoEntregador;
             ultimoEntregador = novoEntregador;
             novoEntregador.setProxEntregador(novoEntregador);
+            return true;
         }
         else
         {
+            Entregador entregadorAtual = primeiroEntregador;
+            while(!entregadorAtual.equals(ultimoEntregador))
+            {
+                if(entregadorAtual.getProxEntregador().getId().equals(novoEntregador.getId()))
+                {
+                    return false;
+                }
+                entregadorAtual = entregadorAtual.getProxEntregador();
+            }
             novoEntregador.setProxEntregador(primeiroEntregador);
             ultimoEntregador.setProxEntregador(novoEntregador);
             ultimoEntregador = novoEntregador;
+            return true;
         }
     }
     public Usuario getPrimeiroEntregador()
