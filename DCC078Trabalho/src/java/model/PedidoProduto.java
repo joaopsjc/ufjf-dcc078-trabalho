@@ -5,27 +5,65 @@
  */
 package model;
 
+import model.interfaces.Promocao;
+
 /**
  *
  * @author jjsfa
  */
 public class PedidoProduto {
     
-    private Long id_pedido;
-    private Long id_produto;
+
     private int quantidade=0;
-    Produto produto;
+    private Produto produto;
+    private Promocao promocao;
 
     public PedidoProduto() {
+        this.quantidade = 0;
+        this.produto = null;
+        this.promocao = null;
     }
 
-    public PedidoProduto(Long id_pedido, Long id_produto, int quantidade,Produto produto) {
-        this.id_pedido = id_pedido;
-        this.id_produto = id_produto;
+    public PedidoProduto(int quantidade,Produto produto) {
         this.quantidade = quantidade;
         this.produto = produto;
+        this.promocao = null;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+    
+    public Promocao getPromocao() {
+        return promocao;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+        //this.id_produto = produto.getId();
+    }
+
+    public void setPromocao(Promocao promocao) {
+        this.promocao = promocao;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void incrementaQuantidade() {
+        this.quantidade++;
+    }
+    
+//NÃO SÃO NECESSÁRIAS, É POSSIVEL ACESSAR O PEDIDO E O PRODUTO ATRAVÉS DE
+//OUTROS MEIOS
+/*
+    private Long id_pedido;
+    private Long id_produto;
     public Long getId_pedido() {
         return id_pedido;
     }
@@ -41,29 +79,6 @@ public class PedidoProduto {
     public void setId_produto(Long id_produto) {
         this.id_produto = id_produto;
     }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-        this.id_produto = produto.getId();
-    }
-
-    public void incrementaQuantidade() {
-        this.quantidade++;
-    }
-    
-    
             
-    
+    */
 }

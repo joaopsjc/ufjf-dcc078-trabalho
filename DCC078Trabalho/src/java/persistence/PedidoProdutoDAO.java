@@ -19,6 +19,7 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import controller.ProdutoEstadoFactory;
 import controller.PromocaoFactory;
+import model.PedidoProduto;
 import model.interfaces.PedidoEstado;
 import model.interfaces.Promocao;
 
@@ -105,6 +106,50 @@ public class PedidoProdutoDAO  extends DAO{
         }
     }
     
+    public List<PedidoProduto> getAllProdutoPedidoByPedidoId(Long id_pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<PedidoProduto> produtos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery(
+                    "SELECT * from produto P "
+                            + "INNER JOIN pedidoProduto PP "
+                            + "ON P.id = PP.id_produto "
+                            + "WHERE PP.id_pedido = '"+id_pedido+"'");
+            while (rs.next())
+            {
+                Long id = rs.getLong("id");
+                Long id_empresa = rs.getLong("id_empresa");
+                String nome = rs.getString("nome");
+                String categoria = rs.getString("categoria");
+                String descricao = rs.getString("descricao");
+                int quantidadeProduto = rs.getInt("P.quantidade");
+                int quantidadePedido = rs.getInt("PP.quantidade");
+                double preco = rs.getDouble("preco");
+                String estado = rs.getString("estado");
+                String tipoPromocao = rs.getString("tipoPromocao");
+                
+                Promocao novaPromocao = PromocaoFactory.create(tipoPromocao);
+                
+                Produto novoProduto =  new Produto(id,nome,descricao, categoria, quantidadeProduto, preco,id_empresa);
+                novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                
+                PedidoProduto pedidoProduto = new PedidoProduto(quantidadePedido, novoProduto);
+                pedidoProduto.setPromocao(novaPromocao);
+                
+                produtos.add(pedidoProduto);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return produtos;
+    }
+    
     public List<Produto> getAllProdutosByPedidoId(Long id_pedido) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -139,6 +184,7 @@ public class PedidoProdutoDAO  extends DAO{
         }
         return produtos;
     }
+    
     //provavelmente nada boa
     public List<Pedido> getAllPedidosByProdutoId(Long id_produto) throws SQLException, ClassNotFoundException{
         Connection conn = null;
