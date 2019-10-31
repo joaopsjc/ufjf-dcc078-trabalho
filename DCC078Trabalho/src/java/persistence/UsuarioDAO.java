@@ -90,7 +90,7 @@ public class UsuarioDAO extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from usuario where id='"+id_usuario+"'");
+            ResultSet rs = st.executeQuery("select * from usuario where id="+id_usuario);
 
             if (rs.next())
             {

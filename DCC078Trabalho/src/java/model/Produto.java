@@ -24,6 +24,7 @@ public class Produto {
     private Double preco;
     private ProdutoEstado estado;
     private Long id_empresa;
+    private String nomeEmpresa;
     private ProdutoMemento estadoDesbloqueado = new ProdutoMemento();
 
     public Produto(Long id, String nome, String descricao, String categoria, Double preco) {
@@ -158,5 +159,15 @@ public class Produto {
     {
         estadoDesbloqueado  = new ProdutoMemento(novoestado);
     }
+
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
+    }
+
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
+    }
+    
+    
     
 }

@@ -97,8 +97,9 @@ public class ProdutoDAO  extends DAO{
                 
                 // execute the query, and get a java resultset
                 stringSearch = stringSearch.toLowerCase();
-                ResultSet rs = st.executeQuery("select * from produto where lower(categoria) like '%"+stringSearch+"%'"
-                +" or lower(nome) like '%"+stringSearch+"%'");
+                ResultSet rs = st.executeQuery("select * from produto where (lower(categoria) like '%"+stringSearch+"%'"
+                +" or lower(nome) like '%"+stringSearch+"%')"
+                +" and estado='"+new ProdutoEstadoDisponivel().getEstado()+"'");
                 // iterate through the java resultset
                 while (rs.next())
                 {
@@ -109,7 +110,8 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    Produto p =  new Produto(id,nome,descricao, stringSearch, quantidade, preco,id_empresa);
+                    String categoria = rs.getString("categoria");
+                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
                     p.setEstado(ProdutoEstadoFactory.create(estado));
                     listaProdutos.add(p);
                 }
@@ -118,6 +120,15 @@ public class ProdutoDAO  extends DAO{
             } finally {
                 closeResources(conn, st);
             }
+        return preencherNomeEmpresa(listaProdutos);
+    }
+    
+    private List<Produto> preencherNomeEmpresa(List<Produto> listaProdutos) throws SQLException, ClassNotFoundException{
+        for(Iterator i = listaProdutos.iterator();i.hasNext();){
+            Produto p = (Produto)i.next();
+            p.setNomeEmpresa(UsuarioDAO.getInstance().getById(p.getId_empresa()).getNome());
+        }
+        
         return listaProdutos;
     }
     

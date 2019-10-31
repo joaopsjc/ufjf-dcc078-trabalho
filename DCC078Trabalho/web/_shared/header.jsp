@@ -52,6 +52,21 @@
                 <ul class="nav navbar-top-links navbar-right">
 
 
+                    <c:if test = "${loggedUser.getTipo() == 'Cliente'}">
+                        <li>
+                            <a href="FrontController?action=ResumoCarrinhoAction">
+                                <i class="fa fa-shopping-cart" title="Carrinho"></i>
+                                <span class="label label-danger"><c:out value="${qtdItensCarrinho}" /></span>
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test = "${loggedUser.getTipo() == 'Entregador'}">
+                        <li>
+                            <a href="login.html">
+                                <i class="fa fa-truck"></i> Log out
+                            </a>
+                        </li>
+                    </c:if>
                     <li>
                         
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -63,7 +78,6 @@
                             <li class="divider"></li>
                             <li><a href="FrontController?action=DoLogout"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
-                        
                     </li>
                 </ul>
                 

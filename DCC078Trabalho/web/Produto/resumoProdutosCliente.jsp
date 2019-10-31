@@ -15,25 +15,17 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form method="GET" action="FrontController" id="form-detalhe-produto">
-                            <input type="hidden" name="id" value="" />
-                            <input type="hidden" name="action" value="FormDetalheProduto" />
-                        </form>
                         <div class="row toolbar-crud-grid">
-                            <a href="FrontController?action=FormNovoProduto"><button class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar</button></a>
-                            <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
-                            <button onclick="UF.Produto.ExcluirProduto(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
-                            <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Bloquear" class="btn btn-warning" type="button"><i class="fa fa-lock"></i> Bloquear</button> 
-                            <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Desbloquear" class="btn btn-primary" type="button"><i class="fa fa-unlock"></i> Desbloquear</button> 
+                            <button onclick="UF.Cliente.AdicionarProdutosCarrinho(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                         </div>
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-resumo-check-all" " name="check-grid"></th>
+                                <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-resumo-check-all" name="check-grid"></th>
                                 <th>Nome</th>
                                 <th>Categoria</th>
+                                <th>Restaurante</th>
                                 <th>Preço</th>
-                                <th>Estado</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,8 +34,8 @@
                                     <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${produto.getId()}" />" name="check-grid"></td>
                                     <td><c:out value="${produto.getNome()}" /></td>
                                     <td><c:out value="${produto.getCategoria()}" /></td>
+                                    <td><c:out value="${produto.getNomeEmpresa()}" /></td>
                                     <td><c:out value="${produto.getPreco()}" /></td>
-                                    <td><c:out value="${produto.getNomeEstado()}" /></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
