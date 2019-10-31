@@ -46,6 +46,21 @@ public class entregadorChainResponsibility {
             return true;
         }
     }
+    //procura se o entregador está na cadeia de responsabilidade, se estiver retorna ele, se não estiver retorna nulo
+    //para não precisar procurá-lo no banco de dados.
+    public Usuario isInChain(Long id_entregador)
+    {
+        Entregador entregadorAtual = primeiroEntregador;
+        while(!entregadorAtual.equals(ultimoEntregador))
+        {
+            if(entregadorAtual.getProxEntregador().getId().equals(id_entregador))
+            {
+                return entregadorAtual;
+            }
+            entregadorAtual = entregadorAtual.getProxEntregador();
+        }
+        return null;
+    }
     public Usuario getPrimeiroEntregador()
     {
         return primeiroEntregador;
@@ -53,29 +68,31 @@ public class entregadorChainResponsibility {
     public void removeFromChain(Entregador entregadorRemover)
     {
         Entregador entregadorAtual = primeiroEntregador;
-
-        if(!entregadorRemover.getId().equals(primeiroEntregador.getId()))
+        if(entregadorAtual!=null)
         {
-            while(!entregadorAtual.getProxEntregador().getId().equals(entregadorRemover.getId()) && !entregadorAtual.equals(ultimoEntregador))
+            if(!entregadorRemover.getId().equals(primeiroEntregador.getId()))
             {
-                entregadorAtual = entregadorAtual.getProxEntregador();
-            }
-            if(!entregadorAtual.equals(ultimoEntregador))
-            {
-                entregadorAtual.setProxEntregador(entregadorAtual.getProxEntregador().getProxEntregador());
-            }
-        }
-        else
-        {
-            if(primeiroEntregador==ultimoEntregador)
-            {
-                primeiroEntregador=null;
-                ultimoEntregador=null;
+                while(!entregadorAtual.getProxEntregador().getId().equals(entregadorRemover.getId()) && !entregadorAtual.equals(ultimoEntregador))
+                {
+                    entregadorAtual = entregadorAtual.getProxEntregador();
+                }
+                if(!entregadorAtual.equals(ultimoEntregador))
+                {
+                    entregadorAtual.setProxEntregador(entregadorAtual.getProxEntregador().getProxEntregador());
+                }
             }
             else
             {
-                primeiroEntregador = primeiroEntregador.getProxEntregador();
-                ultimoEntregador.setProxEntregador(primeiroEntregador);
+                if(primeiroEntregador==ultimoEntregador)
+                {
+                    primeiroEntregador=null;
+                    ultimoEntregador=null;
+                }
+                else
+                {
+                    primeiroEntregador = primeiroEntregador.getProxEntregador();
+                    ultimoEntregador.setProxEntregador(primeiroEntregador);
+                }
             }
         }
     }            
