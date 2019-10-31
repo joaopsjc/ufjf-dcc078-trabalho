@@ -19,20 +19,24 @@ public class PedidoEmPreparo implements PedidoEstado {
         return "Em preparo";
     }
     
+    @Override
     public boolean aCaminho(Pedido pedido) {
         pedido.setEstado(new PedidoACaminho());
         return true;
     }
     
+    @Override
     public boolean cancelado(Pedido pedido) {
         pedido.setEstado(new PedidoCancelado());
         return true;
     }
     
+    @Override
     public boolean concluido(Pedido pedido) {
         return false;
     }
     
+    @Override
     public boolean emPreparo(Pedido pedido) {
         return false;
     }

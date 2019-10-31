@@ -19,6 +19,7 @@ public class PedidoCancelado implements PedidoEstado{
         return "Cancelado";
     }
     
+    @Override
     public boolean aCaminho(Pedido pedido) {
         return false;
     }
@@ -27,10 +28,12 @@ public class PedidoCancelado implements PedidoEstado{
         return false;
     }
     
+    @Override
     public boolean concluido(Pedido pedido) {
         return false;
     }
     
+    @Override
     public boolean emPreparo(Pedido pedido) {
         return false;
     }

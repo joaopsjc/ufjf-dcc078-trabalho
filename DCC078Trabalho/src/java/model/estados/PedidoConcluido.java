@@ -19,18 +19,22 @@ public class PedidoConcluido implements PedidoEstado {
         return "Concluido";
     }
     
+    @Override
     public boolean aCaminho(Pedido pedido) {
         return false;
     }
     
+    @Override
     public boolean cancelado(Pedido pedido) {
         return false;
     }
     
+    @Override
     public boolean concluido(Pedido pedido) {
         return false;
     }
     
+    @Override
     public boolean emPreparo(Pedido pedido) {
         return false;
     }
