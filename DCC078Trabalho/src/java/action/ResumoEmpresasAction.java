@@ -14,26 +14,24 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.extensores.Empresa;
-import persistence.EmpresaDAO;
+import model.abstratos.Usuario;
+import persistence.UsuarioDAO;
 
 /**
  *
  * @author jjsfa
  */
 public class ResumoEmpresasAction  implements Action{
+    @Override
     public void execute(HttpServletRequest request,HttpServletResponse response)
             throws IOException{ 
         try{
-            List<Empresa> listEmpresas = EmpresaDAO.getInstance().getEmpresas();
+            List<Usuario> listEmpresas = UsuarioDAO.getInstance().getAllEmpresas();
             request.setAttribute("listEmpresas", listEmpresas);
             request.getRequestDispatcher("Empresa/resumoEmpresas.jsp").forward(request, response);
         } catch(SQLException ex){
             response.sendRedirect("erro.jsp");
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ResumoEmpresasAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServletException ex) {
+        } catch (ClassNotFoundException | ServletException ex) {
             Logger.getLogger(ResumoEmpresasAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

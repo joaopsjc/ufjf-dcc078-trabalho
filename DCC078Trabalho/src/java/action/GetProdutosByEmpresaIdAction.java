@@ -31,8 +31,8 @@ public class GetProdutosByEmpresaIdAction implements Action{
             Long id_empresa = Long.parseLong(request.getParameter("empresaId"));
             String url = request.getHeader("referer");
             List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(id_empresa);
-            request.setAttribute("produtosByEmpresaId", listaProdutos);
-            request.getRequestDispatcher(url).forward(request, response);
+            request.setAttribute("listProdutos", listaProdutos);
+            request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
             
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);

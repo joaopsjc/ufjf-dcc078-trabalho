@@ -347,3 +347,16 @@ UF.Carrinho.RemoverDoCarrinho = function(element){
 	}	
     });   
 }
+
+UF.RegisterNamespace("Empresa");
+
+UF.Empresa.VisualizarProdutos = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("empresa-grid-resumo");
+    if (selectedIds.length!=1){
+        UF.Alert.Error({message:"É necessário selecionar uma empresa!"});
+        return;
+    }
+    var form = $('#form-visualizar-produtos');
+    form.find('[name=empresaId]').val(selectedIds[0]);
+    form.submit();
+}

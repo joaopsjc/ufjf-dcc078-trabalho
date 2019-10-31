@@ -63,7 +63,8 @@ public class ProdutoDAO  extends DAO{
                 st = conn.createStatement();
                 
                 // execute the query, and get a java resultset
-                ResultSet rs = st.executeQuery("select * from produto where id_empresa ="+id_empresa);
+                ResultSet rs = st.executeQuery("select * from produto where id_empresa ="+id_empresa
+                +" and estado='"+new ProdutoEstadoDisponivel().getEstado()+"'");
                 
                 // iterate through the java resultset
                 while (rs.next())
@@ -84,7 +85,7 @@ public class ProdutoDAO  extends DAO{
             } finally {
                 closeResources(conn, st);
             }
-        return listaProdutos;
+        return preencherNomeEmpresa(listaProdutos);
     }
     
     public List<Produto> getProdutosByCategoria(String stringSearch) throws SQLException, ClassNotFoundException{
