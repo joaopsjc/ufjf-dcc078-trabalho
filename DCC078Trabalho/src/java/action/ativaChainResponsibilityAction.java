@@ -30,8 +30,9 @@ public class ativaChainResponsibilityAction implements Action{
             Long id_pedido = Long.parseLong(request.getParameter("pedidoId"));
             Pedido novoPedido = PedidoDAO.getInstance().getById(id_pedido);
             String url = request.getHeader("referer");
+            
             Entregador primeiroEntregador = (Entregador) entregadorChainResponsibility.getInstance().getPrimeiroEntregador();
-            primeiroEntregador.novaReponsabilidade(novoPedido);
+            primeiroEntregador.novaReponsabilidade(novoPedido);//primeiroEntregador pode ser null
             request.getRequestDispatcher(url).forward(request, response);
             
         } catch (ServletException ex) {
@@ -40,7 +41,10 @@ public class ativaChainResponsibilityAction implements Action{
             Logger.getLogger(ativaChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ativaChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } catch(NullPointerException ex)
+        {
+            Logger.getLogger(ativaChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
