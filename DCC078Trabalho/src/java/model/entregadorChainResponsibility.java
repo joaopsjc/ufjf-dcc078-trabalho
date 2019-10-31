@@ -42,9 +42,9 @@ public class entregadorChainResponsibility {
     {
         Entregador entregadorAtual = primeiroEntregador;
 
-        if(entregadorRemover!=primeiroEntregador)
+        if(!entregadorRemover.getId().equals(primeiroEntregador.getId()))
         {
-            while(!entregadorAtual.getProxEntregador().equals(entregadorRemover) && !entregadorAtual.equals(ultimoEntregador))
+            while(!entregadorAtual.getProxEntregador().getId().equals(entregadorRemover.getId()) && !entregadorAtual.equals(ultimoEntregador))
             {
                 entregadorAtual = entregadorAtual.getProxEntregador();
             }
