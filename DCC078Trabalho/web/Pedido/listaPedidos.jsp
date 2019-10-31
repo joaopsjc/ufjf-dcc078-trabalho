@@ -29,7 +29,6 @@
                             <tbody>
                             <c:forEach items="${listPedidos}" var="pedido">
                                 <tr>
-                                    <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${produto.getId()}" />" name="check-grid"></td>
                                     <td><c:out value="${pedido.getEmpresa().getNome()}" /></td>
                                     <td><c:out value="${pedido.getCliente().getNome()}" /></td>
                                     <td><c:out value="${pedido.getEntregador().getNome()}" /></td>

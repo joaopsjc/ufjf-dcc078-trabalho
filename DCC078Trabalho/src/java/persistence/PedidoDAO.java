@@ -167,6 +167,8 @@ public class PedidoDAO  extends DAO{
                 Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
                 Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
+                String[] status = estado.split(" ");
+                estado = String.join("",estado.split(" "));
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
                 Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
