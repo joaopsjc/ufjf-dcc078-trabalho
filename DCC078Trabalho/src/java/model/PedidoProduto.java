@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.implementadores.PromocaoVazia;
 import model.interfaces.Promocao;
 
 /**
@@ -21,13 +22,13 @@ public class PedidoProduto {
     public PedidoProduto() {
         this.quantidade = 0;
         this.produto = null;
-        this.promocao = null;
+        this.promocao = new PromocaoVazia();
     }
 
     public PedidoProduto(int quantidade,Produto produto) {
         this.quantidade = quantidade;
         this.produto = produto;
-        this.promocao = null;
+        this.promocao = new PromocaoVazia();
     }
 
     public int getQuantidade() {
