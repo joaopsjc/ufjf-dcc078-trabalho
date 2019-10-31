@@ -18,6 +18,7 @@ import model.Produto;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import controller.ProdutoEstadoFactory;
+import controller.PromocaoFactory;
 import model.interfaces.PedidoEstado;
 import model.interfaces.Promocao;
 
@@ -32,15 +33,15 @@ public class PedidoProdutoDAO  extends DAO{
     }
     
     
-    public void insert(Long id_produto, Long id_pedido, Long id_promocao) throws SQLException, ClassNotFoundException{
+    public void insert(Long id_produto, Long id_pedido, String tipoPromocao) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,id_promocao) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,tipoPromocao) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,id_pedido);
             st.setLong(2,id_produto);
-            st.setLong(3,id_promocao);
+            st.setString(3,tipoPromocao);
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -192,8 +193,8 @@ public class PedidoProdutoDAO  extends DAO{
             ResultSet rs = st.executeQuery("SELECT * FROM pedidoProduto where id_pedido='"+id_pedido+"' AND" + "id_produto='"+id_produto+"'");
             if (rs.next())
             {
-                Long id_promocao = rs.getLong("id_promocao");
-                promocao = PromocaoDAO.getInstance().getById(id_promocao);
+                String tipoPromocao = rs.getString("tipoPromocao");
+                promocao = PromocaoFactory.create(tipoPromocao);
             }
         } catch(SQLException e) {
             throw e;
@@ -202,13 +203,13 @@ public class PedidoProdutoDAO  extends DAO{
         }
         return promocao;
     }
-    public void updatePromocao(Long id_produto, Long id_pedido, Long id_promocao) throws SQLException, ClassNotFoundException{
+    public void updatePromocao(Long id_produto, Long id_pedido, String tipoPromocao) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update pedidoProduto set id_promocao=? where id_pedido=? AND id_produto=?",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1,id_promocao);
+            st = conn.prepareStatement("update pedidoProduto set tipoPromocao=? where id_pedido=? AND id_produto=?",Statement.RETURN_GENERATED_KEYS);
+            st.setString(1,tipoPromocao);
             st.setLong(2,id_pedido);
             st.setLong(3,id_produto);
             int affectedRows = st.executeUpdate();
