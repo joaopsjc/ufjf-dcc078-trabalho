@@ -198,6 +198,7 @@ public class PedidoDAO  extends DAO{
         }
         return pedidos;
     }
+    
     public List<Pedido> getPedidosByEntregadorId(Long id_entregador) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -207,6 +208,78 @@ public class PedidoDAO  extends DAO{
             st = conn.createStatement();
 
             ResultSet rs = st.executeQuery("select * from pedido where id_entregador="+id_entregador);
+
+            while (rs.next())
+            {
+                Long id = rs.getLong("id");
+                Long id_empresa = rs.getLong("id_empresa");
+                Long id_cliente = rs.getLong("id_cliente");
+                Long id_endereco = rs.getLong("id_endereco");
+                Double frete = rs.getDouble("frete");
+                String estado = rs.getString("estado");
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
+                PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
+                
+                Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
+                novoPedido.setEmpresa(empresa);
+                novoPedido.setCliente(cliente);
+                pedidos.add(novoPedido);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return pedidos;
+    }
+    
+    public List<Pedido> getPedidosConcluidosByEntregadorId(Long id_entregador) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from pedido where estado='Concluido' AND id_entregador="+id_entregador);
+
+            while (rs.next())
+            {
+                Long id = rs.getLong("id");
+                Long id_empresa = rs.getLong("id_empresa");
+                Long id_cliente = rs.getLong("id_cliente");
+                Long id_endereco = rs.getLong("id_endereco");
+                Double frete = rs.getDouble("frete");
+                String estado = rs.getString("estado");
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
+                PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
+                
+                Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
+                novoPedido.setEmpresa(empresa);
+                novoPedido.setCliente(cliente);
+                pedidos.add(novoPedido);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return pedidos;
+    }
+    
+    public List<Pedido> getPedidosACaminhoByEntregadorId(Long id_entregador) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from pedido where estado='ACaminho' AND id_entregador="+id_entregador);
 
             while (rs.next())
             {
