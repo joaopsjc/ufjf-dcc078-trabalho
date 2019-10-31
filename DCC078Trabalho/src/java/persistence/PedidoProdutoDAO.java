@@ -198,7 +198,7 @@ public class PedidoProdutoDAO  extends DAO{
                     "SELECT * from pedido P "
                             + "INNER JOIN pedidoProduto PP "
                             + "ON P.id = PP.id_pedido "
-                            + "WHERE PP.id_produto = '"+id_produto+"'");
+                            + "WHERE PP.id_produto = "+id_produto);
             while (rs.next())
             {
                 Long id = rs.getLong("id");
@@ -236,7 +236,7 @@ public class PedidoProdutoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT * FROM pedidoProduto where id_pedido='"+id_pedido+"' AND" + "id_produto='"+id_produto+"'");
+            ResultSet rs = st.executeQuery("SELECT * FROM pedidoProduto where id_pedido="+id_pedido+" AND" + "id_produto="+id_produto);
             if (rs.next())
             {
                 String tipoPromocao = rs.getString("tipoPromocao");
@@ -254,7 +254,7 @@ public class PedidoProdutoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update pedidoProduto set tipoPromocao=? where id_pedido=? AND id_produto=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update pedidoProduto set tipoPromocao='?' where id_pedido=? AND id_produto=?",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,tipoPromocao);
             st.setLong(2,id_pedido);
             st.setLong(3,id_produto);

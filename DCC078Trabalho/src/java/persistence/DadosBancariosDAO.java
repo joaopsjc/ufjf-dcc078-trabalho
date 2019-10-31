@@ -54,7 +54,7 @@ public void insert(DadosBancarios dadosBancarios, Long id_usuario) throws SQLExc
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from dadosBancarios where id_usuario='"+id_usuario+"'");
+            ResultSet rs = st.executeQuery("select * from dadosBancarios where id_usuario="+id_usuario);
 
             while (rs.next())
             {
@@ -82,7 +82,7 @@ public void insert(DadosBancarios dadosBancarios, Long id_usuario) throws SQLExc
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from dadosBancarios where id='"+id_dadosBancarios+"'");
+            ResultSet rs = st.executeQuery("select * from dadosBancarios where id="+id_dadosBancarios);
 
             if (rs.next())
             {
@@ -137,7 +137,7 @@ public void insert(DadosBancarios dadosBancarios, Long id_usuario) throws SQLExc
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from dadosBancarios where id='"+id_dadosBancarios+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from dadosBancarios where id="+id_dadosBancarios,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete dadosBancarios failed, no rows affected.");

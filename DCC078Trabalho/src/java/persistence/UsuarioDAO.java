@@ -294,7 +294,7 @@ public class UsuarioDAO extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update usuario set nome=?, login=?,documento=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update usuario set nome='?', login='?',documento='?' where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,usuario.getNome());
             st.setString(2,usuario.getLogin());
             st.setString(3,usuario.getDocumento());
@@ -316,7 +316,7 @@ public class UsuarioDAO extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update usuario set senha=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update usuario set senha='?' where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,senha);
             st.setLong(2,usuario.getId());
             int affectedRows = st.executeUpdate();
@@ -336,7 +336,7 @@ public class UsuarioDAO extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from usuario where id='"+id_usuario+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from usuario where id="+id_usuario,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete user failed, no rows affected.");

@@ -58,7 +58,7 @@ public class PedidoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from pedido where id='"+id_pedido+"'");
+            ResultSet rs = st.executeQuery("select * from pedido where id="+id_pedido);
 
             if (rs.next())
             {

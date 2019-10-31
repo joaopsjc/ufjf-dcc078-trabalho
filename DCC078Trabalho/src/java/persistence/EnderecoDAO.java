@@ -59,7 +59,7 @@ public class EnderecoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from endereco where id='"+id_endereco+"'");
+            ResultSet rs = st.executeQuery("select * from endereco where id="+id_endereco);
 
             if (rs.next())
             {
@@ -97,7 +97,7 @@ public class EnderecoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from endereco where id_usuario='"+id_usuario+"'");
+            ResultSet rs = st.executeQuery("select * from endereco where id_usuario="+id_usuario);
 
             while (rs.next())
             {
@@ -134,7 +134,7 @@ public class EnderecoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update produto set id_usuario=?,numero=?,complemento=?,logradouro=?,bairro=?,cidade=?,estado=?,tipoEndereco=?,cep=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update produto set id_usuario=?,numero=?,complemento='?',logradouro='?',bairro='?',cidade='?',estado='?',tipoEndereco='?',cep=? where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,endereco.getId_usuario());
             st.setInt(2,endereco.getNumero());
             st.setString(3,endereco.getComplemento());
@@ -162,7 +162,7 @@ public class EnderecoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from endereco where id='"+id_endereco+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from endereco where id="+id_endereco,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete endereco failed, no rows affected.");

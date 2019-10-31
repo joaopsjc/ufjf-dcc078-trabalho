@@ -54,7 +54,7 @@ public class ContatoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from contato where id='"+id_contato+"'");
+            ResultSet rs = st.executeQuery("select * from contato where id="+id_contato);
 
             if (rs.next())
             {               
@@ -83,7 +83,7 @@ public class ContatoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from contato where id_usuario='"+id_usuario+"'");
+            ResultSet rs = st.executeQuery("select * from contato where id_usuario="+id_usuario);
 
             while (rs.next())
             {                
@@ -139,7 +139,7 @@ public class ContatoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update produto set id_usuario=?,valor=?,tipoContato=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update produto set id_usuario=?,valor='?',tipoContato='?' where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,contato.getIdUsuario());
             st.setString(2,contato.getValor());
             st.setString(3,contato.getTipo());
@@ -161,7 +161,7 @@ public class ContatoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from contato where id='"+id_contato+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from contato where id="+id_contato,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete endereco failed, no rows affected.");
