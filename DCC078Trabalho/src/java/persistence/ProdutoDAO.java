@@ -280,7 +280,7 @@ public class ProdutoDAO  extends DAO{
         for(Iterator i = ids.iterator();i.hasNext();)
             listProdutos.add(getById((String)i.next()));
         
-        return listProdutos;
+        return preencherNomeEmpresa(listProdutos);
     }
 
 }
