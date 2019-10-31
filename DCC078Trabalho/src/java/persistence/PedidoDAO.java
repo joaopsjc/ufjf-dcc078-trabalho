@@ -167,6 +167,7 @@ public class PedidoDAO  extends DAO{
                 Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
                 Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
                 String[] status = estado.split(" ");
                 estado = String.join("",estado.split(" "));
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
@@ -174,6 +175,7 @@ public class PedidoDAO  extends DAO{
                 Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
                 novoPedido.setEmpresa(empresa);
                 novoPedido.setEntregador(entregador);
+                novoPedido.setCliente(cliente);
                 pedidos.add(novoPedido);
             }
         } catch(SQLException e) {
