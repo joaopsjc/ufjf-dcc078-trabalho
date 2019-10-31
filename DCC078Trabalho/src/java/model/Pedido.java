@@ -44,7 +44,7 @@ public class Pedido extends Observable {
         while(produtoIterator.hasNext())
         {
             PedidoProduto produtoAtual = produtoIterator.next();
-            precoProdutos+= produtoAtual.getProduto().getPreco();
+            precoProdutos+= produtoAtual.getProduto().getPreco() - (produtoAtual.getProduto().getPreco()%produtoAtual.getPromocao().obterDesconto());
         }
     }
     public Pedido(Long id, Endereco endereco, double frete) {
@@ -67,7 +67,7 @@ public class Pedido extends Observable {
         while(produtoIterator.hasNext())
         {
             PedidoProduto produtoAtual = produtoIterator.next();
-            precoProdutos+= produtoAtual.getProduto().getPreco();
+            precoProdutos+= produtoAtual.getProduto().getPreco() - (produtoAtual.getProduto().getPreco()%produtoAtual.getPromocao().obterDesconto());
         }
     }
     public Pedido(Long id, Endereco endereco, double frete,
@@ -148,11 +148,11 @@ public class Pedido extends Observable {
     public void addProduto(PedidoProduto novoProduto)
     {
         produtos.add(novoProduto);
-        precoProdutos+= novoProduto.getProduto().getPreco();
+        precoProdutos+= (novoProduto.getProduto().getPreco() - (novoProduto.getProduto().getPreco()%novoProduto.getPromocao().obterDesconto()));
     }
     public void removeProduto(PedidoProduto produto)
     {
-        precoProdutos-= produto.getProduto().getPreco();
+        precoProdutos-= (produto.getProduto().getPreco() - (produto.getProduto().getPreco()%produto.getPromocao().obterDesconto()));
         produtos.remove(produto);
     }
 
