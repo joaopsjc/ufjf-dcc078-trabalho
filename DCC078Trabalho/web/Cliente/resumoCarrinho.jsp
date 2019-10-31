@@ -33,12 +33,12 @@
                             <tbody>
                             <c:forEach items="${carrinho.produtos}" var="produto">
                                 <tr>
-                                    <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${produto.getId_produto()}" />" name="check-grid"></td>
+                                    <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${produto.getProduto().getId()}" />" name="check-grid"></td>
                                     <td><c:out value="${produto.getProduto().getNome()}" /></td>
                                     <td><c:out value="${produto.getProduto().getCategoria()}" /></td>
                                     <td><c:out value="${produto.getProduto().getNomeEmpresa()}" /></td>
                                     <td><c:out value="${produto.getProduto().getPreco()}" /></td>
-                                    <td><input type="number" min="1" value="<c:out value="${produto.getQuantidade()}" />" name="quantidade-produto-<c:out value="${produto.getId_produto()}" />"/></td>
+                                    <td><input type="number" min="1" value="<c:out value="${produto.getQuantidade()}" />" name="quantidade-produto-<c:out value="${produto.getProduto().getId()}" />"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
