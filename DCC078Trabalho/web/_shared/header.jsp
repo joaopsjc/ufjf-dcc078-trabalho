@@ -62,8 +62,9 @@
                     </c:if>
                     <c:if test = "${loggedUser.getTipo() == 'Entregador'}">
                         <li>
-                            <a href="login.html">
-                                <i class="fa fa-truck"></i> Log out
+                            <a id="link-entregas" class="count-info" href="FrontController?action=Home">
+                                <i class="fa fa-truck" title="Entregas"></i>
+                                <span class="label label-danger"></span>
                             </a>
                         </li>
                     </c:if>
