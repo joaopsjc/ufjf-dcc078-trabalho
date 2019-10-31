@@ -18,7 +18,7 @@
                             <a href="FrontController?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Pendentes</span></a>
                         </li>
                         <li>
-                            <a href="FrontController?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Realizados</span></a>
+                            <a href="FrontController?action=ListaPedidosEntregadorConcluido"><i class="fa fa-caret-right"></i> <span class="nav-label">Realizados</span></a>
                         </li>
                         <li>
                             <a href="FrontController?action=Home"><i class="fa fa-caret-right"></i> <span class="nav-label">Disponíveis</span></a>

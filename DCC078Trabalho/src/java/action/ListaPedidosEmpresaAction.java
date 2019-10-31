@@ -23,21 +23,21 @@ import persistence.PedidoDAO;
  *
  * @author jjsfa
  */
-public class listaPedidosEntregadorAction  implements Action{
+public class ListaPedidosEmpresaAction  implements Action{
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response)
             throws IOException{ 
         try{
             Usuario usuario = Helper.getInstance().getLoggedUser(request);
-            Long id_entregador = usuario.getId();
-            List<Pedido> listaPedidos = PedidoDAO.getInstance().getPedidosByEntregadorId(id_entregador);
+            Long id_empresa = usuario.getId();
+            List<Pedido> listaPedidos = PedidoDAO.getInstance().getPedidosByEmpresaId(id_empresa);
             request.setAttribute("listPedidos", listaPedidos);
             request.getRequestDispatcher("Pedido/listaPedidos.jsp").forward(request, response);
         } catch(SQLException ex){
-            Logger.getLogger(listaPedidosEntregadorAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListaPedidosEmpresaAction.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("erro.jsp");
         } catch (ClassNotFoundException | ServletException ex) {
-            Logger.getLogger(listaPedidosEntregadorAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListaPedidosEmpresaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
