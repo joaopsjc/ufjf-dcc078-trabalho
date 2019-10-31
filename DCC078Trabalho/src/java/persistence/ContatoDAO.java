@@ -57,8 +57,7 @@ public class ContatoDAO  extends DAO{
             ResultSet rs = st.executeQuery("select * from contato where id='"+id_contato+"'");
 
             if (rs.next())
-            {
-                
+            {               
                 Long id_usuario = rs.getLong("id_usuario");
                 String valor  = rs.getString("valor");
                 String tipoContato = rs.getString("tipoContato");
@@ -87,8 +86,7 @@ public class ContatoDAO  extends DAO{
             ResultSet rs = st.executeQuery("select * from contato where id_usuario='"+id_usuario+"'");
 
             while (rs.next())
-            {
-                
+            {                
                 Long id = rs.getLong("id");
                 String valor  = rs.getString("valor");
                 String tipoContato = rs.getString("tipoContato");
@@ -117,8 +115,7 @@ public class ContatoDAO  extends DAO{
             ResultSet rs = st.executeQuery("select * from contato");
 
             while (rs.next())
-            {
-                
+            {                
                 Long id = rs.getLong("id");
                 Long id_usuario = rs.getLong("id_usuario");
                 String valor  = rs.getString("valor");

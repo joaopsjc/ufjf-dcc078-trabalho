@@ -6,7 +6,6 @@
 package model.estados;
 
 import model.Produto;
-import model.ProdutoMemento;
 import model.interfaces.ProdutoEstado;
 
 /**

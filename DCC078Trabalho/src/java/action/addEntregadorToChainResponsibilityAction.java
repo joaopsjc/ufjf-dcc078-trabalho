@@ -8,12 +8,11 @@ package action;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;import model.entregadorChainResponsibility;
+import javax.servlet.http.HttpServletResponse;import model.EntregadorChainResponsibility;
 import model.extensores.Entregador;
 import persistence.UsuarioDAO;
 
@@ -30,12 +29,10 @@ public class addEntregadorToChainResponsibilityAction implements Action{
             String url = request.getHeader("referer");
             
             Entregador entregadorAdiciona = (Entregador) UsuarioDAO.getInstance().getById(id_entregador);
-            entregadorChainResponsibility.getInstance().addToChain(entregadorAdiciona);
+            EntregadorChainResponsibility.getInstance().addToChain(entregadorAdiciona);
             request.getRequestDispatcher(url).forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | ClassNotFoundException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(addEntregadorToChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);

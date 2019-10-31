@@ -9,8 +9,6 @@ import controller.Action;
 import helper.Helper;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +16,6 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Produto;
-import model.estados.ProdutoEstadoBloqueado;
 import persistence.ProdutoDAO;
 
 /**
@@ -38,10 +35,7 @@ public class BloquearDesbloquearProdutoAction implements Action{
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("");
         
-        } catch (SQLException ex) {
-            Logger.getLogger(ExcluirProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
-            response.getWriter().write(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ExcluirProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
             response.getWriter().write(ex.getMessage());
         }

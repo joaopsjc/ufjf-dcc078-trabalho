@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.abstratos.Usuario;
 import persistence.UsuarioDAO;
 
@@ -50,11 +49,7 @@ public class AlterarSenhaAction implements Action{
             request.setAttribute("messageSuccess", "Senha atualizada com sucesso!");
             request.getRequestDispatcher("Usuario/alterarSenha.jsp").forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

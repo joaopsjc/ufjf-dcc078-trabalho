@@ -14,14 +14,14 @@ import model.interfaces.Contato;
  */
 public class ContatoFactory {
     public static Contato create(String tipoContato){
-        Contato usuarioObject = null;
+        Contato usuarioObject;
         String nomeClasse = "model.implementadores.Contato"+ tipoContato;
-        Class classe = null;
-        Object objeto = null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof Contato)) return null;

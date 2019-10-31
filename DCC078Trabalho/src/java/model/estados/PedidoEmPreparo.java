@@ -14,6 +14,7 @@ import model.interfaces.PedidoEstado;
  */
 public class PedidoEmPreparo implements PedidoEstado {
     
+    @Override
     public String getEstado() {
         return "Em preparo";
     }

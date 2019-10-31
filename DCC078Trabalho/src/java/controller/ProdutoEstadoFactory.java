@@ -13,14 +13,14 @@ import model.interfaces.ProdutoEstado;
  */
 public class ProdutoEstadoFactory {
     public static ProdutoEstado create(String estado){
-        ProdutoEstado actionObject = null;
+        ProdutoEstado actionObject;
         String nomeClasse = "model.estados.ProdutoEstado"+ estado;
-        Class classe = null;
-        Object objeto =null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof ProdutoEstado)) return null;

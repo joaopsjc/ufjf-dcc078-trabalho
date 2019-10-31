@@ -27,16 +27,13 @@ public class ExcluirProdutoAction implements Action{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException { 
         try {
             String selectedIds= request.getParameter("selectedIds");
-            List<String> idsList = new ArrayList<String>(Arrays.asList(selectedIds.split(",")));
+            List<String> idsList = new ArrayList<>(Arrays.asList(selectedIds.split(",")));
             ProdutoDAO.getInstance().deleteByIds(idsList);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("");
         
-        } catch (SQLException ex) {
-            Logger.getLogger(ExcluirProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
-            response.getWriter().write(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ExcluirProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
             response.getWriter().write(ex.getMessage());
         }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.Pedido;
@@ -22,7 +23,7 @@ import model.abstratos.Usuario;
 public class Helper {
     
     
-    private static Helper instance = new Helper();
+    private static final Helper instance = new Helper();
     public static Helper getInstance(){
         return instance;
     }
@@ -40,7 +41,7 @@ public class Helper {
     
     public List<Produto> getListProdutosByIds(String selectedIds,HttpServletRequest request){
         List<String> listSelectedIds = stringTolist(selectedIds);
-        List<Produto> result = new ArrayList<Produto>();
+        List<Produto> result = new ArrayList<>();
         for(Iterator i = getListProdutos(request).iterator();i.hasNext();){
             Produto p = (Produto)i.next();
             if (listSelectedIds.contains(p.getId().toString()))
@@ -57,7 +58,7 @@ public class Helper {
                 Produto p = (Produto)i.next();
                 for(Iterator j = listProdutos.iterator();j.hasNext();){
                     p2 = (Produto)j.next();
-                    if (p2.getId()==p.getId())
+                    if (Objects.equals(p2.getId(), p.getId()))
                         p.saveToMemento(p2.getEstadoSalvo());
                 }   
 
@@ -67,7 +68,7 @@ public class Helper {
     }
     
     public List<String> stringTolist(String selectedIds){
-        return new ArrayList<String>(Arrays.asList(selectedIds.split(",")));
+        return new ArrayList<>(Arrays.asList(selectedIds.split(",")));
     }
 
     public Pedido getCarrinhoByClienteId(HttpServletRequest httpRequest) {

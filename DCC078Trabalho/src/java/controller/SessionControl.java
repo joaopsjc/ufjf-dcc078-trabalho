@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
   
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -18,7 +17,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.abstratos.Usuario;
 
 /**
@@ -28,12 +26,6 @@ import model.abstratos.Usuario;
 
 public class SessionControl implements javax.servlet.Filter {
 
-    /*private final List<String> allowedPages = new ArrayList<String>(){
-        "DoLogin",
-        "Login",
-        "/login.jsp",
-        "/assets"
-    }; */
     private static final List<String> allowedPages = new ArrayList<String>() {{
         add("DoLogin");
         add("Login");
@@ -45,11 +37,13 @@ public class SessionControl implements javax.servlet.Filter {
         add("/erro.jsp");
     }};
     
+    @Override
     public void destroy() {
        // TODO Auto-generated method stub
   
     }
   
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
            FilterChain chain) throws IOException, ServletException {
         
@@ -70,13 +64,12 @@ public class SessionControl implements javax.servlet.Filter {
         if (user==null){
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendRedirect("FrontController?action=Login");
-            return;
         }else{
             chain.doFilter(request, response);
-        } 
-  
+        }   
     }
   
+    @Override
     public void init(FilterConfig arg0) throws ServletException {
        // TODO Auto-generated method stub
   

@@ -14,6 +14,7 @@ import model.interfaces.PedidoEstado;
  */
 public class PedidoCancelado implements PedidoEstado{
     
+    @Override
     public String getEstado() {
         return "Cancelado";
     }

@@ -15,9 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Produto;
-import model.abstratos.Usuario;
 import persistence.ProdutoDAO;
-import persistence.UsuarioDAO;
 
 /**
  *
@@ -29,16 +27,11 @@ public class GetProdutosByEmpresaIdAction implements Action{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             Long id_empresa = Long.parseLong(request.getParameter("empresaId"));
-            String url = request.getHeader("referer");
             List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(id_empresa);
             request.setAttribute("listProdutos", listaProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

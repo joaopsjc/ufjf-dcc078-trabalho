@@ -35,11 +35,7 @@ public class GetProdutosByEmpresaNomeAction implements Action{
             request.setAttribute("produtosByEmpresaNome", listaProdutos);
             request.getRequestDispatcher(url).forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

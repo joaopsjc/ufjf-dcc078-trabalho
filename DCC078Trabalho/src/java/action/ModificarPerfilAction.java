@@ -6,7 +6,6 @@
 package action;
 
 import controller.Action;
-import controller.UsuarioFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -43,11 +42,7 @@ public class ModificarPerfilAction implements Action{
             request.setAttribute("messageSuccess", "Perfil atualizado com sucesso!");
             request.getRequestDispatcher("Usuario/profile.jsp").forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

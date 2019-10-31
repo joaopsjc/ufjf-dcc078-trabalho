@@ -14,14 +14,14 @@ import model.interfaces.PedidoEstado;
  */
 public class PedidoEstadoFactory {
     public static PedidoEstado create(String tipoEstadoPedido){
-        PedidoEstado pedidoEstadoObject = null;
+        PedidoEstado pedidoEstadoObject;
         String nomeClasse = "model.estados.Pedido"+ tipoEstadoPedido;
-        Class classe = null;
-        Object objeto = null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof PedidoEstado)) return null;

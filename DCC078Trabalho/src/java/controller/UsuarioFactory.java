@@ -14,14 +14,14 @@ import model.abstratos.Usuario;
  */
 public class UsuarioFactory {
     public static Usuario create(String tipoUsuario){
-        Usuario usuarioObject = null;
+        Usuario usuarioObject;
         String nomeClasse = "model.extensores."+ tipoUsuario;
-        Class classe = null;
-        Object objeto = null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof Usuario)) return null;

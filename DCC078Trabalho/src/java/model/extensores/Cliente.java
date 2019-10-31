@@ -84,8 +84,8 @@ public class Cliente extends Usuario implements Observer {
     @Override
     public void update(Observable pedidoSubject, Object arg1) {
         if (pedidoSubject instanceof Pedido) {
-            Pedido pedido = (Pedido) pedidoSubject;
-            PedidoEstado estado = pedido.getEstado();
+            Pedido pedidoAtualizado = (Pedido) pedidoSubject;
+            PedidoEstado estado = pedidoAtualizado.getEstado();
             
             System.out.println("Estado pedido alterado para "+ estado+ "!");
             /*Enviar email, faltar inserir email e senha e testar, line 93 e 94*/

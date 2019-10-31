@@ -14,14 +14,14 @@ import model.abstratos.Endereco;
  */
 public class EnderecoFactory {
     public static Endereco create(String tipoContato){
-        Endereco enderecoObject = null;
+        Endereco enderecoObject;
         String nomeClasse = "model.extensores."+ tipoContato;
-        Class classe = null;
-        Object objeto = null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof Endereco)) return null;

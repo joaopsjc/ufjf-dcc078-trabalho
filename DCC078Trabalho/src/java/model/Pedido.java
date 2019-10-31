@@ -10,10 +10,10 @@ import model.interfaces.PedidoEstado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Observable;
 import model.abstratos.Usuario;
 import model.estados.PedidoEmPreparo;
-import model.extensores.*;
 
 /**
  *
@@ -179,7 +179,7 @@ public class Pedido extends Observable {
     private PedidoProduto getPedidoProdutoByProdutoId(Long id){
         for(Iterator i = produtos.iterator();i.hasNext();){
             PedidoProduto pedidoproduto = (PedidoProduto)i.next();
-            if (pedidoproduto.getProduto().getId()==id)
+            if (Objects.equals(pedidoproduto.getProduto().getId(), id))
                 return pedidoproduto;
         }
         return null;

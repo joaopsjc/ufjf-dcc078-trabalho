@@ -6,10 +6,8 @@
 package action;
 
 import controller.Action;
-import controller.ActionFactory;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.abstratos.Usuario;
 import controller.UsuarioFactory;
-import model.extensores.*;
 import persistence.UsuarioDAO;
 
 /**
@@ -33,8 +30,7 @@ public class DoRegisterAction implements Action{
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
         String tipoUsuario = request.getParameter("tipoUsuario");
-        String documento = request.getParameter("documento");
-        
+        String documento = request.getParameter("documento");       
         
         try {
             if (!senha.equals(confirmSenha)){
@@ -54,11 +50,7 @@ public class DoRegisterAction implements Action{
             request.setAttribute("messageSuccess", "Registro realizado com sucesso!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

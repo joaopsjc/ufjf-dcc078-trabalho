@@ -40,13 +40,7 @@ public class DoLoginAction implements Action{
                 sess.setAttribute("loggedUser", usuario);
                 response.sendRedirect("FrontController?action=Home");
             }
-        }catch (ServletException ex) {
-            response.sendRedirect("erro.jsp");
-            Logger.getLogger(DoLoginAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            response.sendRedirect("erro.jsp");
-            Logger.getLogger(DoLoginAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        }catch (ServletException | SQLException | ClassNotFoundException ex) {
             response.sendRedirect("erro.jsp");
             Logger.getLogger(DoLoginAction.class.getName()).log(Level.SEVERE, null, ex);
         }

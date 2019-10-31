@@ -11,14 +11,14 @@ package controller;
  */
 public class ActionFactory {
     public static Action create(String action){
-        Action actionObject = null;
+        Action actionObject;
         String nomeClasse = "action."+ action + "Action";
-        Class classe = null;
-        Object objeto =null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof Action)) return null;

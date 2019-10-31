@@ -12,16 +12,15 @@ import model.extensores.Entregador;
  *
  * @author John
  */
-public class entregadorChainResponsibility {
+public class EntregadorChainResponsibility {
     public Entregador primeiroEntregador=null;
     public Entregador ultimoEntregador=null;
-    private static entregadorChainResponsibility instance = new entregadorChainResponsibility();
-    public static entregadorChainResponsibility getInstance(){
+    private static final EntregadorChainResponsibility instance = new EntregadorChainResponsibility();
+    public static EntregadorChainResponsibility getInstance(){
         return instance;
     }
     public boolean addToChain(Entregador novoEntregador)
     {
-
         if(primeiroEntregador==null)
         {
             primeiroEntregador = novoEntregador;

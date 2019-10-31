@@ -14,14 +14,14 @@ import model.interfaces.Promocao;
  */
 public class PromocaoFactory {
     public static Promocao create(String tipoContato){
-        Promocao usuarioObject = null;
+        Promocao usuarioObject;
         String nomeClasse = "model.implementadores.Promocao"+ tipoContato;
-        Class classe = null;
-        Object objeto = null;
+        Class classe;
+        Object objeto;
         try{
             classe = Class.forName(nomeClasse);
             objeto = classe.newInstance();
-        }catch (Exception ex){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex){
             return null;
         }
         if (!(objeto instanceof Promocao)) return null;

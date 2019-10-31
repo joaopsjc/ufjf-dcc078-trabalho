@@ -31,7 +31,7 @@ public class AdicionarProdutosCarrinhoAction implements Action{
         try {
             Pedido pedido = Helper.getInstance().getCarrinhoByClienteId(request);
             String selectedIds= request.getParameter("selectedIds");
-            List<String> idsList = new ArrayList<String>(Arrays.asList(selectedIds.split(",")));
+            List<String> idsList = new ArrayList<>(Arrays.asList(selectedIds.split(",")));
             List<Produto> listProdutos = ProdutoDAO.getInstance().getByListId(idsList);
             pedido.addListaProdutos(listProdutos);
             response.setContentType("application/json");
@@ -40,10 +40,7 @@ public class AdicionarProdutosCarrinhoAction implements Action{
             String resultStr = "{\"message\":\"Sucesso\",\"qtdItensCarrinho\":"+qtdItensCarrinho+"}";
             response.getWriter().write(resultStr);
         
-        } catch (SQLException ex) {
-            Logger.getLogger(ExcluirProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
-            response.getWriter().write(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ExcluirProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
             response.getWriter().write(ex.getMessage());
         }

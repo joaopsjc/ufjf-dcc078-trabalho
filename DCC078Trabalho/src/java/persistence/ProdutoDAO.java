@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import model.Produto;
-import model.estados.ProdutoEstadoBloqueado;
 import model.estados.ProdutoEstadoDisponivel;
-import model.estados.ProdutoEstadoIndisponivel;
-import org.apache.jasper.tagplugins.jstl.ForEach;
 import controller.ProdutoEstadoFactory;
 
 /**

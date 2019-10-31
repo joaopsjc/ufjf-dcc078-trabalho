@@ -6,24 +6,17 @@
 package action;
 
 import controller.Action;
-import controller.UsuarioFactory;
 import helper.Helper;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Produto;
 import model.abstratos.Usuario;
-import model.estados.ProdutoEstadoBloqueado;
-import model.estados.ProdutoEstadoDisponivel;
 import controller.ProdutoEstadoFactory;
-import model.estados.ProdutoEstadoIndisponivel;
 import persistence.ProdutoDAO;
-import persistence.UsuarioDAO;
 
 /**
  *
@@ -70,9 +63,7 @@ public class SaveProdutoAction  implements Action{
             request.setAttribute("messageError", "");
             request.setAttribute("messageSuccess", "Produto cadastrado com sucesso!");
             response.sendRedirect("FrontController?action=ResumoProdutos");
-        } catch (SQLException ex) {
-            Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

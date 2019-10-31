@@ -32,11 +32,7 @@ public class GetProdutosByGlobalSearchAction implements Action{
             request.setAttribute("listProdutos", listaProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
             
-        } catch (ServletException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
