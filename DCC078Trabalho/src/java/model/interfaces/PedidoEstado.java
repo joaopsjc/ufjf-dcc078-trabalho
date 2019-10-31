@@ -5,10 +5,21 @@
  */
 package model.interfaces;
 
+import model.Pedido;
+
 /**
  *
- * @author andradeld
+ * @author Anderson
  */
 public interface PedidoEstado {
+    
     public String getEstado();
+    
+    public boolean aCaminho(Pedido pedido);
+    
+    public boolean cancelado(Pedido pedido);
+    
+    public boolean concluido(Pedido pedido);
+    
+    public boolean emPreparo(Pedido pedido);
 }
