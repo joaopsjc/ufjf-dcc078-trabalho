@@ -30,15 +30,4 @@ public class PromocaoNatal implements Promocao{
         return this.tipo;
     }
 
-    @Override
-    public Long getId()
-    {
-        return id;
-    }
-    
-    @Override
-    public void setId(Long id_promocao)
-    {
-        this.id = id_promocao;
-    }
 }
