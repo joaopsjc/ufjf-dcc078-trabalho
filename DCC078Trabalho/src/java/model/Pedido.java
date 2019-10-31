@@ -25,14 +25,14 @@ public class Pedido extends Observable {
             cliente,
             empresa;
     
-    private final Long id;
-    private final List<Produto> produtos;
+    private Long id;
+    private List<PedidoProduto> produtos =new ArrayList<>();
     private PedidoEstado estado;
     private Endereco endereco;
     private double frete,
             precoProdutos;
 
-    public Pedido(Long id, List<Produto> produtos,Endereco endereco,
+    public Pedido(Long id, List<PedidoProduto> produtos,Endereco endereco,
             double frete) {
         this.id = id;
         estado = new PedidoEmPreparo();
@@ -40,11 +40,11 @@ public class Pedido extends Observable {
         this.endereco = endereco;
         this.frete = frete;
         precoProdutos = 0;
-        Iterator<Produto> produtoIterator = produtos.iterator();
+        Iterator<PedidoProduto> produtoIterator = produtos.iterator();
         while(produtoIterator.hasNext())
         {
-            Produto produtoAtual = produtoIterator.next();
-            precoProdutos+= produtoAtual.getPreco();
+            PedidoProduto produtoAtual = produtoIterator.next();
+            precoProdutos+= produtoAtual.getProduto().getPreco();
         }
     }
     public Pedido(Long id, Endereco endereco, double frete) {
@@ -55,7 +55,7 @@ public class Pedido extends Observable {
         this.frete = frete;
         precoProdutos = 0;
     }
-    public Pedido(Long id, List<Produto> produtos,Endereco endereco,
+    public Pedido(Long id, List<PedidoProduto> produtos,Endereco endereco,
             double frete, PedidoEstado pedidoEstado) {
         this.id = id;
         estado = pedidoEstado;
@@ -63,11 +63,11 @@ public class Pedido extends Observable {
         this.endereco = endereco;
         this.frete = frete;
         precoProdutos = 0;
-        Iterator<Produto> produtoIterator = produtos.iterator();
+        Iterator<PedidoProduto> produtoIterator = produtos.iterator();
         while(produtoIterator.hasNext())
         {
-            Produto produtoAtual = produtoIterator.next();
-            precoProdutos+= produtoAtual.getPreco();
+            PedidoProduto produtoAtual = produtoIterator.next();
+            precoProdutos+= produtoAtual.getProduto().getPreco();
         }
     }
     public Pedido(Long id, Endereco endereco, double frete,
@@ -80,11 +80,14 @@ public class Pedido extends Observable {
         precoProdutos = 0;
     }
 
+    public Pedido() {
+    }
+
     public Long getId() {
         return id;
     }
 
-    public List<Produto> getProdutos() {
+    public List<PedidoProduto> getProdutos() {
         return produtos;
     }
 
@@ -142,9 +145,38 @@ public class Pedido extends Observable {
         notifyObservers(); //observer
     }
     
-    public void addProduto(Produto novoProduto)
+    public void addProduto(PedidoProduto novoProduto)
     {
         produtos.add(novoProduto);
-        precoProdutos+= novoProduto.getPreco();
+        precoProdutos+= novoProduto.getProduto().getPreco();
+    }
+
+    public void addListaProdutos(List<Produto> listProdutos) {
+        for(Iterator i = listProdutos.iterator();i.hasNext();){
+            Produto p = (Produto)i.next();
+            PedidoProduto pedidoProduto = getPedidoProdutoByProdutoId(p.getId());
+            if (pedidoProduto != null)
+                pedidoProduto.incrementaQuantidade();
+            else{
+                pedidoProduto = new PedidoProduto();
+                pedidoProduto.setQuantidade(1);
+                pedidoProduto.setProduto(p);
+                addProduto(pedidoProduto);
+            }
+        }
+            
+    }
+    
+    private PedidoProduto getPedidoProdutoByProdutoId(Long id){
+        for(Iterator i = produtos.iterator();i.hasNext();){
+            PedidoProduto pedidoproduto = (PedidoProduto)i.next();
+            if (pedidoproduto.getProduto().getId()==id)
+                return pedidoproduto;
+        }
+        return null;
+    }
+
+    public int getCountProdutos() {
+        return produtos.size();
     }
 }

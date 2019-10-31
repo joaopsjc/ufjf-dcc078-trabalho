@@ -133,5 +133,10 @@ public class Entregador extends Usuario {
     {
         return "Entregador";
     }
+
+    @Override
+    public String getQtdCarrinho() {
+        return "";
+    }
     
 }

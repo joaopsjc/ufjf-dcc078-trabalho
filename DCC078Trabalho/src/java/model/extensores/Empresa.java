@@ -125,4 +125,9 @@ public class Empresa extends Usuario{
     {
         return "Empresa";
     }
+
+    @Override
+    public String getQtdCarrinho() {
+        return "";
+    }
 }

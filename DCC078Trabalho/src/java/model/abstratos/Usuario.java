@@ -213,6 +213,6 @@ public abstract class Usuario {
         return this.carrinho;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public abstract String getQtdCarrinho();
+    
 }

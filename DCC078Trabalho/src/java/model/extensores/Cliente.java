@@ -124,4 +124,9 @@ public class Cliente extends Usuario implements Observer {
 */
         }
     }
+
+    @Override
+    public String getQtdCarrinho() {
+        return getCarrinho().getCountProdutos()+"";
+    }
 }

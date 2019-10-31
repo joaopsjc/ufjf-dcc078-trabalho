@@ -274,4 +274,13 @@ public class ProdutoDAO  extends DAO{
         for(Iterator i = produtos.iterator();i.hasNext();)
             updateEstado((Produto)i.next());
     }
+
+    public List<Produto> getByListId(List<String> ids) throws SQLException, ClassNotFoundException  {
+        List<Produto> listProdutos = new ArrayList<>();
+        for(Iterator i = ids.iterator();i.hasNext();)
+            listProdutos.add(getById((String)i.next()));
+        
+        return listProdutos;
+    }
+
 }

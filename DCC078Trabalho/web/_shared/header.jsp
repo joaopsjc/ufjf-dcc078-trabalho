@@ -54,9 +54,9 @@
 
                     <c:if test = "${loggedUser.getTipo() == 'Cliente'}">
                         <li>
-                            <a href="FrontController?action=ResumoCarrinhoAction">
+                            <a id="link-carrinho" class="count-info" href="FrontController?action=ResumoCarrinhoAction">
                                 <i class="fa fa-shopping-cart" title="Carrinho"></i>
-                                <span class="label label-danger"><c:out value="${qtdItensCarrinho}" /></span>
+                                <span class="label label-danger"><c:out value="${loggedUser.getQtdCarrinho()}" /></span>
                             </a>
                         </li>
                     </c:if>

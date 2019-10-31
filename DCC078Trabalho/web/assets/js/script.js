@@ -84,7 +84,7 @@ UF.Helpers.GetSelectedIdsFromGrid = function(grid){
     if (typeof(grid)=="string")
         grid = $("#"+grid);
     var result = [];
-    grid.find('input[type=checkbox]:checked').each(function(i,el){
+    grid.find('input[type=checkbox][data-id]:checked').each(function(i,el){
         el = $(el);
         result.push(el.attr('data-id'))
     });
@@ -102,6 +102,14 @@ UF.Helpers.SetCheckAllGrid = function(grid){
     check.on('ifChecked', function(event){
         $(gridId).find('td .i-checks').iCheck('check');
     });
+}
+
+UF.Helpers.TryParseJson = function(str){
+    try {
+        return JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
 }
 
 UF.RegisterNamespace('Alert');
@@ -268,4 +276,32 @@ UF.Produto.BloquearDesbloquearProduto = function(element){
 	}	
     }); 
     
+}
+
+UF.RegisterNamespace("Cliente");
+
+UF.Cliente.AdicionarProdutosCarrinho = function(){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=AdicionarProdutosCarrinho",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            var responseJson = UF.Helpers.TryParseJson(response.responseText);
+            if (responseJson){
+                UF.Alert.Success({message:"Produto(s) adicionados ao carrinho com sucesso"});
+                $('#link-carrinho span').html(responseJson.qtdItensCarrinho);                
+            }else{
+                UF.Alert.Error({message:response.responseText}); 
+            }
+	}	
+    });
 }
