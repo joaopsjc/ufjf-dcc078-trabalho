@@ -16,6 +16,11 @@ public class PedidoEmPreparo implements PedidoEstado {
     
     @Override
     public String getEstado() {
+        return "EmPreparo";
+    } 
+    
+    @Override
+    public String getNome() {
         return "Em preparo";
     }
     

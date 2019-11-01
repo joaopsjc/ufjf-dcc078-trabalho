@@ -18,6 +18,11 @@ public class PedidoCancelado implements PedidoEstado{
     public String getEstado() {
         return "Cancelado";
     }
+        
+    @Override
+    public String getNome() {
+        return "Concluido";
+    }
     
     @Override
     public boolean aCaminho(Pedido pedido) {

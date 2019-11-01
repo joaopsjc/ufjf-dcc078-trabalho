@@ -16,7 +16,12 @@ public class PedidoAguardandoEntregador implements PedidoEstado{
     
     @Override
     public String getEstado() {
-        return "Aguardando Entregador";
+        return "AguardandoEntregador";
+    }
+        
+    @Override
+    public String getNome() {
+        return "Aguardando entregador";
     }
     
     @Override

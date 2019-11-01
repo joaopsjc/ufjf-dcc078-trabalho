@@ -16,6 +16,11 @@ public class PedidoACaminho implements PedidoEstado {
     
     @Override
     public String getEstado() {
+        return "ACaminho";
+    }
+    
+    @Override   
+    public String getNome() {
         return "A caminho";
     }
     

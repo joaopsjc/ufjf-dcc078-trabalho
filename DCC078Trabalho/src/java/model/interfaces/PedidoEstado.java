@@ -15,6 +15,8 @@ public interface PedidoEstado {
     
     public String getEstado();
     
+    public String getNome();
+    
     public boolean aCaminho(Pedido pedido);
     
     public boolean cancelado(Pedido pedido);

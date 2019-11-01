@@ -16,7 +16,12 @@ public class PedidoAguardandoRestaurante implements PedidoEstado {
     
     @Override
     public String getEstado() {
-        return "Aguardando Restaurante";
+        return "AguardandoRestaurante";
+    }
+        
+    @Override
+    public String getNome() {
+        return "Aguardando restaurante";
     }
     
     @Override
