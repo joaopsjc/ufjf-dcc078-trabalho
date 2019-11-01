@@ -13,7 +13,6 @@ import model.DadosBancarios;
 import model.Pedido;
 import java.util.Observable;
 import java.util.Observer;
-import model.interfaces.PedidoEstado;
 
 import javax.mail.*;  
 import javax.mail.internet.*;  
@@ -85,11 +84,11 @@ public class Cliente extends Usuario implements Observer {
     public void update(Observable pedidoSubject, Object arg1) {
         if (pedidoSubject instanceof Pedido) {
             Pedido pedidoAtualizado = (Pedido) pedidoSubject;
-            PedidoEstado estado = pedidoAtualizado.getEstado();
+            String estado = pedidoAtualizado.getEstado().getNome();
             
             System.out.println("Estado pedido alterado para "+ estado+ "!");
             /*Enviar email, faltar inserir email e senha e testar, line 93 e 94*/
- /*               String host="mail.javatpoint.com";
+ /*              String host="mail.javatpoint.com";
                 final String user="sonoojaiswal@javatpoint.com";
                 final String password="xxxxx";
 
