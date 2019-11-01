@@ -30,16 +30,12 @@ public class RejeitarPedidoAction implements Action{
             String url = request.getHeader("referer");
             
             Entregador entregador = (Entregador) Helper.getInstance().getLoggedUser(request);
-            entregador.aceitarPedido();
+            entregador.rejeitarPedido();
             request.getRequestDispatcher(url).forward(request, response);
             
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(RejeitarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RejeitarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
     
 }
