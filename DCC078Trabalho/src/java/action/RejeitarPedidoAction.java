@@ -35,6 +35,10 @@ public class RejeitarPedidoAction implements Action{
             
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RejeitarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RejeitarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

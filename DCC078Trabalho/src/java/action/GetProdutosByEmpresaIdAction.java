@@ -27,7 +27,7 @@ public class GetProdutosByEmpresaIdAction implements Action{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             Long id_empresa = Long.parseLong(request.getParameter("empresaId"));
-            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(id_empresa);
+            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosDisponiveisByEmpresaId(id_empresa);
             request.setAttribute("listProdutos", listaProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
             

@@ -31,7 +31,7 @@ public class GetProdutosByEmpresaNomeAction implements Action{
             String nomeEmpresa = request.getParameter("empresaProduto");
             String url = request.getHeader("referer");
             Usuario empresa = UsuarioDAO.getInstance().getByName(nomeEmpresa);
-            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByEmpresaId(empresa.getId());
+            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosDisponiveisByEmpresaId(empresa.getId());
             request.setAttribute("produtosByEmpresaNome", listaProdutos);
             request.getRequestDispatcher(url).forward(request, response);
             

@@ -28,7 +28,7 @@ public class GetProdutosByGlobalSearchAction implements Action{
         try {
             String stringSearch = request.getParameter("stringSearch");
             String url = request.getHeader("referer");
-            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosByCategoria(stringSearch);
+            List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosDisponiveisByCategoria(stringSearch);
             request.setAttribute("listProdutos", listaProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
             

@@ -35,6 +35,10 @@ public class AceitarPedidoAction implements Action{
             
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AceitarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AceitarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
