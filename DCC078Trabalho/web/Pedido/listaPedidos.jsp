@@ -34,7 +34,7 @@
                                     <td><c:out value="${pedido.getEntregador().getNome()}" /></td>
                                     <td><c:out value="${pedido.getFrete()}" /></td>
                                     <td><c:out value="${pedido.getPrecoProdutos()}" /></td>
-                                    <td><c:out value="${pedido.getEstado().getEstado()}" /></td>
+                                    <td><c:out value="${pedido.getEstado().getNome()}" /></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
