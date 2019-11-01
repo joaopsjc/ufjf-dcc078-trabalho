@@ -79,5 +79,9 @@ public class Helper {
     public void addCarrinho(Pedido carrinho,HttpServletRequest httpRequest) {
         getLoggedUser(httpRequest).setCarrinho(carrinho);
     }
+
+    public void zeraCarrinhoByClienteId(HttpServletRequest request) {
+        getLoggedUser(request).setCarrinho(new Pedido());
+    }
     
 }

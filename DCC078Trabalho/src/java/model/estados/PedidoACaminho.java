@@ -40,4 +40,14 @@ public class PedidoACaminho implements PedidoEstado {
     public boolean emPreparo(Pedido pedido) {
         return false;
     }
+
+    @Override
+    public boolean aguardandoRestaurante(Pedido pedido) {
+        return false;
+    }
+
+    @Override
+    public boolean aguardandoEntregador(Pedido pedido) {
+        return false;
+    }
 }

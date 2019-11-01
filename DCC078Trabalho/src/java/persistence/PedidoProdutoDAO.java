@@ -19,6 +19,7 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import controller.ProdutoEstadoFactory;
 import controller.PromocaoFactory;
+import java.util.Iterator;
 import model.PedidoProduto;
 import model.interfaces.PedidoEstado;
 import model.interfaces.Promocao;
@@ -43,6 +44,27 @@ public class PedidoProdutoDAO  extends DAO{
             st.setLong(1,id_pedido);
             st.setLong(2,id_produto);
             st.setString(3,tipoPromocao);
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating pedidoProduto failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;//  
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    public void insert(Long idPedido, PedidoProduto pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,quantidade) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,idPedido);
+            st.setLong(2,pedido.getProduto().getId());
+            st.setInt(3,pedido.getQuantidade());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -267,6 +289,13 @@ public class PedidoProdutoDAO  extends DAO{
             throw e;
         } finally {
             closeResources(conn, st);
+        }
+    }
+
+    public void insert(Pedido pedido) throws SQLException, ClassNotFoundException{
+        for(Iterator i = pedido.getProdutos().iterator();i.hasNext();){
+            PedidoProduto p = (PedidoProduto)i.next();
+            insert(pedido.getId(),p);
         }
     }
 }

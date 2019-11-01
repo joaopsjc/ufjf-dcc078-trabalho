@@ -12,11 +12,11 @@ import model.interfaces.PedidoEstado;
  *
  * @author ice
  */
-public class PedidoCancelado implements PedidoEstado{
+public class PedidoAguardandoRestaurante implements PedidoEstado {
     
     @Override
     public String getEstado() {
-        return "Cancelado";
+        return "Aguardando Restaurante";
     }
     
     @Override
@@ -24,8 +24,10 @@ public class PedidoCancelado implements PedidoEstado{
         return false;
     }
     
+    @Override
     public boolean cancelado(Pedido pedido) {
-        return false;
+        pedido.setEstado(new PedidoCancelado());
+        return true;
     }
     
     @Override
@@ -35,7 +37,8 @@ public class PedidoCancelado implements PedidoEstado{
     
     @Override
     public boolean emPreparo(Pedido pedido) {
-        return false;
+        pedido.setEstado(new PedidoEmPreparo());
+        return true;
     }
 
     @Override

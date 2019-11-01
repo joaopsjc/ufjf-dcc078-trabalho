@@ -17,7 +17,7 @@
                     <div class="ibox-content">
                         <div class="row toolbar-crud-grid">
                             <button onclick="UF.Carrinho.RemoverDoCarrinho(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Remover do carrinho</button>
-                            <button onclick="UF.Carrinho.FinalizarPedido(this)" class="btn btn-primary" type="button"><i class="fa fa-check"></i> Finalizar pedido</button>
+                            <button onclick="UF.Carrinho.RealizarPedido(this)" class="btn btn-primary" type="button"><i class="fa fa-check"></i> Realizar pedido</button>
                         </div>
                         <table id="carrinho-grid-resumo"class="table table-bordered">
                             <thead>

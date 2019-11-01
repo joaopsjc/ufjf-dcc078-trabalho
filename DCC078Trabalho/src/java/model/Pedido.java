@@ -10,6 +10,7 @@ import model.interfaces.PedidoEstado;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Observable;
 import model.abstratos.Usuario;
@@ -29,7 +30,7 @@ public class Pedido extends Observable {
     private List<PedidoProduto> produtos =new ArrayList<>();
     private PedidoEstado estado;
     private Endereco endereco;
-    private double frete,
+    private double frete=0,
             precoProdutos;
 
     public Pedido(Long id, List<PedidoProduto> produtos,Endereco endereco,
@@ -197,4 +198,18 @@ public class Pedido extends Observable {
                 removeProduto(pedidoProduto);
         }
     }
+
+    public void atualizaQuantidades(List<String> qtdItensList) {
+        for(ListIterator  i = qtdItensList.listIterator();i.hasNext();){
+            int index = i.nextIndex();
+            String qtdProduto = (String)i.next();
+            produtos.get(index).setQuantidade(Integer.parseInt(qtdProduto));
+        }
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
 }

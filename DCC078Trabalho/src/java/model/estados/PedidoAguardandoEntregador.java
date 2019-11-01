@@ -12,20 +12,22 @@ import model.interfaces.PedidoEstado;
  *
  * @author ice
  */
-public class PedidoCancelado implements PedidoEstado{
+public class PedidoAguardandoEntregador implements PedidoEstado{
     
     @Override
     public String getEstado() {
-        return "Cancelado";
+        return "Aguardando Entregador";
     }
     
     @Override
     public boolean aCaminho(Pedido pedido) {
-        return false;
+        pedido.setEstado(new PedidoACaminho());
+        return true;
     }
     
     public boolean cancelado(Pedido pedido) {
-        return false;
+        pedido.setEstado(new PedidoCancelado());
+        return true;
     }
     
     @Override
