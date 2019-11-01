@@ -118,7 +118,7 @@ public class ProdutoDAO  extends DAO{
         return preencherNomeEmpresa(listaProdutos);
     }
     
-    public List<Produto> getProdutosByCategoria(String stringSearch) throws SQLException, ClassNotFoundException{
+    public List<Produto> getProdutosDisponiveisByCategoria(String stringSearch) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         List<Produto> listaProdutos = new ArrayList();
@@ -130,7 +130,42 @@ public class ProdutoDAO  extends DAO{
                 stringSearch = stringSearch.toLowerCase();
                 ResultSet rs = st.executeQuery("select * from produto where (lower(categoria) like '%"+stringSearch+"%'"
                 +" or lower(nome) like '%"+stringSearch+"%')"
-                +" and estado='"+new ProdutoEstadoDisponivel().getEstado()+"'");
+                +" and estado='Disponivel'");
+                // iterate through the java resultset
+                while (rs.next())
+                {
+                    Long id = rs.getLong("id");
+                    Long id_empresa = rs.getLong("id_empresa");
+                    String nome = rs.getString("nome");
+                    String descricao = rs.getString("descricao");
+                    int quantidade = rs.getInt("quantidade");
+                    double preco = rs.getDouble("preco");
+                    String estado = rs.getString("estado");
+                    String categoria = rs.getString("categoria");
+                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    p.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(p);
+                }
+            } catch(SQLException e) {
+                throw e;
+            } finally {
+                closeResources(conn, st);
+            }
+        return preencherNomeEmpresa(listaProdutos);
+    }
+    
+    public List<Produto> getProdutosByCategoria(String stringSearch) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Produto> listaProdutos = new ArrayList();
+        try {
+                conn = DatabaseLocator.getInstance().getConection();
+                st = conn.createStatement();
+                
+                // execute the query, and get a java resultset
+                stringSearch = stringSearch.toLowerCase();
+                ResultSet rs = st.executeQuery("select * from produto where (lower(categoria) like '%"+stringSearch+"%'"
+                +" or lower(nome) like '%"+stringSearch+"%')");
                 // iterate through the java resultset
                 while (rs.next())
                 {
