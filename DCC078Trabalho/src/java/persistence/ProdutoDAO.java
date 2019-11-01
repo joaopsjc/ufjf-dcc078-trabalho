@@ -60,8 +60,41 @@ public class ProdutoDAO  extends DAO{
                 st = conn.createStatement();
                 
                 // execute the query, and get a java resultset
+                ResultSet rs = st.executeQuery("select * from produto where id_empresa ="+id_empresa);
+                
+                // iterate through the java resultset
+                while (rs.next())
+                {
+                    Long id = rs.getLong("id");
+                    String nome = rs.getString("nome");
+                    String categoria = rs.getString("categoria");
+                    String descricao = rs.getString("descricao");
+                    int quantidade = rs.getInt("quantidade");
+                    double preco = rs.getDouble("preco");
+                    String estado = rs.getString("estado");
+                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    p.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(p);
+                }
+            } catch(SQLException e) {
+                throw e;
+            } finally {
+                closeResources(conn, st);
+            }
+        return preencherNomeEmpresa(listaProdutos);
+    }
+    
+    public List<Produto> getProdutosDisponiveisByEmpresaId(Long id_empresa) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Produto> listaProdutos = new ArrayList();
+        try {
+                conn = DatabaseLocator.getInstance().getConection();
+                st = conn.createStatement();
+                
+                // execute the query, and get a java resultset
                 ResultSet rs = st.executeQuery("select * from produto where id_empresa ="+id_empresa
-                +" and estado='"+new ProdutoEstadoDisponivel().getEstado()+"'");
+                +" and estado='Disponivel'");
                 
                 // iterate through the java resultset
                 while (rs.next())
