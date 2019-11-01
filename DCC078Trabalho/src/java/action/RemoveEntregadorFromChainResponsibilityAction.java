@@ -6,6 +6,7 @@
 package action;
 
 import controller.Action;
+import helper.Helper;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,17 +26,14 @@ public class RemoveEntregadorFromChainResponsibilityAction implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            Long id_entregador = Long.parseLong(request.getParameter("entregadorId"));
             String url = request.getHeader("referer");
             
-            Entregador entregadorAdiciona = (Entregador) UsuarioDAO.getInstance().getById(id_entregador);
+            Entregador entregadorAdiciona = (Entregador) Helper.getInstance().getLoggedUser(request);
             EntregadorChainResponsibility.getInstance().removeFromChain(entregadorAdiciona);
             request.getRequestDispatcher(url).forward(request, response);
             
-        } catch (ServletException | ClassNotFoundException ex) {
+        } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(RemoveEntregadorFromChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -16,10 +16,10 @@
                     </div>
                     <div class="ibox-content">
                     <div class="row toolbar-crud-grid">
-                        <button onclick="" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Aceitar</button>
+                        <button onclick="UF.Pedido.AceitarPedido(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Aceitar</button>
                     </div>
                     <div class="row toolbar-crud-grid">
-                        <button onclick="" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Rejeitar</button>
+                        <button onclick="UF.Pedido.RejeitarPedido(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Rejeitar</button>
                     </div>
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>

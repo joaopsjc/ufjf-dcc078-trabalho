@@ -5,12 +5,14 @@
  */
 package model.extensores;
 
+import java.sql.SQLException;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
 import java.util.List;
 import model.DadosBancarios;
 import model.Pedido;
+import persistence.PedidoDAO;
 
 /**
  *
@@ -90,7 +92,17 @@ public class Entregador extends Usuario {
             getProxEntregador().novaReponsabilidade(novoPedido);
         }
     }
-    
+    public void aceitarPedido() throws SQLException, ClassNotFoundException
+    {
+        if(pedidoDisponivel!=null)
+        {
+            super.getPedidos().add(pedidoDisponivel);
+            pedidoDisponivel.getEstado().aCaminho(pedidoDisponivel);
+            PedidoDAO.getInstance().updateEstado(pedidoDisponivel);
+            pedidoDisponivel=null;
+            disponivel=true;
+        }
+    }
     public void rejeitarPedido() {
         if(pedidoDisponivel!=null)
         {

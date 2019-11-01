@@ -1,0 +1,15 @@
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (1,3,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (2,6,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (5,9,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (8,12,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (11,15,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (14,18,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (17,3,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (1,6,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (2,9,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (5,12,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (8,15,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (11,18,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (14,3,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (17,6,,,10,'Aguardando Restaurante');
+insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (1,9,,,10,'Aguardando Restaurante');

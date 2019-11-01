@@ -360,3 +360,14 @@ UF.Empresa.VisualizarProdutos = function(element){
     form.find('[name=empresaId]').val(selectedIds[0]);
     form.submit();
 }
+
+UF.RegisterNamespace("Pedido");
+
+UF.Pedido.AceitarPedido = function()
+{
+    window.location = "FrontController?action=AceitarPedido";
+}
+UF.Pedido.RejeitarPedido = function()
+{
+    window.location = "FrontController?action=RejeitarPedido";
+}

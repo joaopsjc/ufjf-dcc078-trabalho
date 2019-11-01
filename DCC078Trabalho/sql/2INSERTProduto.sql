@@ -1,0 +1,15 @@
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (3,'x-tudo','hamburguer','hamburguer',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (6,'calabreza','pizza','pizza',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (9,'salada','vegetariano','vegetariano',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (12,'x-tudo','hamburguer','hamburguer',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (15,'calabreza','pizza','pizza',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (18,'salada','vegetariano','vegetariano',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (18,'x-tudo','hamburguer','hamburguer',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (18,'calabreza','pizza','pizza',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (3,'salada','vegetariano','vegetariano',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (6,'x-tudo','hamburguer','hamburguer',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (9,'calabreza','pizza','pizza',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (15,'salada','vegetariano','vegetariano',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (18,'x-tudo','hamburguer','hamburguer',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (6,'calabreza','pizza','pizza',10,10,'Disponivel');
+insert into produto(id_empresa,nome,categoria,descricao,quantidade,preco,estado) values (9,'salada','vegetariano','vegetariano',10,10,'Disponivel');
