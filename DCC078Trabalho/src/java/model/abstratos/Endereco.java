@@ -109,5 +109,4 @@ public abstract class Endereco {
     public void setId_usuario(long id_usuario) {
         this.id_usuario = id_usuario;
     }
-    
 }
