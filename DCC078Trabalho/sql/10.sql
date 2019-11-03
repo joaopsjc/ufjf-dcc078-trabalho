@@ -1,4 +1,4 @@
-CREATE TABLE ComboProduto (
+CREATE TABLE comboProduto (
         id_combo INTEGER not null,
         id_produto INTEGER not null,
 	CONSTRAINT fk_ComboProduto_combo FOREIGN KEY (id_combo) REFERENCES produto,
