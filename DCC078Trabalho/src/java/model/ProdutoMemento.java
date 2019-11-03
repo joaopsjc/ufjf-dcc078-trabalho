@@ -19,7 +19,7 @@ public class ProdutoMemento {
         this.estado = estado;
     }
 
-    ProdutoMemento() {
+    public ProdutoMemento() {
         this.estado = new ProdutoEstadoIndisponivel();
     }
     

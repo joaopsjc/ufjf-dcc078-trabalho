@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.abstratos.Produto;
 import java.util.ArrayList;
 import java.util.List;
 

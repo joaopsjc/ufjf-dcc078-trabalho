@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.abstratos;
 
+import model.ProdutoMemento;
 import model.estados.ProdutoEstadoBloqueado;
 import model.estados.ProdutoEstadoDisponivel;
 import model.estados.ProdutoEstadoIndisponivel;
@@ -14,11 +15,10 @@ import model.interfaces.ProdutoEstado;
  *
  * @author andradeld
  */
-public class Produto {
+public abstract class Produto {
     private Long id;
     private String nome,
-            descricao,
-            categoria;
+            descricao;
     private int quantidade;
     private Double preco;
     private ProdutoEstado estado;
@@ -26,31 +26,31 @@ public class Produto {
     private String nomeEmpresa;
     private ProdutoMemento estadoDesbloqueado = new ProdutoMemento();
 
-    public Produto(Long id, String nome, String descricao, String categoria, Double preco) {
+    public Produto(Long id, String nome, String descricao, Double preco) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.categoria = categoria;
+
         this.preco = preco;
         this.quantidade = 0;
         this.estado = new ProdutoEstadoDisponivel();
     }
 
-    public Produto(Long id, String nome, String descricao, String categoria, int quantidade, Double preco) {
+    public Produto(Long id, String nome, String descricao, int quantidade, Double preco) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.categoria = categoria;
+
         this.preco = preco;
         this.quantidade = quantidade;
         this.estado = new ProdutoEstadoDisponivel();
     }
     
-    public Produto(Long id, String nome, String descricao, String categoria, int quantidade, Double preco, Long id_empresa) {
+    public Produto(Long id, String nome, String descricao, int quantidade, Double preco, Long id_empresa) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.categoria = categoria;
+
         this.preco = preco;
         this.quantidade = quantidade;
         this.id_empresa = id_empresa;
@@ -72,10 +72,6 @@ public class Produto {
         return descricao;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
     public Double getPreco() {
         return preco;
     }
@@ -93,10 +89,6 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public void setPreco(Double preco) {
@@ -166,7 +158,8 @@ public class Produto {
     public void setNomeEmpresa(String nomeEmpresa) {
         this.nomeEmpresa = nomeEmpresa;
     }
-    
-    
-    
+    public String getCategoria()
+    {
+        return "Produto";
+    }
 }

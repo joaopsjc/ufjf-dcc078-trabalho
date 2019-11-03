@@ -12,7 +12,7 @@ import java.util.List;
 import model.Cardapio;
 import model.DadosBancarios;
 import model.Pedido;
-import model.Produto;
+import model.abstratos.Produto;
 
 /**
  *

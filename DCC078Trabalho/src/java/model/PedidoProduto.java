@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.abstratos.Produto;
 import model.implementadores.PromocaoVazia;
 import model.interfaces.Promocao;
 

@@ -5,7 +5,7 @@
  */
 package model.estados;
 
-import model.Produto;
+import model.abstratos.Produto;
 import model.interfaces.ProdutoEstado;
 
 /**

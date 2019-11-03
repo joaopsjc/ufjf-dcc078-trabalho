@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.abstratos.Produto;
 import model.abstratos.Endereco;
 import model.interfaces.PedidoEstado;
 import java.util.ArrayList;

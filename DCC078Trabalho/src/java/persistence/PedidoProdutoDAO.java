@@ -14,10 +14,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Pedido;
-import model.Produto;
+import model.abstratos.Produto;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import controller.ProdutoEstadoFactory;
+import controller.ProdutoFactory;
 import controller.PromocaoFactory;
 import java.util.Iterator;
 import model.PedidoProduto;
@@ -156,7 +157,16 @@ public class PedidoProdutoDAO  extends DAO{
                 
                 Promocao novaPromocao = PromocaoFactory.create(tipoPromocao);
                 
-                Produto novoProduto =  new Produto(id,nome,descricao, categoria, quantidadeProduto, preco,id_empresa);
+                Produto novoProduto =  ProdutoFactory.create(categoria);
+                //categoria não é mais um elemento setável, 
+                // utilização do produtoFactory para criação de novo produtos
+                //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                novoProduto.setId(id);
+                novoProduto.setNome(nome);
+                novoProduto.setId_empresa(id_empresa);
+                novoProduto.setDescricao(descricao);
+                novoProduto.setQuantidade(quantidadeProduto);
+                novoProduto.setPreco(preco);
                 novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
                 
                 PedidoProduto pedidoProduto = new PedidoProduto(quantidadePedido, novoProduto);
@@ -195,8 +205,19 @@ public class PedidoProdutoDAO  extends DAO{
                 int quantidade = rs.getInt("quantidade");
                 double preco = rs.getDouble("preco");
                 String estado = rs.getString("estado");
-                Produto novoProduto =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                
+                Produto novoProduto =  ProdutoFactory.create(categoria);
+                //categoria não é mais um elemento setável, 
+                // utilização do produtoFactory para criação de novo produtos
+                //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                novoProduto.setId(id);
+                novoProduto.setNome(nome);
+                novoProduto.setId_empresa(id_empresa);
+                novoProduto.setDescricao(descricao);
+                novoProduto.setQuantidade(quantidade);
+                novoProduto.setPreco(preco);
                 novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+
                 produtos.add(novoProduto);
             }
         } catch(SQLException e) {

@@ -13,7 +13,7 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.Pedido;
-import model.Produto;
+import model.abstratos.Produto;
 import model.abstratos.Usuario;
 
 /**

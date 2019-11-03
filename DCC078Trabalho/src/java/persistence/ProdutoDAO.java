@@ -13,9 +13,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import model.Produto;
+import model.abstratos.Produto;
 import model.estados.ProdutoEstadoDisponivel;
 import controller.ProdutoEstadoFactory;
+import controller.ProdutoFactory;
 
 /**
  *
@@ -72,9 +73,18 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
-                    p.setEstado(ProdutoEstadoFactory.create(estado));
-                    listaProdutos.add(p);
+                    Produto novoProduto =  ProdutoFactory.create(categoria);
+                    //categoria não é mais um elemento setável, 
+                    // utilização do produtoFactory para criação de novo produtos
+                    //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    novoProduto.setId(id);
+                    novoProduto.setNome(nome);
+                    novoProduto.setId_empresa(id_empresa);
+                    novoProduto.setDescricao(descricao);
+                    novoProduto.setQuantidade(quantidade);
+                    novoProduto.setPreco(preco);
+                    novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(novoProduto);
                 }
             } catch(SQLException e) {
                 throw e;
@@ -106,9 +116,19 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
-                    p.setEstado(ProdutoEstadoFactory.create(estado));
-                    listaProdutos.add(p);
+                    Produto novoProduto =  ProdutoFactory.create(categoria);
+                    //categoria não é mais um elemento setável, 
+                    // utilização do produtoFactory para criação de novo produtos
+                    //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    novoProduto.setId(id);
+                    novoProduto.setNome(nome);
+                    novoProduto.setId_empresa(id_empresa);
+                    novoProduto.setDescricao(descricao);
+                    novoProduto.setQuantidade(quantidade);
+                    novoProduto.setPreco(preco);
+                    
+                    novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(novoProduto);
                 }
             } catch(SQLException e) {
                 throw e;
@@ -142,9 +162,18 @@ public class ProdutoDAO  extends DAO{
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
                     String categoria = rs.getString("categoria");
-                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
-                    p.setEstado(ProdutoEstadoFactory.create(estado));
-                    listaProdutos.add(p);
+                    Produto novoProduto =  ProdutoFactory.create(categoria);
+                    //categoria não é mais um elemento setável, 
+                    // utilização do produtoFactory para criação de novo produtos
+                    //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    novoProduto.setId(id);
+                    novoProduto.setNome(nome);
+                    novoProduto.setId_empresa(id_empresa);
+                    novoProduto.setDescricao(descricao);
+                    novoProduto.setQuantidade(quantidade);
+                    novoProduto.setPreco(preco);
+                    novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(novoProduto);
                 }
             } catch(SQLException e) {
                 throw e;
@@ -177,9 +206,18 @@ public class ProdutoDAO  extends DAO{
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
                     String categoria = rs.getString("categoria");
-                    Produto p =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
-                    p.setEstado(ProdutoEstadoFactory.create(estado));
-                    listaProdutos.add(p);
+                    Produto novoProduto =  ProdutoFactory.create(categoria);
+                    //categoria não é mais um elemento setável, 
+                    // utilização do produtoFactory para criação de novo produtos
+                    //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    novoProduto.setId(id);
+                    novoProduto.setNome(nome);
+                    novoProduto.setId_empresa(id_empresa);
+                    novoProduto.setDescricao(descricao);
+                    novoProduto.setQuantidade(quantidade);
+                    novoProduto.setPreco(preco);
+                    novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                    listaProdutos.add(novoProduto);
                 }
             } catch(SQLException e) {
                 throw e;
@@ -223,7 +261,16 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    produto =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    produto =  ProdutoFactory.create(categoria);
+                    //categoria não é mais um elemento setável, 
+                    // utilização do produtoFactory para criação de novo produtos
+                    //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    produto.setId(id);
+                    produto.setNome(nome);
+                    produto.setId_empresa(id_empresa);
+                    produto.setDescricao(descricao);
+                    produto.setQuantidade(quantidade);
+                    produto.setPreco(preco);
                     produto.setEstado(ProdutoEstadoFactory.create(estado));
                 }
             } catch(SQLException e) {
@@ -255,7 +302,16 @@ public class ProdutoDAO  extends DAO{
                     int quantidade = rs.getInt("quantidade");
                     double preco = rs.getDouble("preco");
                     String estado = rs.getString("estado");
-                    Produto novoProduto =  new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    Produto novoProduto =  ProdutoFactory.create(categoria);
+                    //categoria não é mais um elemento setável, 
+                    // utilização do produtoFactory para criação de novo produtos
+                    //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                    novoProduto.setId(id);
+                    novoProduto.setNome(nome);
+                    novoProduto.setId_empresa(id_empresa);
+                    novoProduto.setDescricao(descricao);
+                    novoProduto.setQuantidade(quantidade);
+                    novoProduto.setPreco(preco);
                     novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
                     listaProdutos.add(novoProduto);
                 }

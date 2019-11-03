@@ -5,7 +5,7 @@
  */
 package model.interfaces;
 
-import model.Produto;
+import model.abstratos.Produto;
 
 /**
  *
