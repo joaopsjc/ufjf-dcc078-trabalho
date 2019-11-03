@@ -13,9 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Produto;
+import model.abstratos.Produto;
 import model.abstratos.Usuario;
 import controller.ProdutoEstadoFactory;
+import controller.ProdutoFactory;
 import persistence.ProdutoDAO;
 
 /**
@@ -39,8 +40,7 @@ public class SaveProdutoAction  implements Action{
             if (id.length() != 0)
                 produto= ProdutoDAO.getInstance().getById(id);
             else
-                produto= new Produto();
-            produto.setCategoria(categoria);
+                produto= ProdutoFactory.create(categoria);
             produto.setNome(nome);
             produto.setDescricao(descricao);
             produto.setPreco(preco);
