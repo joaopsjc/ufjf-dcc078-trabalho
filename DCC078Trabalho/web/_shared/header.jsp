@@ -76,6 +76,7 @@
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="FrontController?action=Profile"><i class="fa fa-user"></i> Perfil</a></li>
                             <li><a href="FrontController?action=FormAlterarSenha"><i class="fa fa-key"></i> Alterar senha</a></li>
+                            <li><a href="FrontController?action=ResumoEnderecos"><i class="fa fa-building"></i> Endereços</a></li>
                             <li class="divider"></li>
                             <li><a href="FrontController?action=DoLogout"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>

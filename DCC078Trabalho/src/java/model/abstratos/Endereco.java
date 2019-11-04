@@ -29,11 +29,9 @@ public abstract class Endereco {
         this.bairro = bairro;
         this.estado = estado;
         this.cidade = cidade;
-    }
+    }   
 
-    
-
-    public String getLagradouro() {
+    public String getLogradouro() {
         return lagradouro;
     }
 

@@ -34,7 +34,7 @@ public class EnderecoDAO  extends DAO{
             st.setLong(1,id_usuario);
             st.setInt(2,endereco.getNumero());
             st.setString(3,endereco.getComplemento());
-            st.setString(4,endereco.getLagradouro());
+            st.setString(4,endereco.getLogradouro());
             st.setString(5,endereco.getBairro());
             st.setString(6,endereco.getCidade());
             st.setString(7,endereco.getEstado());
@@ -138,7 +138,7 @@ public class EnderecoDAO  extends DAO{
             st.setLong(1,endereco.getId_usuario());
             st.setInt(2,endereco.getNumero());
             st.setString(3,endereco.getComplemento());
-            st.setString(4,endereco.getLagradouro());
+            st.setString(4,endereco.getLogradouro());
             st.setString(5,endereco.getBairro());
             st.setString(6,endereco.getCidade());
             st.setString(7,endereco.getEstado());

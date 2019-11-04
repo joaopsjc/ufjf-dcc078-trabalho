@@ -24,7 +24,7 @@ public class EnderecoRua extends Endereco{
     }
     public String toString()
     {
-        return getTipo() + " " + super.getLagradouro() + ", " + super.getNumero() + " - "
+        return getTipo() + " " + super.getLogradouro() + ", " + super.getNumero() + " - "
                 + super.getBairro() + ", " + super.getCidade() +  " - " + super.getEstado()
                 + ", " + super.getCep();
     }
