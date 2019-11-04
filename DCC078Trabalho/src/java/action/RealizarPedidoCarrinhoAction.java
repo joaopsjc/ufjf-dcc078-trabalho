@@ -37,8 +37,8 @@ public class RealizarPedidoCarrinhoAction implements Action{
             pedido.atualizaQuantidades(qtdItensList);
             pedido.setEstado(new PedidoAguardandoRestaurante());
             pedido.setCliente(Helper.getInstance().getLoggedUser(request));
-            PedidoDAO.getInstance().insert(pedido);
-            PedidoProdutoDAO.getInstance().insert(pedido);
+            List<Pedido> pedidos = Helper.getInstance().dividePedidoPorEmpresa(pedido);
+            PedidoDAO.getInstance().insert(pedidos);
             Helper.getInstance().zeraCarrinhoByClienteId(request);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

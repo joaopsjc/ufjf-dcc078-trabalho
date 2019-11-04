@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Observable;
 import model.abstratos.Usuario;
 import model.estados.PedidoEmPreparo;
+import persistence.PedidoDAO;
 
 /**
  *

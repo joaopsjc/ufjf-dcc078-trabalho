@@ -18,6 +18,7 @@
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Restaurante</th>
                                 <th>Cliente</th>
                                 <th>Entregador</th>
@@ -29,6 +30,7 @@
                             <tbody>
                             <c:forEach items="${listPedidos}" var="pedido">
                                 <tr>
+                                    <td><c:out value="${pedido.getId()}" /></td>
                                     <td><c:out value="${pedido.getEmpresa().getNome()}" /></td>
                                     <td><c:out value="${pedido.getCliente().getNome()}" /></td>
                                     <td><c:out value="${pedido.getEntregador().getNome()}" /></td>

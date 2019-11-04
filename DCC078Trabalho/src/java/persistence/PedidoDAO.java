@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.Pedido;
 import model.abstratos.Endereco;
@@ -63,12 +64,20 @@ public class PedidoDAO  extends DAO{
             if (rs.next()) {
                 pedido.setId(rs.getLong(1));
             }
+            PedidoProdutoDAO.getInstance().insert(pedido);
         } catch(SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
     }
+    
+    public void insert(List<Pedido> pedidos) throws SQLException, ClassNotFoundException{
+        for(Iterator i = pedidos.iterator();i.hasNext();){
+            insert((Pedido)i.next());
+        }
+    }
+    
     public Pedido getById(Long id_pedido) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
