@@ -20,7 +20,13 @@
                             <input type="hidden" name="action" value="FormDetalheProduto" />
                         </form>
                         <div class="row toolbar-crud-grid">
-                            <a href="FrontController?action=FormNovoProduto"><button class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar</button></a>
+                            <div class="btn-group">
+                                <button data-toggle="dropdown" class="btn btn-success "><i class="fa fa-plus"></i>Adicionar</button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="FrontController?action=FormNovoProduto&categoria=Sanduiche">Sanduíche</a></li>
+                                    <li><a href="FrontController?action=FormNovoProduto&categoria=Pizza">Pizza</a></li>
+                                </ul>
+                            </div>
                             <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
                             <button onclick="UF.Produto.ExcluirProduto(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
                             <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Bloquear" class="btn btn-warning" type="button"><i class="fa fa-lock"></i> Bloquear</button> 

@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input type="text" name="categoria" class="form-control" value="<c:out value="${currentProduto.getCategoria()}"> </c:out>" required="">
+                                        <input type="text" readonly="readonly" name="categoria" class="form-control" value="<c:out value="${currentProduto.getCategoria()}"> </c:out>" required="">
                                     </div>
                                 </div>
                             </div>
