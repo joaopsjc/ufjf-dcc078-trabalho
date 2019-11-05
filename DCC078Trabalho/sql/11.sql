@@ -1,0 +1,3 @@
+
+
+ALTER TABLE endereco ADD isPrincipal SMALLINT DEFAULT 0 NOT NULL;

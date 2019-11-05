@@ -388,3 +388,82 @@ UF.Pedido.RejeitarPedido = function()
 {
     window.location = "FrontController?action=RejeitarPedido";
 }
+
+UF.RegisterNamespace("Endereco");
+
+UF.Endereco.EditarEndereco = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("endereco-grid-resumo");
+    if (selectedIds.length!=1){
+        UF.Alert.Error({message:"É necessário selecionar um endereco!"});
+        return;
+    }
+    var form = $('#form-detalhe-endereco');
+    form.find('[name=id]').val(selectedIds[0]);
+    form.submit();    
+}
+
+UF.Endereco.ExcluirEndereco = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("endereco-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um endereco!"});
+        return;
+    }
+    var principalSelected = $('#endereco-grid-resumo').find('input[type=checkbox][data-id]:checked').parents('tr').find('i[class="color-green fa fa-check"]').length ==1;
+    
+    if (principalSelected){
+        UF.Alert.Error({message:"Não é possível excluir um endereço principal. Defina um novo principal e tente novamente!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=ExcluirEndereco",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete:function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Endereco(s) excluído(s) com sucesso",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ResumoEnderecos";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});            
+	}	
+    });   
+}
+
+
+UF.Endereco.TornarPrincipal = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("endereco-grid-resumo");
+    if (selectedIds.length!=1){
+        UF.Alert.Error({message:"É necessário selecionar um endereco!"});
+        return;
+    }
+    
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=TornarEnderecoPrincipal",	
+	type : 'post',	
+	data : {
+            selectedId: selectedIds[0]
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Endereco principal selecionado",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ResumoEnderecos";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });   
+}
+
+/*
+UF.Endereco.EditarEndereco(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
+                            <button onclick="UF.Endereco.ExcluirEndereco(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
+                            <button onclick="UF.Endereco.TornarPrincipal(this) */

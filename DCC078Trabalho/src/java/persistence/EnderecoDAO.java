@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.abstratos.Endereco;
 
@@ -63,7 +64,7 @@ public class EnderecoDAO  extends DAO{
 
             if (rs.next())
             {
-                int número = rs.getInt("numero");
+                int numero = rs.getInt("numero");
                 String complemento = rs.getString("complemento");
                 String logradouro = rs.getString("logradouro");
                 String bairro = rs.getString("bairro");
@@ -71,15 +72,17 @@ public class EnderecoDAO  extends DAO{
                 String estado = rs.getString("estado");
                 String tipoEndereco = rs.getString("tipoEndereco");
                 String cep = rs.getString("cep");
+                boolean isPrincipal = rs.getInt("isPrincipal")==1;
                 endereco = EnderecoFactory.create(tipoEndereco);
                 endereco.setId(id_endereco);
-                endereco.setNumero(número);
+                endereco.setNumero(numero);
                 endereco.setComplemento(complemento);
                 endereco.setLagradouro(logradouro);
                 endereco.setBairro(bairro);
                 endereco.setCidade(cidade);
                 endereco.setEstado(estado);
                 endereco.setCep(cep);
+                endereco.setPrincipal(isPrincipal);
             }
         } catch(SQLException e) {
             throw e;
@@ -110,6 +113,7 @@ public class EnderecoDAO  extends DAO{
                 String estado = rs.getString("estado");
                 String tipoEndereco = rs.getString("tipoEndereco");
                 String cep = rs.getString("cep");
+                boolean isPrincipal = rs.getInt("isPrincipal")==1;
                 Endereco novoEndereco = EnderecoFactory.create(tipoEndereco);
                 novoEndereco.setId(id);
                 novoEndereco.setNumero(número);
@@ -119,6 +123,7 @@ public class EnderecoDAO  extends DAO{
                 novoEndereco.setCidade(cidade);
                 novoEndereco.setEstado(estado);
                 novoEndereco.setCep(cep);
+                novoEndereco.setPrincipal(isPrincipal);
                 enderecos.add(novoEndereco);
             }
         } catch(SQLException e) {
@@ -166,6 +171,42 @@ public class EnderecoDAO  extends DAO{
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete endereco failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    private void delete(String id) throws SQLException, ClassNotFoundException{
+        delete((Long.parseLong(id)));
+    }
+
+    public void deleteByIds(List<String> idsList) throws SQLException, ClassNotFoundException {
+        for(Iterator i = idsList.iterator();i.hasNext();)
+            delete((String)i.next());
+    }
+
+    public void setEnderecoPrincipal(Long id, Long idUsuario) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update endereco set isPrincipal=0 where id_usuario=?",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,idUsuario);
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update endereco failed, no rows affected.");
+            }
+            st = conn.prepareStatement("update endereco set isPrincipal=1 where id=?",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,id);
+            
+            affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update endereco failed, no rows affected.");
             }
         } catch(SQLException e) {
             throw e;

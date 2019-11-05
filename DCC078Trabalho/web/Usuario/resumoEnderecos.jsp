@@ -20,15 +20,12 @@
                             <input type="hidden" name="action" value="FormDetalheEndereco" />
                         </form>
                         <div class="row toolbar-crud-grid">
-                            <div class="btn-group">
-                                <button data-toggle="dropdown" class="btn btn-success "><i class="fa fa-plus"></i>Adicionar</button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="FrontController?action=FormNovoProduto&categoria=Sanduiche">Sanduíche</a></li>
-                                    <li><a href="FrontController?action=FormNovoProduto&categoria=Pizza">Pizza</a></li>
-                                </ul>
-                            </div>
+                            
+                            <a href="FrontController?action=FormNovoEndereco"> <button type="button" class="btn btn-success "><i class="fa fa-plus"></i>Adicionar</button></a>
+                            
                             <button onclick="UF.Endereco.EditarEndereco(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
                             <button onclick="UF.Endereco.ExcluirEndereco(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
+                            <button onclick="UF.Endereco.TornarPrincipal(this)" class="btn btn-warning" type="button"><i class="fa fa-star"></i> Tornar principal</button> 
                         </div>
                         <table id="endereco-grid-resumo"class="table table-bordered">
                             <thead>
@@ -37,6 +34,7 @@
                                 <th>Logradouro</th>
                                 <th>Nº</th>
                                 <th>Bairro</th>
+                                <th>Principal</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,7 +43,15 @@
                                     <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${endereco.getId()}" />" name="check-grid"></td>
                                     <td><c:out value="${endereco.getLogradouro()}" /></td>
                                     <td><c:out value="${endereco.getNumero()}" /></td>
-                                    <td><c:out value="${endereco.getBairro()}" /></td>
+                                    <td><c:out value="${endereco.getBairro()}" /></td>                                    
+                                    <c:choose>
+                                        <c:when test="${endereco.isPrincipal()}">
+                                            <td><i class="color-green fa fa-check"></i></td>
+                                        </c:when>    
+                                        <c:otherwise>
+                                            <td><i class="color-red fa fa-times"></i></td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
                             </c:forEach>
                             </tbody>

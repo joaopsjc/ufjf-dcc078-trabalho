@@ -20,6 +20,8 @@ public abstract class Endereco {
             estado,
             cidade,
             cep;
+    
+    private boolean principal;
 
     public Endereco(int numero, String cep, long id, String lagradouro, String complemento, String bairro, String estado, String cidade) {
         this.numero = numero;
@@ -110,4 +112,14 @@ public abstract class Endereco {
     public void setId_usuario(long id_usuario) {
         this.id_usuario = id_usuario;
     }
+
+    public boolean isPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
+    }
+    
+    
 }
