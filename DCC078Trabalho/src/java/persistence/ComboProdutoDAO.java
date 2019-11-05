@@ -110,8 +110,9 @@ public class ComboProdutoDAO  extends DAO{
 
             ResultSet rs = st.executeQuery(
                     "SELECT * from produto P LEFT JOIN comboProduto CP "
-                            + "ON CP.id_combo !=" + id_combo
-                            + "where P.categoria!='Combo' AND P.id_empresa="+id_empresa);
+                            + "ON CP.id_combo =" + id_combo 
+                            + " where P.categoria!='Combo' AND P.id_empresa=" +id_empresa
+                            + " AND (P.ID!=CP.ID_PRODUTO OR cp.id_combo IS NULL)");
             while (rs.next())
             {
                 Long id = rs.getLong("id");
