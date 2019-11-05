@@ -432,6 +432,31 @@ UF.Empresa.RejeitarPedido = function(element){
     });   
 }
 
+UF.Empresa.AdicionarProdutosCombo = function(){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=AdicionarProdutosCombo",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            var responseJson = UF.Helpers.TryParseJson(response.responseText);
+            if (responseJson){
+                UF.Alert.Success({message:"Produto(s) adicionados ao combo com sucesso"});
+                $('#link-carrinho span').html(responseJson.qtdItensCarrinho);                
+            }else{
+                UF.Alert.Error({message:response.responseText}); 
+            }
+	}	
+    });
+}
 
 UF.RegisterNamespace("Pedido");
 
