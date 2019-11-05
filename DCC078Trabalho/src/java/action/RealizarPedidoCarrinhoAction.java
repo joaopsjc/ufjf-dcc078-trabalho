@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.Pedido;
 import model.estados.PedidoAguardandoRestaurante;
 import persistence.PedidoDAO;
-import persistence.PedidoProdutoDAO;
 
 /**
  *
@@ -37,6 +36,7 @@ public class RealizarPedidoCarrinhoAction implements Action{
             pedido.atualizaQuantidades(qtdItensList);
             pedido.setEstado(new PedidoAguardandoRestaurante());
             pedido.setCliente(Helper.getInstance().getLoggedUser(request));
+            pedido.setEndereco();
             List<Pedido> pedidos = Helper.getInstance().dividePedidoPorEmpresa(pedido);
             PedidoDAO.getInstance().insert(pedidos);
             Helper.getInstance().zeraCarrinhoByClienteId(request);

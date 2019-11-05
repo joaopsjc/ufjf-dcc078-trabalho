@@ -110,6 +110,7 @@ public class Helper {
                 pedidosPorEmpresa.put(empresa.getId(),p);
                 p.setCliente(pedido.getCliente());
                 p.setEstado(pedido.getEstado());
+                p.setEndereco(pedido.getEndereco());
             }
             p.addProduto(pedidoProduto);
         }       
