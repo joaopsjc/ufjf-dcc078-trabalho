@@ -14,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.EntregadorChainResponsibility;
 import model.abstratos.Usuario;
+import model.extensores.Entregador;
 import persistence.UsuarioDAO;
 
 /**
@@ -38,6 +40,8 @@ public class DoLoginAction implements Action{
             }else{
                 HttpSession sess = request.getSession(true);
                 sess.setAttribute("loggedUser", usuario);
+                if (usuario instanceof  Entregador)
+                    EntregadorChainResponsibility.getInstance().addToChain((Entregador) usuario);
                 response.sendRedirect("FrontController?action=Home");
             }
         }catch (ServletException | SQLException | ClassNotFoundException ex) {
