@@ -127,7 +127,14 @@ public abstract class Usuario {
     }
     
     public String getNickname(){
-        return this.nome.split(" ")[0];
+        String[] names = this.nome.split(" ");
+        String firstName = names[0];
+        if (names.length==1)
+            return firstName;
+        String lastName = names[names.length-1];
+        
+        
+        return firstName+" "+lastName;
     }
 
     public String getLogin() {
