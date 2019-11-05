@@ -100,7 +100,7 @@ public class ComboProdutoDAO  extends DAO{
         }
     }
     
-    public List<Produto> getNotAllProdutosByComboId(Long id_combo) throws SQLException, ClassNotFoundException{
+    public List<Produto> getNotAllProdutosByComboId(Long id_combo, long id_empresa) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
         List<Produto> produtos = new ArrayList<>();
@@ -109,14 +109,12 @@ public class ComboProdutoDAO  extends DAO{
             st = conn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                    "SELECT * from produto P "
-                            + "INNER JOIN comboProduto CP "
-                            + "ON P.id = CP.id_produto "
-                            + "WHERE CP.id_combo != "+id_combo);
+                    "SELECT * from produto P LEFT JOIN comboProduto CP "
+                            + "ON CP.id_combo !=" + id_combo
+                            + "where P.categoria!='Combo' AND P.id_empresa="+id_empresa);
             while (rs.next())
             {
                 Long id = rs.getLong("id");
-                Long id_empresa = rs.getLong("id_empresa");
                 String nome = rs.getString("nome");
                 String categoria = rs.getString("categoria");
                 String descricao = rs.getString("descricao");
