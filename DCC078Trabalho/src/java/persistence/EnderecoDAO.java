@@ -26,14 +26,14 @@ public class EnderecoDAO  extends DAO{
         return instance;
     }
     
-    public void insert(Endereco endereco, Long id_usuario) throws SQLException, ClassNotFoundException{
+    public void insert(Endereco endereco) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.prepareStatement("insert into endereco(id_usuario,numero,complemento,logradouro,bairro,cidade,estado,tipoEndereco,cep) values (?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1,id_usuario);
-            st.setInt(2,endereco.getNumero());
+            st.setLong(1,endereco.getId_usuario());
+            st.setString(2,endereco.getNumero());
             st.setString(3,endereco.getComplemento());
             st.setString(4,endereco.getLogradouro());
             st.setString(5,endereco.getBairro());
@@ -52,6 +52,10 @@ public class EnderecoDAO  extends DAO{
             closeResources(conn, st);
         }
     }
+    public Endereco getById(String id) throws SQLException, ClassNotFoundException{
+        return getById(Long.parseLong(id));
+    }
+    
     public Endereco getById(Long id_endereco) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -64,7 +68,7 @@ public class EnderecoDAO  extends DAO{
 
             if (rs.next())
             {
-                int numero = rs.getInt("numero");
+                String numero = rs.getString("numero");
                 String complemento = rs.getString("complemento");
                 String logradouro = rs.getString("logradouro");
                 String bairro = rs.getString("bairro");
@@ -77,7 +81,7 @@ public class EnderecoDAO  extends DAO{
                 endereco.setId(id_endereco);
                 endereco.setNumero(numero);
                 endereco.setComplemento(complemento);
-                endereco.setLagradouro(logradouro);
+                endereco.setLogradouro(logradouro);
                 endereco.setBairro(bairro);
                 endereco.setCidade(cidade);
                 endereco.setEstado(estado);
@@ -105,7 +109,7 @@ public class EnderecoDAO  extends DAO{
             while (rs.next())
             {
                 Long id = rs.getLong("id");
-                int número = rs.getInt("numero");
+                String numero = rs.getString("numero");
                 String complemento = rs.getString("complemento");
                 String logradouro = rs.getString("logradouro");
                 String bairro = rs.getString("bairro");
@@ -116,9 +120,9 @@ public class EnderecoDAO  extends DAO{
                 boolean isPrincipal = rs.getInt("isPrincipal")==1;
                 Endereco novoEndereco = EnderecoFactory.create(tipoEndereco);
                 novoEndereco.setId(id);
-                novoEndereco.setNumero(número);
+                novoEndereco.setNumero(numero);
                 novoEndereco.setComplemento(complemento);
-                novoEndereco.setLagradouro(logradouro);
+                novoEndereco.setLogradouro(logradouro);
                 novoEndereco.setBairro(bairro);
                 novoEndereco.setCidade(cidade);
                 novoEndereco.setEstado(estado);
@@ -139,9 +143,9 @@ public class EnderecoDAO  extends DAO{
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update produto set id_usuario=?,numero=?,complemento='?',logradouro='?',bairro='?',cidade='?',estado='?',tipoEndereco='?',cep=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("update endereco set id_usuario=?,numero=?,complemento=?,logradouro=?,bairro=?,cidade=?,estado=?,tipoEndereco=?,cep=? where id=?",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,endereco.getId_usuario());
-            st.setInt(2,endereco.getNumero());
+            st.setString(2,endereco.getNumero());
             st.setString(3,endereco.getComplemento());
             st.setString(4,endereco.getLogradouro());
             st.setString(5,endereco.getBairro());
@@ -183,7 +187,7 @@ public class EnderecoDAO  extends DAO{
         delete((Long.parseLong(id)));
     }
 
-    public void deleteByIds(List<String> idsList) throws SQLException, ClassNotFoundException {
+    public void deleteByIds(List<String> idsList) throws SQLException,  ClassNotFoundException {
         for(Iterator i = idsList.iterator();i.hasNext();)
             delete((String)i.next());
     }
@@ -214,4 +218,5 @@ public class EnderecoDAO  extends DAO{
             closeResources(conn, st);
         }
     }
+
 }

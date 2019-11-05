@@ -5,29 +5,32 @@
  */
 package model.abstratos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author andradeld
  */
 public abstract class Endereco {
-    private int numero;
-    private long 
+    private Long 
             id,
             id_usuario;
-    private String lagradouro,
+    private String logradouro,
             complemento,
             bairro,
             estado,
             cidade,
-            cep;
+            cep,
+            numero;
     
     private boolean principal;
 
-    public Endereco(int numero, String cep, long id, String lagradouro, String complemento, String bairro, String estado, String cidade) {
+    public Endereco(String numero, String cep, Long id, String logradouro, String complemento, String bairro, String estado, String cidade) {
         this.numero = numero;
         this.cep = cep;
         this.id = id;
-        this.lagradouro = lagradouro;
+        this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.estado = estado;
@@ -37,10 +40,10 @@ public abstract class Endereco {
     }
 
     public String getLogradouro() {
-        return lagradouro;
+        return logradouro;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
@@ -64,24 +67,21 @@ public abstract class Endereco {
         return bairro;
     }
     
-    public String getTipo()
-    {
-        return "Endereco";
-    }
+    public abstract String getTipo();
 
-    public long getId_usuario() {
+    public Long getId_usuario() {
         return id_usuario;
     }
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
     
-    public void setLagradouro(String lagradouro) {
-        this.lagradouro = lagradouro;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
     
@@ -105,11 +105,11 @@ public abstract class Endereco {
         this.bairro = bairro;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setId_usuario(long id_usuario) {
+    public void setId_usuario(Long id_usuario) {
         this.id_usuario = id_usuario;
     }
 
@@ -119,6 +119,26 @@ public abstract class Endereco {
 
     public void setPrincipal(boolean principal) {
         this.principal = principal;
+    }
+    
+    public String getLogradouroExibicao(){
+        return getTipo()+" "+this.getLogradouro();
+    }
+    public String getLogradouroCompleto(){
+        List<String> result = new ArrayList<>();
+        result.add(getTipo());
+        result.add(" ");
+        result.add(this.getLogradouro());
+        result.add(", nº ");
+        result.add(this.getNumero());
+        if (this.getComplemento() !=null &&this.getComplemento().length()>0){
+            result.add(", ");
+            result.add(this.getComplemento());
+        }
+        
+        result.add(", ");
+        result.add(this.getBairro());
+        return String.join("",result);
     }
     
     

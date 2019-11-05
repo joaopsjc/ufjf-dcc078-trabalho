@@ -29,7 +29,7 @@ public class FormDetalheEnderecoAction implements Action{
             Long id = Long.parseLong(request.getParameter("id"));
             Endereco endereco = EnderecoDAO.getInstance().getById(id);
             request.setAttribute("currentEndereco",endereco);
-            request.getRequestDispatcher("Empresa/detalheEmpresa.jsp").forward(request, response);
+            request.getRequestDispatcher("Usuario/detalheEndereco.jsp").forward(request, response);
         } catch(SQLException ex){
             response.sendRedirect("erro.jsp");
         } catch (ClassNotFoundException | ServletException ex) {

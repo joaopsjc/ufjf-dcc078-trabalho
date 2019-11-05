@@ -41,7 +41,7 @@
                             <c:forEach items="${listEnderecos}" var="endereco">
                                 <tr>
                                     <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${endereco.getId()}" />" name="check-grid"></td>
-                                    <td><c:out value="${endereco.getLogradouro()}" /></td>
+                                    <td><c:out value="${endereco.getLogradouroExibicao()}" /></td>
                                     <td><c:out value="${endereco.getNumero()}" /></td>
                                     <td><c:out value="${endereco.getBairro()}" /></td>                                    
                                     <c:choose>

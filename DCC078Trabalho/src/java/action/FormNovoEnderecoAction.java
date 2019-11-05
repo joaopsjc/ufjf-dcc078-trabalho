@@ -26,7 +26,7 @@ public class FormNovoEnderecoAction implements Action{
         try {
             Endereco endereco = EnderecoFactory.create("Rua");
             request.setAttribute("currentEndereco", endereco);
-            request.getRequestDispatcher("Empresa/detalheEmpresa.jsp").forward(request, response);
+            request.getRequestDispatcher("Usuario/detalheEndereco.jsp").forward(request, response);
         } catch (ServletException ex) {
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
         }
