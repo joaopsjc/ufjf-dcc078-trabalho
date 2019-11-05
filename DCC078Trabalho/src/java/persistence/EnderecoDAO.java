@@ -39,7 +39,7 @@ public class EnderecoDAO  extends DAO{
             st.setString(6,endereco.getCidade());
             st.setString(7,endereco.getEstado());
             st.setString(8,endereco.getTipo());
-            st.setLong(9,endereco.getCep());
+            st.setString(9,endereco.getCep());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -70,7 +70,7 @@ public class EnderecoDAO  extends DAO{
                 String cidade = rs.getString("cidade");
                 String estado = rs.getString("estado");
                 String tipoEndereco = rs.getString("tipoEndereco");
-                Long cep = rs.getLong("cep");
+                String cep = rs.getString("cep");
                 endereco = EnderecoFactory.create(tipoEndereco);
                 endereco.setId(id_endereco);
                 endereco.setNumero(número);
@@ -109,7 +109,7 @@ public class EnderecoDAO  extends DAO{
                 String cidade = rs.getString("cidade");
                 String estado = rs.getString("estado");
                 String tipoEndereco = rs.getString("tipoEndereco");
-                Long cep = rs.getLong("cep");
+                String cep = rs.getString("cep");
                 Endereco novoEndereco = EnderecoFactory.create(tipoEndereco);
                 novoEndereco.setId(id);
                 novoEndereco.setNumero(número);
@@ -143,7 +143,7 @@ public class EnderecoDAO  extends DAO{
             st.setString(6,endereco.getCidade());
             st.setString(7,endereco.getEstado());
             st.setString(8,endereco.getTipo());
-            st.setLong(9,endereco.getCep());
+            st.setString(9,endereco.getCep());
             st.setLong(10,endereco.getId());
             int affectedRows = st.executeUpdate();
 

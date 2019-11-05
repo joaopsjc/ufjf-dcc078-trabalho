@@ -15,7 +15,7 @@ import model.abstratos.Endereco;
 public class EnderecoFactory {
     public static Endereco create(String tipoContato){
         Endereco enderecoObject;
-        String nomeClasse = "model.extensores."+ tipoContato;
+        String nomeClasse = "model.extensores.Endereco"+ tipoContato;
         Class classe;
         Object objeto;
         try{

@@ -11,16 +11,17 @@ package model.abstratos;
  */
 public abstract class Endereco {
     private int numero;
-    private long cep,
+    private long 
             id,
             id_usuario;
     private String lagradouro,
             complemento,
             bairro,
             estado,
-            cidade;
+            cidade,
+            cep;
 
-    public Endereco(int numero, long cep, long id, String lagradouro, String complemento, String bairro, String estado, String cidade) {
+    public Endereco(int numero, String cep, long id, String lagradouro, String complemento, String bairro, String estado, String cidade) {
         this.numero = numero;
         this.cep = cep;
         this.id = id;
@@ -30,6 +31,8 @@ public abstract class Endereco {
         this.estado = estado;
         this.cidade = cidade;
     }   
+    public Endereco(){
+    }
 
     public String getLogradouro() {
         return lagradouro;
@@ -51,7 +54,7 @@ public abstract class Endereco {
         return estado;
     }
 
-    public long getCep() {
+    public String getCep() {
         return cep;
     }
 
@@ -92,7 +95,7 @@ public abstract class Endereco {
         this.estado = estado;
     }
 
-    public void setCep(long cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
