@@ -31,22 +31,35 @@ public class ProdutoCombo extends Produto{
         super(id, nome, descricao, quantidade, preco, id_empresa);
         produtos = new ArrayList<>();
     }
+    
+    public ProdutoCombo() {
+        produtos = new ArrayList<>();
+    }
+    
     @Override
     public String getCategoria()
     {
         return "Combo";
     }
-    public ProdutoCombo() {
-        produtos = new ArrayList<>();
+    
+    public int getCountProdutos()
+    {
+        return produtos.size();
     }
 
     public List<Produto> getProdutos() {
         return produtos;
     }
+
+    public void setListaProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+    
     public void addProduto(Produto novoProduto)
     {
         produtos.add(novoProduto);
     }
+    
     public void removeProduto(Produto novoProduto)
     {
         produtos.remove(novoProduto);

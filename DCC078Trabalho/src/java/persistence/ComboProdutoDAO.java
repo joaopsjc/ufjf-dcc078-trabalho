@@ -5,7 +5,6 @@
  */
 package persistence;
 
-import controller.PedidoEstadoFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,17 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Pedido;
 import model.abstratos.Produto;
-import model.abstratos.Endereco;
-import model.abstratos.Usuario;
 import controller.ProdutoEstadoFactory;
 import controller.ProdutoFactory;
-import controller.PromocaoFactory;
 import java.util.Iterator;
 import model.extensores.ProdutoCombo;
-import model.interfaces.PedidoEstado;
-import model.interfaces.Promocao;
 
 /**
  *

@@ -443,7 +443,8 @@ UF.Empresa.AdicionarProdutosCombo = function(){
 	url : "FrontController?action=AdicionarProdutosCombo",	
 	type : 'post',	
 	data : {
-            selectedIds: selectedIds.join(',')
+            selectedIds: selectedIds.join(','),
+            id_combo: $('[name=id]').val()
 	},	
 	complete  : function(response){	
             UF.Alert.CloseLoading();
