@@ -106,6 +106,7 @@ public class Helper {
         sess.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");
         Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(user.getId());
         user.setEnderecoPrincipal(endereco);
+        sess.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(user.getId()));
     }
 
     

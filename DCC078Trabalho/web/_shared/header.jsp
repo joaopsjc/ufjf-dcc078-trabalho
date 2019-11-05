@@ -70,7 +70,7 @@
                             <li>
                                 <a id="link-carrinho" class="count-info" href="FrontController?action=ListaPedidosPendentesEmpresa">
                                     <i class="fa fa-bell" title="Pedidos pendentes"></i>
-                                    <span class="label label-danger">0</span>
+                                    <span class="label label-danger"><c:out value="${countPedidosPendentesEmpresa}" /></span>
                                 </a>
                             </li>
                         </c:when>      

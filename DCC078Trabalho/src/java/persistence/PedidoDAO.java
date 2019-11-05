@@ -435,5 +435,9 @@ public class PedidoDAO  extends DAO{
         for(Iterator i = pedidos.iterator();i.hasNext();)
             updateEstado((Pedido)i.next());
     }
+
+    public int getCountPedidosPendentes(Long id_empresa) throws SQLException, ClassNotFoundException {
+        return getPedidosPendentesByEmpresaId(id_empresa).size();
+    }
     
 }

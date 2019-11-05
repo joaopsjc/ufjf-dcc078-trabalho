@@ -65,4 +65,8 @@ public class HelperPedido {
         }
         PedidoDAO.getInstance().updateEstado(pedidos);
     }
+    
+    public int getCountPedidosPendentesEmpresa(Long id_empresa) throws SQLException, ClassNotFoundException{
+        return PedidoDAO.getInstance().getCountPedidosPendentes(id_empresa);
+    }
 }
