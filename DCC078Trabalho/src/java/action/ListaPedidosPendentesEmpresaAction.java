@@ -34,10 +34,10 @@ public class ListaPedidosPendentesEmpresaAction  implements Action{
             request.setAttribute("listPedidos", listaPedidos);
             request.getRequestDispatcher("Pedido/listaPedidosPendentesEmpresa.jsp").forward(request, response);
         } catch(SQLException ex){
-            Logger.getLogger(ListaPedidosClienteAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListaPedidosPendentesEmpresaAction.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("erro.jsp");
         } catch (ClassNotFoundException | ServletException ex) {
-            Logger.getLogger(ListaPedidosClienteAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListaPedidosPendentesEmpresaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
