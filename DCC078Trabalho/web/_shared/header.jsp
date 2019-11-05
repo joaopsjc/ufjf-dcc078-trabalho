@@ -52,27 +52,37 @@
                 <ul class="nav navbar-top-links navbar-right">
 
                     
-                    <c:if test = "${loggedUser.getTipo() == 'Cliente'}">
-                        
-                        <li><a href="FrontController?action=ResumoEnderecos">
+                    
+                    <c:choose>
+                        <c:when test = "${loggedUser.getTipo() == 'Cliente'}">
+                            <li><a href="FrontController?action=ResumoEnderecos">
                                 <i class="fa fa-truck" title="Endereços"></i><span class="m-r-sm text-muted welcome-message">Entregar em: <c:out value="${loggedUser.getEnderecoPrincipal().getLogradouroCompleto()}" /></span>
                             </a>
-                        </li>
-                        <li>
-                            <a id="link-carrinho" class="count-info" href="FrontController?action=ResumoCarrinho">
-                                <i class="fa fa-shopping-cart" title="Carrinho"></i>
-                                <span class="label label-danger"><c:out value="${loggedUser.getQtdCarrinho()}" /></span>
-                            </a>
-                        </li>
-                    </c:if>
-                    <c:if test = "${loggedUser.getTipo() == 'Entregador'}">
-                        <li>
-                            <a id="link-entregas" class="count-info" href="FrontController?action=Home">
-                                <i class="fa fa-truck" title="Entregas"></i>
-                                <span class="label label-danger"></span>
-                            </a>
-                        </li>
-                    </c:if>
+                            </li>
+                            <li>
+                                <a id="link-carrinho" class="count-info" href="FrontController?action=ResumoCarrinho">
+                                    <i class="fa fa-shopping-cart" title="Carrinho"></i>
+                                    <span class="label label-danger"><c:out value="${loggedUser.getQtdCarrinho()}" /></span>
+                                </a>
+                            </li>
+                        </c:when>
+                        <c:when test = "${loggedUser.getTipo() == 'Empresa'}">
+                            <li>
+                                <a id="link-carrinho" class="count-info" href="FrontController?action=ListaPedidosPendentesEmpresa">
+                                    <i class="fa fa-bell" title="Pedidos pendentes"></i>
+                                    <span class="label label-danger">0</span>
+                                </a>
+                            </li>
+                        </c:when>      
+                        <c:otherwise>
+                            <li>
+                                <a id="link-entregas" class="count-info" href="FrontController?action=Home">
+                                    <i class="fa fa-truck" title="Entregas"></i>
+                                    <span class="label label-danger"></span>
+                                </a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
                     <li>
                         
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">

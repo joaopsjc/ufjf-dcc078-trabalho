@@ -7,6 +7,7 @@ package action;
 
 import controller.Action;
 import helper.Helper;
+import helper.HelperPedido;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class RealizarPedidoCarrinhoAction implements Action{
             pedido.setEstado(new PedidoAguardandoRestaurante());
             pedido.setCliente(Helper.getInstance().getLoggedUser(request));
             pedido.setEndereco();
-            List<Pedido> pedidos = Helper.getInstance().dividePedidoPorEmpresa(pedido);
+            List<Pedido> pedidos = HelperPedido.getInstance().dividePedidoPorEmpresa(pedido);
             PedidoDAO.getInstance().insert(pedidos);
             Helper.getInstance().zeraCarrinhoByClienteId(request);
             response.setContentType("application/json");

@@ -378,6 +378,61 @@ UF.Empresa.VisualizarProdutos = function(element){
     form.submit();
 }
 
+UF.Empresa.AceitarPedido = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("pedidos-pendentes-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um pedido!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=IniciarPreparoPedidos",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Preparo do(s) pedido(s) iniciado(s)",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=Home";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });   
+}
+
+UF.Empresa.RejeitarPedido = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("pedidos-pendentes-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um pedido!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=CancelarPedidos",
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Pedido(s) cancelado(s)!",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=Home";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });   
+}
+
+
 UF.RegisterNamespace("Pedido");
 
 UF.Pedido.AceitarPedido = function()
@@ -463,7 +518,3 @@ UF.Endereco.TornarPrincipal = function(element){
     });   
 }
 
-/*
-UF.Endereco.EditarEndereco(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
-                            <button onclick="UF.Endereco.ExcluirEndereco(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
-                            <button onclick="UF.Endereco.TornarPrincipal(this) */

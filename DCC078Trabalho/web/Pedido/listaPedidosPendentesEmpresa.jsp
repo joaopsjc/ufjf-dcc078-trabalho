@@ -7,7 +7,7 @@
         <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Pedidos </h5>
+                        <h5>Pedidos pendentes</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -15,10 +15,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <table id="produto-grid-resumo"class="table table-bordered">
+                        <div class="row toolbar-crud-grid">
+                            <button onclick="UF.Empresa.AceitarPedido(this)" class="btn btn-success" type="button"><i class="fa fa-check"></i> Aceitar</button>
+                            <button onclick="UF.Empresa.RejeitarPedido(this)" class="btn btn-danger" type="button"><i class="fa fa-times"></i> Rejeitar</button>
+                        </div>
+                        <table id="pedidos-pendentes-grid-resumo"class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="table-th-check"><input type="checkbox"  class="i-checks" id="pedidos-pendentes-grid-resumo-check-all" name="check-grid"></th>
                                 <th>Restaurante</th>
                                 <th>Cliente</th>
                                 <th>Entregador</th>
@@ -30,7 +34,7 @@
                             <tbody>
                             <c:forEach items="${listPedidos}" var="pedido">
                                 <tr>
-                                    <td><c:out value="${pedido.getId()}" /></td>
+                                    <td><input type="checkbox"  class="i-checks" data-id="<c:out value="${pedido.getId()}" />" name="check-grid"></td>
                                     <td><c:out value="${pedido.getEmpresa().getNome()}" /></td>
                                     <td><c:out value="${pedido.getCliente().getNome()}" /></td>
                                     <td><c:out value="${pedido.getEntregador().getNome()}" /></td>
@@ -55,6 +59,6 @@
                 radioClass: 'iradio_square-green',
             }); 
             
-            UF.Helpers.SetCheckAllGrid('produto-grid-resumo');
+            UF.Helpers.SetCheckAllGrid('pedidos-pendentes-grid-resumo');
         });
 </script>

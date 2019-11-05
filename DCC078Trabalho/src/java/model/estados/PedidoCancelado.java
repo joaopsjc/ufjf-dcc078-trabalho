@@ -21,7 +21,7 @@ public class PedidoCancelado implements PedidoEstado{
         
     @Override
     public String getNome() {
-        return "Concluido";
+        return "Cancelado";
     }
     
     @Override
