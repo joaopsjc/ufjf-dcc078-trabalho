@@ -27,6 +27,8 @@ public abstract class Usuario {
     private final List<Pedido> pedidos;
     private List<Produto> produtos;
     private Pedido carrinho;
+    
+    private Endereco enderecoPrincipal;
 
     public Usuario(){
         dadosBancarios = new ArrayList<>();
@@ -213,5 +215,15 @@ public abstract class Usuario {
     }
 
     public abstract String getQtdCarrinho();
+
+    public Endereco getEnderecoPrincipal() {
+        return enderecoPrincipal;
+    }
+
+    public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
+    }
+    
+    
     
 }

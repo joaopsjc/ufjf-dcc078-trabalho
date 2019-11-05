@@ -77,6 +77,7 @@ public class EnderecoDAO  extends DAO{
                 String tipoEndereco = rs.getString("tipoEndereco");
                 String cep = rs.getString("cep");
                 boolean isPrincipal = rs.getInt("isPrincipal")==1;
+                Long id_usuario = rs.getLong("id_usuario");
                 endereco = EnderecoFactory.create(tipoEndereco);
                 endereco.setId(id_endereco);
                 endereco.setNumero(numero);
@@ -87,6 +88,7 @@ public class EnderecoDAO  extends DAO{
                 endereco.setEstado(estado);
                 endereco.setCep(cep);
                 endereco.setPrincipal(isPrincipal);
+                endereco.setId_usuario(id_usuario);
             }
         } catch(SQLException e) {
             throw e;
@@ -128,6 +130,7 @@ public class EnderecoDAO  extends DAO{
                 novoEndereco.setEstado(estado);
                 novoEndereco.setCep(cep);
                 novoEndereco.setPrincipal(isPrincipal);
+                novoEndereco.setId_usuario(id_usuario);
                 enderecos.add(novoEndereco);
             }
         } catch(SQLException e) {
@@ -217,6 +220,48 @@ public class EnderecoDAO  extends DAO{
         } finally {
             closeResources(conn, st);
         }
+    }
+
+    public Endereco getPrincipalByUserId(Long id_usuario) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        Endereco endereco = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from endereco where isPrincipal=1 and id_usuario="+id_usuario);
+
+            if (rs.next())
+            {
+                String numero = rs.getString("numero");
+                String complemento = rs.getString("complemento");
+                String logradouro = rs.getString("logradouro");
+                String bairro = rs.getString("bairro");
+                String cidade = rs.getString("cidade");
+                String estado = rs.getString("estado");
+                String tipoEndereco = rs.getString("tipoEndereco");
+                String cep = rs.getString("cep");
+                boolean isPrincipal = rs.getInt("isPrincipal")==1;
+                Long id_endereco = rs.getLong("id");
+                endereco = EnderecoFactory.create(tipoEndereco);
+                endereco.setId(id_endereco);
+                endereco.setNumero(numero);
+                endereco.setComplemento(complemento);
+                endereco.setLogradouro(logradouro);
+                endereco.setBairro(bairro);
+                endereco.setCidade(cidade);
+                endereco.setEstado(estado);
+                endereco.setCep(cep);
+                endereco.setPrincipal(isPrincipal);
+                endereco.setId_usuario(id_usuario);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return endereco;
     }
 
 }

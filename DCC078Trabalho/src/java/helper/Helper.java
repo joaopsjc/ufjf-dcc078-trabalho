@@ -19,9 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.Pedido;
 import model.PedidoProduto;
+import model.abstratos.Endereco;
 import model.abstratos.Produto;
 import model.abstratos.Usuario;
 import model.extensores.Empresa;
+import persistence.EnderecoDAO;
 import persistence.UsuarioDAO;
 
 /**
@@ -114,6 +116,21 @@ public class Helper {
         List<Pedido> result = new ArrayList<>(pedidosPorEmpresa.values());
         
         return result;
+    }
+    
+    public void setDynamicInfoLoggedUser(HttpServletRequest request) throws SQLException, ClassNotFoundException{
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession sess = httpRequest.getSession(false);
+
+        if (sess == null)
+            return;
+        
+        Usuario user = (Usuario)sess.getAttribute("loggedUser");
+        if (user == null)
+            return;
+        sess.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");
+        Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(user.getId());
+        user.setEnderecoPrincipal(endereco);
     }
     
 }
