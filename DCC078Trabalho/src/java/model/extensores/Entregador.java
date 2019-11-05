@@ -5,12 +5,14 @@
  */
 package model.extensores;
 
+import helper.HelperPedido;
 import java.sql.SQLException;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
 import java.util.List;
 import model.DadosBancarios;
+import model.EntregadorChainResponsibility;
 import model.Pedido;
 import persistence.PedidoDAO;
 
@@ -21,7 +23,6 @@ import persistence.PedidoDAO;
 public class Entregador extends Usuario {
     private Entregador proxEntregador;
     private int avaliacao;
-    private boolean disponivel;
     private Pedido pedidoDisponivel;
 
     public Entregador(){
@@ -32,7 +33,6 @@ public class Entregador extends Usuario {
         super(id,documento, nome, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        disponivel = false;
         pedidoDisponivel=null;
 
     }
@@ -41,7 +41,6 @@ public class Entregador extends Usuario {
         super(id,documento, nome, login, dadosBancarios, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        disponivel = false;
         pedidoDisponivel=null;
     }
 
@@ -49,7 +48,6 @@ public class Entregador extends Usuario {
         super(id,documento, nome, login, senha, enderecos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        disponivel = false;
         pedidoDisponivel=null;
     }
 
@@ -57,7 +55,6 @@ public class Entregador extends Usuario {
         super(id,documento, nome, contatos, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        disponivel = false;
         pedidoDisponivel=null;
     }
 
@@ -65,7 +62,6 @@ public class Entregador extends Usuario {
         super(id,documento, pedidos, nome, login, senha);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        disponivel = false;
         pedidoDisponivel=null;
     }
 
@@ -73,7 +69,6 @@ public class Entregador extends Usuario {
         super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
-        disponivel = false;
         pedidoDisponivel=null;
     }
 
@@ -81,44 +76,6 @@ public class Entregador extends Usuario {
         this.proxEntregador = proxEntregador;
     }
     
-    public void novaReponsabilidade(Pedido novoPedido) {
-        if(disponivel)
-        {
-            disponivel=false;
-            pedidoDisponivel = novoPedido;
-        }
-        else
-        {
-            getProxEntregador().novaReponsabilidade(novoPedido);
-        }
-    }
-    public void aceitarPedido() throws SQLException, ClassNotFoundException
-    {
-        if(pedidoDisponivel!=null)
-        {
-            super.getPedidos().add(pedidoDisponivel);
-            pedidoDisponivel.getEstado().aCaminho(pedidoDisponivel);
-            PedidoDAO.getInstance().updateEstado(pedidoDisponivel);
-            pedidoDisponivel=null;
-            disponivel=true;
-        }
-    }
-    public void rejeitarPedido() {
-        if(pedidoDisponivel!=null)
-        {
-            getProxEntregador().novaReponsabilidade(pedidoDisponivel);
-            pedidoDisponivel=null;
-            disponivel=true;
-        }
-    }
-
-    public void setDisponivel() {
-        this.disponivel = true;
-    }
-    
-    public void setNotDisponivel() {
-        this.disponivel = false;
-    }
     
     public void setAvaliacao(int avaliacao) {
         this.avaliacao = avaliacao;
@@ -127,11 +84,7 @@ public class Entregador extends Usuario {
     public Entregador getProxEntregador() {
         return proxEntregador;
     }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
+    
     public int getAvaliacao() {
         return avaliacao;
     }
@@ -149,6 +102,19 @@ public class Entregador extends Usuario {
     @Override
     public String getQtdCarrinho() {
         return "";
+    }
+
+    public void repassarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
+        getPedidos().removeAll(pedidos);
+        Entregador e = getProxEntregador();
+        if (e.getId().equals(getId()))
+            EntregadorChainResponsibility.getInstance().populaListaPendente();
+        else
+            e.addPedido(pedidos);
+    }
+    
+    public void aceitarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException{
+        PedidoDAO.getInstance().setEntregadorPedidos(pedidos,this);
     }
     
 }

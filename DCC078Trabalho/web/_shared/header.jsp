@@ -76,9 +76,9 @@
                         </c:when>      
                         <c:otherwise>
                             <li>
-                                <a id="link-entregas" class="count-info" href="FrontController?action=Home">
-                                    <i class="fa fa-truck" title="Entregas"></i>
-                                    <span class="label label-danger"></span>
+                                <a id="link-entregas" class="count-info" href="FrontController?action=ListaPedidosPendentesEntregador">
+                                    <i class="fa fa-truck" title="Entregas pendentes"></i>
+                                    <span class="label label-danger"><c:out value="${countPedidosPendentesEntregador}" /></span>
                                 </a>
                             </li>
                         </c:otherwise>

@@ -544,3 +544,59 @@ UF.Endereco.TornarPrincipal = function(element){
     });   
 }
 
+
+UF.RegisterNamespace("Entregador")
+
+UF.Entregador.AceitarPedido = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("pedidos-pendentes-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um pedido!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=AceitarEntregaPedido",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Pedido(s) aceito(s) com sucesso",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ListaPedidosPendentesEntregador";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });   
+}
+
+UF.Entregador.RejeitarPedido = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("pedidos-pendentes-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um pedido!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=DispensarEntregaPedido",
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Pedido(s) rejeitado(s) com sucesso!",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ListaPedidosPendentesEntregador";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });   
+}

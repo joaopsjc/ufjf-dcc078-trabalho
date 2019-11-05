@@ -7,6 +7,7 @@ package model.abstratos;
 
 import model.interfaces.Contato;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.DadosBancarios;
 import model.Pedido;
@@ -203,6 +204,11 @@ public abstract class Usuario {
         pedidos.add(novoPedido);
     }
 
+    public void addPedido(List<Pedido> listaPedidosPendentes) {
+        pedidos.addAll(listaPedidosPendentes);
+    }
+    
+
     public List<Produto> getProdutos() {
         return produtos;
     }
@@ -229,6 +235,16 @@ public abstract class Usuario {
 
     public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
         this.enderecoPrincipal = enderecoPrincipal;
+    }
+
+    public List<Pedido> getPedidos(List<String> idsList) {
+        List<Pedido> result = new ArrayList<>();
+        for(Iterator i = getPedidos().iterator(); i.hasNext();){
+            Pedido p = (Pedido) i.next();
+            if (idsList.contains(p.getId().toString()))
+                result.add(p);                   
+        }
+        return result;
     }
     
     

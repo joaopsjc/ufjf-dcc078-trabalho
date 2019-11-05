@@ -5,6 +5,7 @@
  */
 package model.estados;
 
+import helper.HelperPedido;
 import model.Pedido;
 import model.interfaces.PedidoEstado;
 
@@ -43,6 +44,7 @@ public class PedidoAguardandoRestaurante implements PedidoEstado {
     @Override
     public boolean emPreparo(Pedido pedido) {
         pedido.setEstado(new PedidoEmPreparo());
+        HelperPedido.getInstance().adicionarPedidoListaPendentesEntregador(pedido);
         return true;
     }
 

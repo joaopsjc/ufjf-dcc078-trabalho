@@ -29,7 +29,13 @@ public class RemoveEntregadorFromChainResponsibilityAction implements Action{
             String url = request.getHeader("referer");
             
             Entregador entregadorAdiciona = (Entregador) Helper.getInstance().getLoggedUser(request);
-            EntregadorChainResponsibility.getInstance().removeFromChain(entregadorAdiciona);
+            try {
+                EntregadorChainResponsibility.getInstance().removeFromChain(entregadorAdiciona);
+            } catch (SQLException ex) {
+                Logger.getLogger(RemoveEntregadorFromChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RemoveEntregadorFromChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.getRequestDispatcher(url).forward(request, response);
             
         } catch (ServletException ex) {

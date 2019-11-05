@@ -103,10 +103,30 @@ public class Helper {
         Usuario user = (Usuario)sess.getAttribute("loggedUser");
         if (user == null)
             return;
-        sess.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");
+        sess.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");       
+        
+        switch(user.getTipo()){
+            case "Entregador":
+                setDynamicInfoEntregador(sess,user);
+                break;
+            case "Empresa":
+                setDynamicInfoEmpresa(sess,user);
+                break;
+            case "Cliente":
+                setDynamicInfoCliente(sess,user);
+                break;
+        }
+    }
+    
+    private void setDynamicInfoEntregador(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
+        sess.setAttribute("countPedidosPendentesEntregador", HelperPedido.getInstance().getCountPedidosPendentesEntregador(user.getId()));
+    }
+    private void setDynamicInfoEmpresa(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
+        sess.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(user.getId()));
+    }
+    private void setDynamicInfoCliente(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
         Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(user.getId());
         user.setEnderecoPrincipal(endereco);
-        sess.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(user.getId()));
     }
 
     

@@ -10,9 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.EntregadorChainResponsibility;
 import model.Pedido;
 import model.PedidoProduto;
+import model.abstratos.Usuario;
 import model.extensores.Empresa;
+import model.extensores.Entregador;
 import persistence.PedidoDAO;
 import persistence.UsuarioDAO;
 
@@ -69,4 +74,34 @@ public class HelperPedido {
     public int getCountPedidosPendentesEmpresa(Long id_empresa) throws SQLException, ClassNotFoundException{
         return PedidoDAO.getInstance().getCountPedidosPendentes(id_empresa);
     }
+
+    public void adicionarPedidoListaPendentesEntregador(Pedido pedido) {
+        Usuario usuario = EntregadorChainResponsibility.getInstance().getPrimeiroEntregador();
+        if (usuario!=null)
+            usuario.addPedido(pedido);
+        else
+            EntregadorChainResponsibility.getInstance().addPedidoListaPendente(pedido);
+    }
+
+    public int getCountPedidosPendentesEntregador(Long id_entregador) throws SQLException, ClassNotFoundException {
+        Usuario entregador = EntregadorChainResponsibility.getInstance().isInChain(id_entregador);
+        return entregador.getPedidos().size();
+    }
+
+    public void dispensarEntrega(List<Pedido> pedidos, Entregador entregador) {
+        try {
+            entregador.repassarPedidos(pedidos);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(HelperPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void aceitarEntrega(List<Pedido> pedidos, Entregador entregador) {
+        try {
+            entregador.aceitarPedidos(pedidos);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(HelperPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
 }

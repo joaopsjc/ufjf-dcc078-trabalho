@@ -419,6 +419,44 @@ public class PedidoDAO  extends DAO{
         return pedidos;
     }
     
+    
+    public List<Pedido> getPedidosPendentesEntregador() throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from pedido where (estado='AguardandoEntregador' or estado='EmPreparo')"+
+                    " and id_entregador is null");
+
+            while (rs.next())
+            {
+                Long id = rs.getLong("id");
+                Long id_cliente = rs.getLong("id_cliente");
+                Long id_endereco = rs.getLong("id_endereco");
+                Long id_empresa = rs.getLong("id_empresa");
+                Double frete = rs.getDouble("frete");
+                String estado = rs.getString("estado");
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
+                PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
+
+                Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
+                novoPedido.setEmpresa(empresa);
+                novoPedido.setCliente(cliente);
+                pedidos.add(novoPedido);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return pedidos;
+    }
+    
     public List<Pedido> getByListId(List<String> ids) throws SQLException, ClassNotFoundException  {
         List<Pedido> listPedidos = new ArrayList<>();
         for(Iterator i = ids.iterator();i.hasNext();)
@@ -439,5 +477,39 @@ public class PedidoDAO  extends DAO{
     public int getCountPedidosPendentes(Long id_empresa) throws SQLException, ClassNotFoundException {
         return getPedidosPendentesByEmpresaId(id_empresa).size();
     }
+
+    public int getCountPedidosPendentesEntregador() throws SQLException, ClassNotFoundException {
+        return getPedidosPendentesEntregador().size();
+    }
+
+    public void setEntregadorPedido(Pedido pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update pedido set id_entregador=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,pedido.getEntregador().getId());
+            st.setLong(2,pedido.getId());
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update entregador failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    
+    public void setEntregadorPedidos(List<Pedido> pedidos, Usuario user) throws SQLException, ClassNotFoundException {
+        for(Iterator i = pedidos.iterator(); i.hasNext();){
+            Pedido pedido = (Pedido) i.next();
+            pedido.setEntregador(user);
+            setEntregadorPedido(pedido);
+        }
+    }
+
     
 }
