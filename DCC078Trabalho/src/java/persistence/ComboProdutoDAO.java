@@ -21,7 +21,6 @@ import controller.ProdutoEstadoFactory;
 import controller.ProdutoFactory;
 import controller.PromocaoFactory;
 import java.util.Iterator;
-import model.PedidoProduto;
 import model.extensores.ProdutoCombo;
 import model.interfaces.PedidoEstado;
 import model.interfaces.Promocao;
@@ -108,10 +107,10 @@ public class ComboProdutoDAO  extends DAO{
         }
     }
     
-    public List<PedidoProduto> getAllComboProdutoByComboId(Long id_combo) throws SQLException, ClassNotFoundException{
+    public List<Produto> getNotAllProdutosByComboId(Long id_combo) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
-        List<PedidoProduto> produtos = new ArrayList<>();
+        List<Produto> produtos = new ArrayList<>();
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
@@ -120,7 +119,7 @@ public class ComboProdutoDAO  extends DAO{
                     "SELECT * from produto P "
                             + "INNER JOIN comboProduto CP "
                             + "ON P.id = CP.id_produto "
-                            + "WHERE CP.id_combo = "+id_combo);
+                            + "WHERE CP.id_combo != "+id_combo);
             while (rs.next())
             {
                 Long id = rs.getLong("id");
@@ -129,12 +128,8 @@ public class ComboProdutoDAO  extends DAO{
                 String categoria = rs.getString("categoria");
                 String descricao = rs.getString("descricao");
                 int quantidadeProduto = rs.getInt("P.quantidade");
-                int quantidadePedido = rs.getInt("PP.quantidade");
                 double preco = rs.getDouble("preco");
                 String estado = rs.getString("estado");
-                String tipoPromocao = rs.getString("tipoPromocao");
-                
-                Promocao novaPromocao = PromocaoFactory.create(tipoPromocao);
                 
                 Produto novoProduto =  ProdutoFactory.create(categoria);
                 //categoria não é mais um elemento setável, 
@@ -148,10 +143,7 @@ public class ComboProdutoDAO  extends DAO{
                 novoProduto.setPreco(preco);
                 novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
                 
-                PedidoProduto pedidoProduto = new PedidoProduto(quantidadePedido, novoProduto);
-                pedidoProduto.setPromocao(novaPromocao);
-                
-                produtos.add(pedidoProduto);
+                produtos.add(novoProduto);
             }
         } catch(SQLException e) {
             throw e;
@@ -208,10 +200,10 @@ public class ComboProdutoDAO  extends DAO{
     }
     
     //provavelmente nada boa
-    public List<Pedido> getAllComboByProdutoId(Long id_produto) throws SQLException, ClassNotFoundException{
+    public List<ProdutoCombo> getAllComboByProdutoId(Long id_produto) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
-        List<Pedido> pedidos = new ArrayList<>();
+        List<ProdutoCombo> combos = new ArrayList<>();
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
@@ -224,31 +216,32 @@ public class ComboProdutoDAO  extends DAO{
             while (rs.next())
             {
                 Long id = rs.getLong("id");
-                Long id_cliente = rs.getLong("id_cliente");
-                Long id_entregador = rs.getLong("id_entregador");
                 Long id_empresa = rs.getLong("id_empresa");
-                Long id_endereco = rs.getLong("id_endereco");
-                Double frete = rs.getDouble("frete");
+                String nome = rs.getString("nome");
+                String categoria = rs.getString("categoria");
+                String descricao = rs.getString("descricao");
+                int quantidade = rs.getInt("quantidade");
+                double preco = rs.getDouble("preco");
                 String estado = rs.getString("estado");
                 
-                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
-                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
-                Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
-                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
-                PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
+                ProdutoCombo novoCombo = (ProdutoCombo) ProdutoFactory.create(estado);
+                novoCombo.setId(id);
+                novoCombo.setNome(nome);
+                novoCombo.setId_empresa(id_empresa);
+                novoCombo.setDescricao(descricao);
+                novoCombo.setQuantidade(quantidade);
+                novoCombo.setPreco(preco);
+                novoCombo.setEstado(ProdutoEstadoFactory.create(estado));
                 
-                Pedido novoPedido = new Pedido(id, endereco, frete,pedidoEstado);
-                novoPedido.setCliente(cliente);
-                novoPedido.setEntregador(entregador);
-                novoPedido.setEmpresa(empresa);
-                pedidos.add(novoPedido);
+                
+                combos.add(novoCombo);
             }
         } catch(SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
-        return pedidos;
+        return combos;
     }
     
     public void insert(ProdutoCombo combo) throws SQLException, ClassNotFoundException{
