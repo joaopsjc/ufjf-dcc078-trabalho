@@ -18,6 +18,7 @@ import java.util.List;
 import model.Pedido;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
+import model.extensores.Cliente;
 import model.extensores.Entregador;
 import model.interfaces.PedidoEstado;
 
@@ -97,11 +98,13 @@ public class PedidoDAO  extends DAO{
                 Long id_endereco = rs.getLong("id_endereco");
                 Double frete = rs.getDouble("frete");
                 String estado = rs.getString("estado");
-                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                Cliente cliente = (Cliente) UsuarioDAO.getInstance().getById(id_cliente);
                 Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
                 Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
+                
+                pedido.addObserver(cliente);
                 
                 pedido = new Pedido(id_pedido, endereco, frete,pedidoEstado);
                 pedido.setCliente(cliente);
