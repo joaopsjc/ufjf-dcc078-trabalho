@@ -26,8 +26,15 @@ public class PedidoAguardandoEntregador implements PedidoEstado{
     
     @Override
     public boolean aCaminho(Pedido pedido) {
-        pedido.setEstado(new PedidoACaminho());
-        return true;
+        if(pedido.getEntregador()!=null)
+        {
+            pedido.setEstado(new PedidoACaminho());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     public boolean cancelado(Pedido pedido) {
