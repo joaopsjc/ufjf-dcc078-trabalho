@@ -99,7 +99,7 @@ public class Cliente extends Usuario implements Observer {
                  props.put("mail.smtp.host",host);
                  props.put("mail.smtp.auth", "true");
 
-                 Session session = Session.getDefaultInstance(props,
+                 Session session = Session.getInstance(props,
                   new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                       return new PasswordAuthentication(user,password);
