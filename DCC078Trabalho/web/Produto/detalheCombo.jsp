@@ -90,10 +90,10 @@
                         <div class="row toolbar-crud-grid">
                             <button onclick="UF.Empresa.AdicionarProdutosCombo(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar ao Combo</button>
                         </div>
-                        <table id="produto-grid-resumo"class="table table-bordered">
+                        <table id="produto-grid-adicionar"class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-resumo-check-all" name="check-grid"></th>
+                                        <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-adicionar-check-all" name="check-grid"></th>
                                         <th>Nome</th>
                                         <th>Categoria</th>
                                         <th>Restaurante</th>
@@ -115,12 +115,12 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row toolbar-crud-grid">
-                            <button onclick="" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Remover do Combo</button>
+                            <button onclick="UF.Empresa.RemoverProdutosCombo(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Remover do Combo</button>
                         </div>
-                        <table id="produto-grid-resumo"class="table table-bordered">
+                        <table id="produto-grid-remover"class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-resumo-check-all" name="check-grid2"></th>
+                                        <th class="table-th-check"><input type="checkbox"  class="i-checks" id="produto-grid-remover-check-all" name="check-grid2"></th>
                                         <th>Nome</th>
                                         <th>Categoria</th>
                                         <th>Restaurante</th>
