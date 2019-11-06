@@ -7,6 +7,7 @@ package model.extensores;
 
 import helper.HelperPedido;
 import java.sql.SQLException;
+import java.util.Iterator;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
@@ -114,6 +115,12 @@ public class Entregador extends Usuario {
     }
     
     public void aceitarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException{
+        Iterator<Pedido> iteratorPedidos = pedidos.iterator();
+        while(iteratorPedidos.hasNext())
+        {
+            Pedido pedidoAtual = iteratorPedidos.next();
+            pedidoAtual.getEstado().aCaminho(pedidoAtual);
+        }
         PedidoDAO.getInstance().setEntregadorPedidos(pedidos,this);
     }
     
