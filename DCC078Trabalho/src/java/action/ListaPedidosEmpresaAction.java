@@ -32,7 +32,7 @@ public class ListaPedidosEmpresaAction  implements Action{
             Long id_empresa = usuario.getId();
             List<Pedido> listaPedidos = PedidoDAO.getInstance().getPedidosByEmpresaId(id_empresa);
             request.setAttribute("listPedidos", listaPedidos);
-            request.getRequestDispatcher("Pedido/listaPedidos.jsp").forward(request, response);
+            request.getRequestDispatcher("Pedido/listaPedidosEmpreparoEmpresa.jsp").forward(request, response);
         } catch(SQLException ex){
             Logger.getLogger(ListaPedidosEmpresaAction.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("erro.jsp");

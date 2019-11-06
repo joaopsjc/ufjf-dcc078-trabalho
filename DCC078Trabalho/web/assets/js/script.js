@@ -413,7 +413,7 @@ UF.Empresa.FinalizarPedido = function(element){
     }
     UF.Alert.ShowLoading();
     $.ajax({
-	url : "FrontController?action=FinalizarPedidosEmpresaAction",	
+	url : "FrontController?action=FinalizarPedidosEmpresa",	
 	type : 'post',	
 	data : {
             selectedIds: selectedIds.join(',')

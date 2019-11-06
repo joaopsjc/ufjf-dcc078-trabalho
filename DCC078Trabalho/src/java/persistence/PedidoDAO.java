@@ -104,9 +104,9 @@ public class PedidoDAO  extends DAO{
                 Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
                 PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
                 
-                pedido.addObserver(cliente);
                 
                 pedido = new Pedido(id_pedido, endereco, frete,pedidoEstado);
+                pedido.addObserver(cliente);
                 pedido.setCliente(cliente);
                 pedido.setEmpresa(empresa);
                 pedido.setEntregador(entregador);
