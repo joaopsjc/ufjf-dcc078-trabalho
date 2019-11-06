@@ -138,7 +138,7 @@ public class PedidoProdutoDAO  extends DAO{
             st = conn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                    "SELECT * from produto P "
+                    "SELECT *,P.quantidade as produtoQuantidade from produto P "
                             + "INNER JOIN pedidoProduto PP "
                             + "ON P.id = PP.id_produto "
                             + "WHERE PP.id_pedido = '"+id_pedido+"'");
@@ -149,8 +149,8 @@ public class PedidoProdutoDAO  extends DAO{
                 String nome = rs.getString("nome");
                 String categoria = rs.getString("categoria");
                 String descricao = rs.getString("descricao");
-                int quantidadeProduto = rs.getInt("P.quantidade");
-                int quantidadePedido = rs.getInt("PP.quantidade");
+                int quantidadeProduto = rs.getInt("produtoQuantidade");
+                int quantidadePedido = rs.getInt("quantidade");
                 double preco = rs.getDouble("preco");
                 String estado = rs.getString("estado");
                 String tipoPromocao = rs.getString("tipoPromocao");
@@ -191,7 +191,7 @@ public class PedidoProdutoDAO  extends DAO{
             st = conn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                    "SELECT * from produto P "
+                    "SELECT P.* from produto P "
                             + "INNER JOIN pedidoProduto PP "
                             + "ON P.id = PP.id_produto "
                             + "WHERE PP.id_pedido = '"+id_pedido+"'");
