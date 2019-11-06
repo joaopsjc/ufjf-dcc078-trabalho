@@ -119,7 +119,7 @@ public class ComboProdutoDAO  extends DAO{
                 String nome = rs.getString("nome");
                 String categoria = rs.getString("categoria");
                 String descricao = rs.getString("descricao");
-                int quantidadeProduto = rs.getInt("P.quantidade");
+                int quantidadeProduto = rs.getInt("quantidade");
                 double preco = rs.getDouble("preco");
                 String estado = rs.getString("estado");
                 
