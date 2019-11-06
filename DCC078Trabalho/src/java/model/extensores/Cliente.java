@@ -86,13 +86,13 @@ public class Cliente extends Usuario implements Observer {
             Pedido pedidoAtualizado = (Pedido) pedidoSubject;
             String estado = pedidoAtualizado.getEstado().getNome();
             
-            System.out.println("Estado pedido alterado para "+ estado+ "!");
+            //System.out.println("Estado pedido alterado para "+ estado+ "!");
             /*Enviar email, faltar inserir email e senha e testar, line 93 e 94*/
- /*              String host="mail.javatpoint.com";
-                final String user="sonoojaiswal@javatpoint.com";
-                final String password="xxxxx";
+               String host="mail.javatpoint.com";
+                final String user="ufjfdcc078grupo1@gmail.com";
+                final String password="!q12345678";
 
-                String to="anderson.andrade@gmail.com";
+                String to="ufjfdcc078grupo1@gmail.com";
 
                  //Get the session object
                  Properties props = new Properties();
@@ -120,7 +120,7 @@ public class Cliente extends Usuario implements Observer {
                    System.out.println("message sent successfully...");
 
                    } catch (MessagingException e) {e.printStackTrace();}  
-*/
+
         }
     }
 
