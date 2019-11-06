@@ -25,6 +25,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="FrontController?action=FormNovoProduto&categoria=Sanduiche">Sanduíche</a></li>
                                     <li><a href="FrontController?action=FormNovoProduto&categoria=Pizza">Pizza</a></li>
+                                    <li><a href="FrontController?action=FormNovoProdutoCombo">Combo</a></li>
                                 </ul>
                             </div>
                             <button onclick="UF.Produto.EditarProduto(this)" class="btn btn-primary" type="button"><i class="fa fa-edit"></i> Editar</button>
