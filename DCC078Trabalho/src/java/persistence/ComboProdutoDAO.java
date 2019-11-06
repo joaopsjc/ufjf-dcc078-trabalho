@@ -83,12 +83,12 @@ public class ComboProdutoDAO  extends DAO{
         }
     }
     
-    public void delete(Long id_combo, Long id_produto) throws SQLException, ClassNotFoundException{
+    public void delete(Long id_produto, Long id_combo) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from comboProduto where id_combo='"+id_combo+"' AND" + "id_produto='"+id_produto+"'",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("delete from comboProduto where id_combo= "+id_combo+" AND " + " id_produto= "+id_produto,Statement.RETURN_GENERATED_KEYS);
             int affectedRows = st.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Delete comboProduto failed, no rows affected.");
@@ -240,6 +240,12 @@ public class ComboProdutoDAO  extends DAO{
         for(Iterator<Produto> i = combo.getProdutos().iterator();i.hasNext();){
             Produto novoProduto = i.next();
             insert(novoProduto.getId(),combo.getId());
+        }
+    }
+    public void delete(ProdutoCombo combo) throws SQLException, ClassNotFoundException{
+        for(Iterator<Produto> i = combo.getProdutos().iterator();i.hasNext();){
+            Produto novoProduto = i.next();
+            delete(novoProduto.getId(),combo.getId());
         }
     }
 }
