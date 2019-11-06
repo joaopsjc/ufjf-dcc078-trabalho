@@ -112,7 +112,7 @@ public class Cliente extends Usuario implements Observer {
                    message.setFrom(new InternetAddress(user));
                    message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
                    message.setSubject("javatpoint");
-                   message.setText("O seu pedido teve o estado alterado para " + estado);
+                   message.setText("Olá,"+this.getNome()+". O seu pedido teve o estado alterado para " + estado);
 
                   //send the message
                    Transport.send(message);
