@@ -24,7 +24,7 @@ import persistence.ProdutoDAO;
  *
  * @author jjsfa
  */
-public class AdicionarProdutosComboAction implements Action{
+public class RemoverProdutosComboAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -41,8 +41,8 @@ public class AdicionarProdutosComboAction implements Action{
             response.setCharacterEncoding("UTF-8");
             int qtdItensCombo = comboAtual.getCountProdutos();
             String resultStr = "{\"message\":\"Sucesso\",\"qtdItensCombo\":"+qtdItensCombo+"}";
+            ComboProdutoDAO.getInstance().delete(comboAtual);
             
-            ComboProdutoDAO.getInstance().insert(comboAtual);
             
             response.getWriter().write(resultStr);
         
