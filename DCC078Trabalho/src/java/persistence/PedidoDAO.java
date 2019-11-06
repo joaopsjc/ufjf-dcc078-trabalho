@@ -505,6 +505,26 @@ public class PedidoDAO  extends DAO{
         }
     }
     
+    public void setEntregadorEstadoPedido(Pedido pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("update pedido set id_entregador=?,estado=? where id=?",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,pedido.getEntregador().getId());
+            st.setString(2,pedido.getEstado().getEstado());
+            st.setLong(3,pedido.getId());
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Update entregador failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
     
     public void setEntregadorPedidos(List<Pedido> pedidos, Usuario user) throws SQLException, ClassNotFoundException {
         for(Iterator i = pedidos.iterator(); i.hasNext();){
@@ -514,5 +534,12 @@ public class PedidoDAO  extends DAO{
         }
     }
 
+    public void setEntregadorEstadoPedidos(List<Pedido> pedidos, Usuario user) throws SQLException, ClassNotFoundException {
+        for(Iterator i = pedidos.iterator(); i.hasNext();){
+            Pedido pedido = (Pedido) i.next();
+            pedido.setEntregador(user);
+            setEntregadorEstadoPedido(pedido);
+        }
+    }
     
 }
