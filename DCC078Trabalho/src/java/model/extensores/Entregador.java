@@ -121,7 +121,7 @@ public class Entregador extends Usuario {
             Pedido pedidoAtual = iteratorPedidos.next();
             pedidoAtual.getEstado().aCaminho(pedidoAtual);
         }
-        PedidoDAO.getInstance().setEntregadorPedidos(pedidos,this);
+        PedidoDAO.getInstance().setEntregadorEstadoPedidos(pedidos,this);
     }
     
 }
