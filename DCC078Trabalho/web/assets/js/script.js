@@ -461,7 +461,7 @@ UF.Empresa.RejeitarPedido = function(element){
 }
 
 UF.Empresa.AdicionarProdutosCombo = function(){
-    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-adicionar");
     if (selectedIds.length==0){
         UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
         return;
@@ -479,6 +479,33 @@ UF.Empresa.AdicionarProdutosCombo = function(){
             var responseJson = UF.Helpers.TryParseJson(response.responseText);
             if (responseJson){
                 UF.Alert.Success({message:"Produto(s) adicionados ao combo com sucesso"});
+                $('#link-carrinho span').html(responseJson.qtdItensCarrinho);                
+            }else{
+                UF.Alert.Error({message:response.responseText}); 
+            }
+	}	
+    });
+}
+
+UF.Empresa.RemoverProdutosCombo = function(){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-remover");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=RemoverProdutosCombo",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(','),
+            id_combo: $('[name=id]').val()
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            var responseJson = UF.Helpers.TryParseJson(response.responseText);
+            if (responseJson){
+                UF.Alert.Success({message:"Produto(s) removidos do combo com sucesso"});
                 $('#link-carrinho span').html(responseJson.qtdItensCarrinho);                
             }else{
                 UF.Alert.Error({message:response.responseText}); 
