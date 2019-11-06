@@ -405,6 +405,34 @@ UF.Empresa.AceitarPedido = function(element){
     });   
 }
 
+UF.Empresa.FinalizarPedido = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("pedidos-finalizados-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um pedido!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=FinalizarPedidosEmpresaAction",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Pedido(s) marcados(s) como finalizado(s)",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=Home";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    });   
+}
+
+
 UF.Empresa.RejeitarPedido = function(element){
     var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("pedidos-pendentes-grid-resumo");
     if (selectedIds.length==0){

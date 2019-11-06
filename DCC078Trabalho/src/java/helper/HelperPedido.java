@@ -63,6 +63,18 @@ public class HelperPedido {
         PedidoDAO.getInstance().updateEstado(pedidos);
     }
     
+    public void FinalizarPreparoPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
+        for(Iterator i = pedidos.iterator();i.hasNext();){
+            Pedido pedido = (Pedido)i.next();
+            if(!pedido.getEstado().aguardandoEntregador(pedido))
+            {
+                pedido.getEstado().aCaminho(pedido);
+            }
+            
+        }
+        PedidoDAO.getInstance().updateEstado(pedidos);
+    }
+    
     public void cancelarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
         for(Iterator i = pedidos.iterator();i.hasNext();){
             Pedido pedido = (Pedido)i.next();
