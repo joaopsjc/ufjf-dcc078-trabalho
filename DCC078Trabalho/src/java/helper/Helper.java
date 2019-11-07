@@ -21,6 +21,7 @@ import model.abstratos.Produto;
 import model.abstratos.Usuario;
 import model.extensores.Empresa;
 import persistence.EnderecoDAO;
+import persistence.NotificacaoDAO;
 import persistence.UsuarioDAO;
 
 /**
@@ -127,6 +128,7 @@ public class Helper {
     private void setDynamicInfoCliente(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
         Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(user.getId());
         user.setEnderecoPrincipal(endereco);
+        sess.setAttribute("countNotificacoesCliente", NotificacaoDAO.getInstance().getCountNotificacoesCliente(user.getId()));
     }
 
     

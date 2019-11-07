@@ -60,6 +60,12 @@
                             </a>
                             </li>
                             <li>
+                                <a id="link-notificacao" class="count-info" href="FrontController?action=ListaNotificacoes">
+                                    <i class="fa fa-envelope-o" title="Notificações"></i>
+                                    <span class="label label-danger"><c:out value="${countNotificacoesCliente}" /></span>
+                                </a>
+                            </li>
+                            <li>
                                 <a id="link-carrinho" class="count-info" href="FrontController?action=ResumoCarrinho">
                                     <i class="fa fa-shopping-cart" title="Carrinho"></i>
                                     <span class="label label-danger"><c:out value="${loggedUser.getQtdCarrinho()}" /></span>

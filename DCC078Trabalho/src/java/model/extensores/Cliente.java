@@ -5,6 +5,10 @@
  */
 package model.extensores;
 
+import java.sql.SQLException;
+import model.Notificacao;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
@@ -17,6 +21,9 @@ import java.util.Observer;
 import javax.mail.*;  
 import javax.mail.internet.*;  
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistence.NotificacaoDAO;
 
 /**
  *
@@ -82,46 +89,22 @@ public class Cliente extends Usuario implements Observer {
 
     @Override
     public void update(Observable pedidoSubject, Object arg1) {
-        if (pedidoSubject instanceof Pedido) {
+        if (!(pedidoSubject instanceof Pedido)) 
+            return;
+        
+        try {
             Pedido pedidoAtualizado = (Pedido) pedidoSubject;
             String estado = pedidoAtualizado.getEstado().getNome();
-            
-            //System.out.println("Estado pedido alterado para "+ estado+ "!");
-            /*Enviar email, faltar inserir email e senha e testar, line 93 e 94*/
-               String host="mail.javatpoint.com";
-                final String user="ufjfdcc078grupo1@gmail.com";
-                final String password="!q12345678";
-
-                String to="ufjfdcc078grupo1@gmail.com";
-
-                 //Get the session object
-                 Properties props = new Properties();
-                 props.put("mail.smtp.host",host);
-                 props.put("mail.smtp.auth", "true");
-
-                 Session session = Session.getInstance(props,
-                  new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                      return new PasswordAuthentication(user,password);
-                    }
-                  });
-
-                 //Compose the message
-                  try {
-                   MimeMessage message = new MimeMessage(session);
-                   message.setFrom(new InternetAddress(user));
-                   message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-                   message.setSubject("javatpoint");
-                   message.setText("Olá,"+this.getNome()+". O seu pedido teve o estado alterado para " + estado);
-
-                  //send the message
-                   Transport.send(message);
-
-                   System.out.println("message sent successfully...");
-
-                   } catch (MessagingException e) {e.printStackTrace();}  
-
+            String message = "Olá,"+this.getNome()+". O seu pedido teve o estado alterado para " + estado;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();
+            String horaNotificacao = dtf.format(now);
+            Notificacao notificacao = new Notificacao(this.getId(),message,horaNotificacao);
+            NotificacaoDAO.getInstance().insert(notificacao);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     @Override
