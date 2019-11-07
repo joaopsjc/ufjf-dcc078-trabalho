@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Observable;
 import model.abstratos.Usuario;
 import model.estados.PedidoEmPreparo;
+import model.interfaces.Promocao;
 import persistence.PedidoDAO;
 
 /**
@@ -32,8 +33,7 @@ public class Pedido extends Observable {
     private List<PedidoProduto> produtos =new ArrayList<>();
     private PedidoEstado estado;
     private Endereco endereco;
-    private double frete=0,
-            precoProdutos;
+    private double frete=0;
 
     public Pedido(Long id, List<PedidoProduto> produtos,Endereco endereco,
             double frete) {
@@ -42,13 +42,6 @@ public class Pedido extends Observable {
         this.produtos = produtos;
         this.endereco = endereco;
         this.frete = frete;
-        precoProdutos = 0;
-        Iterator<PedidoProduto> produtoIterator = produtos.iterator();
-        while(produtoIterator.hasNext())
-        {
-            PedidoProduto produtoAtual = produtoIterator.next();
-            precoProdutos+= produtoAtual.getProduto().getPreco() - (produtoAtual.getProduto().getPreco()%produtoAtual.getPromocao().obterDesconto());
-        }
     }
     public Pedido(Long id, Endereco endereco, double frete) {
         this.id = id;
@@ -56,7 +49,6 @@ public class Pedido extends Observable {
         this.produtos = new ArrayList<>();
         this.endereco = endereco;
         this.frete = frete;
-        precoProdutos = 0;
     }
     public Pedido(Long id, List<PedidoProduto> produtos,Endereco endereco,
             double frete, PedidoEstado pedidoEstado) {
@@ -65,13 +57,6 @@ public class Pedido extends Observable {
         this.produtos = produtos;
         this.endereco = endereco;
         this.frete = frete;
-        precoProdutos = 0;
-        Iterator<PedidoProduto> produtoIterator = produtos.iterator();
-        while(produtoIterator.hasNext())
-        {
-            PedidoProduto produtoAtual = produtoIterator.next();
-            precoProdutos+= produtoAtual.getProduto().getPreco() - (produtoAtual.getProduto().getPreco()%produtoAtual.getPromocao().obterDesconto());
-        }
     }
     public Pedido(Long id, Endereco endereco, double frete,
             PedidoEstado pedidoEstado) {
@@ -80,7 +65,6 @@ public class Pedido extends Observable {
         this.produtos = new ArrayList<>();
         this.endereco = endereco;
         this.frete = frete;
-        precoProdutos = 0;
     }
 
     public Pedido() {
@@ -107,6 +91,13 @@ public class Pedido extends Observable {
     }
 
     public double getPrecoProdutos() {
+        double precoProdutos = 0;
+        Iterator<PedidoProduto> IteratorProdutos = produtos.iterator();
+        while(IteratorProdutos.hasNext())
+        {
+            PedidoProduto produtoAtual = IteratorProdutos.next();
+            precoProdutos = precoProdutos + (produtoAtual.getProduto().getPreco() - ((produtoAtual.getProduto().getPreco()*produtoAtual.getPromocao().obterDesconto())/100)  * produtoAtual.getQuantidade());
+        }
         return precoProdutos;
     }
 
@@ -147,15 +138,17 @@ public class Pedido extends Observable {
         setChanged(); //observer
         notifyObservers(); //observer
     }
+
+    public void setProdutos(List<PedidoProduto> produtos) {
+        this.produtos = produtos;
+    }
     
     public void addProduto(PedidoProduto novoProduto)
     {
         produtos.add(novoProduto);
-        precoProdutos+= (novoProduto.getProduto().getPreco() - (novoProduto.getProduto().getPreco()%novoProduto.getPromocao().obterDesconto()));
     }
     public void removeProduto(PedidoProduto produto)
     {
-        precoProdutos-= (produto.getProduto().getPreco() - (produto.getProduto().getPreco()%produto.getPromocao().obterDesconto()));
         produtos.remove(produto);
     }
 
@@ -169,6 +162,23 @@ public class Pedido extends Observable {
                 pedidoProduto = new PedidoProduto();
                 pedidoProduto.setQuantidade(1);
                 pedidoProduto.setProduto(p);
+                addProduto(pedidoProduto);
+            }
+        }
+            
+    }
+
+    public void addListaProdutosPromocao(List<Produto> listProdutos, Promocao promocao) {
+        for(Iterator i = listProdutos.iterator();i.hasNext();){
+            Produto p = (Produto)i.next();
+            PedidoProduto pedidoProduto = getPedidoProdutoByProdutoId(p.getId());
+            if (pedidoProduto != null)
+                pedidoProduto.incrementaQuantidade();
+            else{
+                pedidoProduto = new PedidoProduto();
+                pedidoProduto.setQuantidade(1);
+                pedidoProduto.setProduto(p);
+                pedidoProduto.setPromocao(promocao);
                 addProduto(pedidoProduto);
             }
         }

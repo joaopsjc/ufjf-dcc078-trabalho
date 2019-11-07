@@ -78,6 +78,28 @@ public class PedidoProdutoDAO  extends DAO{
         }
     }
     
+    public void insert(Long idPedido, PedidoProduto pedido, String promocaoTipo) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,quantidade,tipoPromocao) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1,idPedido);
+            st.setLong(2,pedido.getProduto().getId());
+            st.setInt(3,pedido.getQuantidade());
+            st.setString(4,promocaoTipo);
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating pedidoProduto failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;//  
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
     public void deleteByProdutoId(Long id_produto) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement st = null;
@@ -194,7 +216,7 @@ public class PedidoProdutoDAO  extends DAO{
                     "SELECT P.* from produto P "
                             + "INNER JOIN pedidoProduto PP "
                             + "ON P.id = PP.id_produto "
-                            + "WHERE PP.id_pedido = '"+id_pedido+"'");
+                            + "WHERE PP.id_pedido = "+id_pedido);
             while (rs.next())
             {
                 Long id = rs.getLong("id");
@@ -226,6 +248,59 @@ public class PedidoProdutoDAO  extends DAO{
             closeResources(conn, st);
         }
         return produtos;
+    }
+    
+    public List<PedidoProduto> getAllPedidoProdutosByPedidoId(Long id_pedido) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<PedidoProduto> pedidoProdutos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery(
+                    "SELECT P.*, PP.quantidade as pedidoQuantidade,PP.tipoPromocao as pedidoPromocao from produto P "
+                            + "INNER JOIN pedidoProduto PP "
+                            + "ON P.id = PP.id_produto "
+                            + "WHERE PP.id_pedido = "+id_pedido);
+            while (rs.next())
+            {
+                Long id = rs.getLong("id");
+                Long id_empresa = rs.getLong("id_empresa");
+                String nome = rs.getString("nome");
+                String categoria = rs.getString("categoria");
+                String tipoPromocao = rs.getString("pedidoPromocao");
+                String descricao = rs.getString("descricao");
+                int quantidade = rs.getInt("quantidade");
+                int pedidoQuantidade = rs.getInt("pedidoQuantidade");
+                double preco = rs.getDouble("preco");
+                String estado = rs.getString("estado");
+                
+                Produto novoProduto =  ProdutoFactory.create(categoria);
+                //categoria não é mais um elemento setável, 
+                // utilização do produtoFactory para criação de novo produtos
+                //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
+                novoProduto.setId(id);
+                novoProduto.setNome(nome);
+                novoProduto.setId_empresa(id_empresa);
+                novoProduto.setDescricao(descricao);
+                novoProduto.setQuantidade(quantidade);
+                novoProduto.setPreco(preco);
+                novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
+                
+                Promocao promocao = PromocaoFactory.create(tipoPromocao);
+                
+                PedidoProduto novoPedidoProduto = new PedidoProduto(pedidoQuantidade, novoProduto);
+                novoPedidoProduto.setPromocao(promocao);
+
+                pedidoProdutos.add(novoPedidoProduto);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return pedidoProdutos;
     }
     
     //provavelmente nada boa
@@ -317,6 +392,13 @@ public class PedidoProdutoDAO  extends DAO{
         for(Iterator i = pedido.getProdutos().iterator();i.hasNext();){
             PedidoProduto p = (PedidoProduto)i.next();
             insert(pedido.getId(),p);
+        }
+    }
+
+    public void insert(Pedido pedido, String promocao) throws SQLException, ClassNotFoundException{
+        for(Iterator i = pedido.getProdutos().iterator();i.hasNext();){
+            PedidoProduto p = (PedidoProduto)i.next();
+            insert(pedido.getId(), p,promocao);
         }
     }
 }

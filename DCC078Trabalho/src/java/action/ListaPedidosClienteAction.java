@@ -30,7 +30,7 @@ public class ListaPedidosClienteAction  implements Action{
         try{
             Usuario usuario = Helper.getInstance().getLoggedUser(request);
             Long id_cliente = usuario.getId();
-            List<Pedido> listaPedidos = PedidoDAO.getInstance().getPedidosByClienteId(id_cliente);
+            List<Pedido> listaPedidos = PedidoDAO.getInstance().getPedidosWithProdutoPromocaoByClienteId(id_cliente);
             request.setAttribute("listPedidos", listaPedidos);
             request.getRequestDispatcher("Pedido/listaPedidos.jsp").forward(request, response);
         } catch(SQLException ex){

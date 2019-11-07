@@ -313,6 +313,8 @@ UF.Carrinho.RealizarPedido = function(element){
     $('#carrinho-grid-resumo input[type=number]').each(function(i,el){
         qtdItens.push($(el).val());
     });
+    var promocaoCombobox = document.getElementById("promocao-combo-resumo");
+    var promocao = promocaoCombobox.options[promocaoCombobox.selectedIndex].value;
     qtdItens.join();   
     
     UF.Alert.ShowLoading();
@@ -320,7 +322,8 @@ UF.Carrinho.RealizarPedido = function(element){
 	url : "FrontController?action=RealizarPedidoCarrinho",	
 	type : 'post',
 	data : {
-            qtdItens: qtdItens.join(',')
+            qtdItens: qtdItens.join(','),
+            promocao: promocao
 	},	
 	complete  : function(response){	
             UF.Alert.CloseLoading();

@@ -44,14 +44,14 @@
                         </tbody>
                     </table>
                     <div class="form-group">
-                        <label class="font-noraml">Multi select</label>
-                        <div class="input-group">
-                            <select data-placeholder="Escolha uma Promoção..." class="chosen-select" multiple="" style="width: 350px; display: none;" tabindex="-1">
-                                <option value="">Select</option>
-                                <option value="Natal">Promoção de Natal</option>
-                                <option value="DiaMaes">Promoção de Dia das Mães</option>
-                            </select><div class="chosen-container chosen-container-multi" style="width: 350px;" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Choose a Country..." class="default" autocomplete="off" style="width: 140px;" tabindex="4"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0" style="">Select</li><li class="active-result" data-option-array-index="251" style="">Promoção de Natal</li><li class="active-result" data-option-array-index="251" style="">Promoção de Dia das Mães</li></ul></div></div>
-                        </div>
+                        <select  id="promocao-combo-resumo" data-placeholder="Escolha uma Promoção..." >
+                            <option value="">..</option>
+                            <c:forEach items="${promocoes}" var="promocao">
+                                <option value="${promocao.getTipo()}">
+                                    ${promocao.obterPromocao()}
+                                </option>
+                            </c:forEach>
+                        </select>
                     </div>
                 </div>
             </div>

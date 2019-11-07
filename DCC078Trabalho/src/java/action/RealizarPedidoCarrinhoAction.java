@@ -33,13 +33,16 @@ public class RealizarPedidoCarrinhoAction implements Action{
         try {
             Pedido pedido = Helper.getInstance().getCarrinhoByClienteId(request);
             String qtdItens= request.getParameter("qtdItens");
+            String promocaoTipo = request.getParameter("promocao");
+            
             List<String> qtdItensList = new ArrayList<>(Arrays.asList(qtdItens.split(",")));
             pedido.atualizaQuantidades(qtdItensList);
             pedido.setEstado(new PedidoAguardandoRestaurante());
             pedido.setCliente(Helper.getInstance().getLoggedUser(request));
             pedido.setEndereco();
             List<Pedido> pedidos = HelperPedido.getInstance().dividePedidoPorEmpresa(pedido);
-            PedidoDAO.getInstance().insert(pedidos);
+            PedidoDAO.getInstance().insert(pedidos,promocaoTipo);
+            
             Helper.getInstance().zeraCarrinhoByClienteId(request);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

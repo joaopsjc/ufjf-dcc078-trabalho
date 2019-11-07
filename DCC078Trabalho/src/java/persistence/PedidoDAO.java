@@ -19,8 +19,8 @@ import model.Pedido;
 import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.extensores.Cliente;
-import model.extensores.Entregador;
 import model.interfaces.PedidoEstado;
+import model.interfaces.Promocao;
 
 /**
  *
@@ -74,9 +74,58 @@ public class PedidoDAO  extends DAO{
         }
     }
     
+    public void insert(Pedido pedido, String tipoPromocao) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement("insert into pedido(id_cliente,id_empresa,id_entregador,id_endereco,frete,estado) values (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            if (pedido.getCliente()!=null)
+                st.setLong(1, pedido.getCliente().getId());
+            else
+                st.setNull(1, Types.INTEGER);
+            if (pedido.getEmpresa()!=null)
+                st.setLong(2, pedido.getEmpresa().getId());
+            else
+                st.setNull(2, Types.INTEGER);
+            if (pedido.getEntregador()!=null)
+                st.setLong(3, pedido.getEntregador().getId());
+            else
+                st.setNull(3, Types.INTEGER);
+            if (pedido.getEndereco()!=null)
+                st.setLong(4, pedido.getEndereco().getId());
+            else
+                st.setNull(4, Types.INTEGER);
+            
+            st.setDouble(5, pedido.getFrete());
+            st.setString(6, pedido.getEstado().getEstado());
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating pedido failed, no rows affected.");
+            }
+            ResultSet rs = st.getGeneratedKeys();
+
+            if (rs.next()) {
+                pedido.setId(rs.getLong(1));
+            }
+            PedidoProdutoDAO.getInstance().insert(pedido,tipoPromocao);
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
     public void insert(List<Pedido> pedidos) throws SQLException, ClassNotFoundException{
         for(Iterator i = pedidos.iterator();i.hasNext();){
             insert((Pedido)i.next());
+        }
+    }
+    
+    public void insert(List<Pedido> pedidos,String promocao) throws SQLException, ClassNotFoundException{
+        for(Iterator i = pedidos.iterator();i.hasNext();){
+            insert((Pedido)i.next(),promocao);
         }
     }
     
@@ -158,6 +207,7 @@ public class PedidoDAO  extends DAO{
         }
         return pedidos;
     }
+    
     public List<Pedido> getPedidosByClienteId(Long id_cliente) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
@@ -198,6 +248,51 @@ public class PedidoDAO  extends DAO{
         }
         return pedidos;
     }
+    
+    public List<Pedido> getPedidosWithProdutoPromocaoByClienteId(Long id_cliente) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        Statement st = null;
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("select * from pedido where id_cliente="+id_cliente);
+
+            while (rs.next())
+            {                
+                Long id_pedido = rs.getLong("id");
+                Long id_empresa = rs.getLong("id_empresa");
+                Long id_entregador = rs.getLong("id_entregador");
+                Long id_endereco = rs.getLong("id_endereco");
+                Double frete = rs.getDouble("frete");
+                String estado = rs.getString("estado");
+                
+                Usuario empresa = UsuarioDAO.getInstance().getById(id_empresa);
+                Usuario entregador = UsuarioDAO.getInstance().getById(id_entregador);
+                Endereco endereco = EnderecoDAO.getInstance().getById(id_endereco);
+                Usuario cliente = UsuarioDAO.getInstance().getById(id_cliente);
+                String[] status = estado.split(" ");
+                estado = String.join("",estado.split(" "));
+                PedidoEstado pedidoEstado = PedidoEstadoFactory.create(estado);
+                
+                Pedido novoPedido = new Pedido(id_pedido, endereco, frete,pedidoEstado);
+                novoPedido.setEmpresa(empresa);
+                novoPedido.setEntregador(entregador);
+                novoPedido.setCliente(cliente);
+                
+                novoPedido.setProdutos(PedidoProdutoDAO.getInstance().getAllPedidoProdutosByPedidoId(id_pedido));
+                
+                pedidos.add(novoPedido);
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return pedidos;
+    }
+    
     public List<Pedido> getPedidosByEmpresaId(Long id_empresa) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         Statement st = null;
