@@ -95,7 +95,7 @@ public class Cliente extends Usuario implements Observer {
         try {
             Pedido pedidoAtualizado = (Pedido) pedidoSubject;
             String estado = pedidoAtualizado.getEstado().getNome();
-            String message = "Olá,"+this.getNome()+". O seu pedido teve o estado alterado para " + estado;
+            String message = "Olá,"+this.getNome()+". O pedido #"+pedidoAtualizado.getId()+" teve o estado alterado para " + estado;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
             LocalDateTime now = LocalDateTime.now();
             String horaNotificacao = dtf.format(now);

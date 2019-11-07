@@ -305,6 +305,33 @@ UF.Cliente.AdicionarProdutosCarrinho = function(){
     });
 }
 
+UF.Cliente.MarcarComoLida = function(){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("notificacoes-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos uma notificacao!"});
+        return;
+    }
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=MarcarNotificacoesLidas",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(',')
+	},	
+	complete  : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText==""){
+                UF.Alert.Success({message:"Notificação marcada como lida",
+                    onConfirm: function(){
+                        window.location.reload();
+                    }});                
+            }else{
+                UF.Alert.Error({message:response.responseText}); 
+            }            
+	}	
+    });
+}
+
 UF.RegisterNamespace("Carrinho");
 
 UF.Carrinho.RealizarPedido = function(element){
