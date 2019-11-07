@@ -94,9 +94,10 @@ public class Pedido extends Observable {
         double precoProdutos = 0;
         Iterator<PedidoProduto> IteratorProdutos = produtos.iterator();
         while(IteratorProdutos.hasNext())
-        {
+        {   
             PedidoProduto produtoAtual = IteratorProdutos.next();
-            precoProdutos = precoProdutos + (produtoAtual.getProduto().getPreco() - ((produtoAtual.getProduto().getPreco()*produtoAtual.getPromocao().obterDesconto())/100)  * produtoAtual.getQuantidade());
+            int desconto = produtoAtual.getPromocao() != null ? produtoAtual.getPromocao().obterDesconto() : 0;
+            precoProdutos = precoProdutos + (produtoAtual.getProduto().getPreco() - ((produtoAtual.getProduto().getPreco()*desconto)/100)  * produtoAtual.getQuantidade());
         }
         return precoProdutos;
     }
