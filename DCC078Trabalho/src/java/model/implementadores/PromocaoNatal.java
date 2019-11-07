@@ -18,7 +18,7 @@ public class PromocaoNatal implements Promocao{
     
     @Override
     public int obterDesconto() {
-            return 20;
+            return 10;
     }
     @Override
     public String obterPromocao() {
