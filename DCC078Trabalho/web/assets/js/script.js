@@ -423,7 +423,7 @@ UF.Empresa.FinalizarPedido = function(element){
             if (response.responseText=="")
                 UF.Alert.Success({message:"Pedido(s) marcados(s) como finalizado(s)",
                     onConfirm: function(){
-                        window.location = "FrontController?action=Home";
+                        window.location.reload();
                     }});
             else
                 UF.Alert.Error({message:response.responseText});
@@ -478,7 +478,11 @@ UF.Empresa.AdicionarProdutosCombo = function(){
             UF.Alert.CloseLoading();
             var responseJson = UF.Helpers.TryParseJson(response.responseText);
             if (responseJson){
-                UF.Alert.Success({message:"Produto(s) adicionados ao combo com sucesso"});
+                UF.Alert.Success({
+                    message:"Produto(s) adicionados ao combo com sucesso",
+                    onConfirm: function(){
+                        window.location.reload();
+                    }});
                 $('#link-carrinho span').html(responseJson.qtdItensCarrinho);                
             }else{
                 UF.Alert.Error({message:response.responseText}); 
@@ -505,12 +509,16 @@ UF.Empresa.RemoverProdutosCombo = function(){
             UF.Alert.CloseLoading();
             var responseJson = UF.Helpers.TryParseJson(response.responseText);
             if (responseJson){
-                UF.Alert.Success({message:"Produto(s) removidos do combo com sucesso"});
+                UF.Alert.Success({
+                    message:"Produto(s) removidos do combo com sucesso",
+                    onConfirm: function(){
+                        window.location.reload();
+                    }});
                 $('#link-carrinho span').html(responseJson.qtdItensCarrinho);                
             }else{
                 UF.Alert.Error({message:response.responseText}); 
             }
-	}	
+	}
     });
 }
 

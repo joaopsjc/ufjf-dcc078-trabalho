@@ -107,12 +107,11 @@ public class ComboProdutoDAO  extends DAO{
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
-
+            
             ResultSet rs = st.executeQuery(
-                    "SELECT * from produto P LEFT JOIN comboProduto CP "
-                            + "ON CP.id_combo =" + id_combo 
-                            + " where P.categoria!='Combo' AND P.id_empresa=" +id_empresa
-                            + " AND (P.ID!=CP.ID_PRODUTO OR cp.id_combo IS NULL)");
+                    "SELECT * from produto P where p.id not in (" +
+                    "select id_produto from comboproduto where id_combo = " + id_combo +
+                    ") and P.categoria!='Combo' and P.id_empresa="+id_empresa);
             while (rs.next())
             {
                 Long id = rs.getLong("id");

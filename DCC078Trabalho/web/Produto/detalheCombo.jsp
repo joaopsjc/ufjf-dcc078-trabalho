@@ -88,7 +88,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row toolbar-crud-grid">
-                            <button onclick="UF.Empresa.AdicionarProdutosCombo(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Adicionar ao Combo</button>
+                            <button onclick="UF.Empresa.AdicionarProdutosCombo(this)" class="btn btn-success" type="button"><i class="fa fa-plus-square"></i> Adicionar ao Combo</button>
                         </div>
                         <table id="produto-grid-adicionar"class="table table-bordered">
                                 <thead>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row toolbar-crud-grid">
-                            <button onclick="UF.Empresa.RemoverProdutosCombo(this)" class="btn btn-success" type="button"><i class="fa fa-plus"></i> Remover do Combo</button>
+                            <button onclick="UF.Empresa.RemoverProdutosCombo(this)" class="btn btn-danger" type="button"><i class="fa fa-minus-square"></i> Remover do Combo</button>
                         </div>
                         <table id="produto-grid-remover"class="table table-bordered">
                                 <thead>
@@ -146,3 +146,15 @@
     </div>
 </div>
 <%@ include file="../_shared/footer.jsp" %>
+
+<script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            }); 
+            
+            UF.Helpers.SetCheckAllGrid('produto-grid-adicionar');
+            UF.Helpers.SetCheckAllGrid('produto-grid-remover');
+        });
+    </script>
