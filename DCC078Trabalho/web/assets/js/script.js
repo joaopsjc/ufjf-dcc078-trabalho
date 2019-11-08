@@ -277,6 +277,37 @@ UF.Produto.BloquearDesbloquearProduto = function(element){
     
 }
 
+UF.Produto.DisponibilizarIndisponibilizarProduto = function(element){
+    var selectedIds = UF.Helpers.GetSelectedIdsFromGrid("produto-grid-resumo");
+    if (selectedIds.length==0){
+        UF.Alert.Error({message:"É necessário selecionar ao menos um produto!"});
+        return;
+    }
+    var isDisponibilizar = element.getAttribute('data-type')=="Disponivel";
+    UF.Alert.ShowLoading();
+    $.ajax({
+	url : "FrontController?action=DisponibilizarIndisponibilizarProduto",	
+	type : 'post',	
+	data : {
+            selectedIds: selectedIds.join(','),
+            isDisponibilizar: isDisponibilizar
+	},	
+	complete : function(response){	
+            UF.Alert.CloseLoading();
+            if (response.responseText=="")
+                UF.Alert.Success({message:"Mudança de status realizada.",
+                    onConfirm: function(){
+                        window.location = "FrontController?action=ResumoProdutos";
+                    }});
+            else
+                UF.Alert.Error({message:response.responseText});
+            
+	}	
+    }); 
+    
+}
+
+
 UF.RegisterNamespace("Cliente");
 
 UF.Cliente.AdicionarProdutosCarrinho = function(){

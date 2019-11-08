@@ -32,6 +32,8 @@
                             <button onclick="UF.Produto.ExcluirProduto(this)" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> Excluir</button> 
                             <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Bloquear" class="btn btn-warning" type="button"><i class="fa fa-lock"></i> Bloquear</button> 
                             <button onclick="UF.Produto.BloquearDesbloquearProduto(this)" data-type="Desbloquear" class="btn btn-primary" type="button"><i class="fa fa-unlock"></i> Desbloquear</button> 
+                            <button onclick="UF.Produto.DisponibilizarIndisponibilizarProduto(this)" data-type="Disponivel" class="btn btn-primary" type="button"><i class="fa fa-check"></i> Disponível</button> 
+                            <button onclick="UF.Produto.DisponibilizarIndisponibilizarProduto(this)" data-type="Indisponivel" class="btn btn-warning" type="button"><i class="fa fa-times"></i> Indisponível</button> 
                         </div>
                         <table id="produto-grid-resumo"class="table table-bordered">
                             <thead>
