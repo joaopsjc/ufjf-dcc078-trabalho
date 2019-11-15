@@ -6,6 +6,7 @@
 package persistence;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -22,5 +23,13 @@ public abstract class DAO {
         } catch(SQLException e) {
 
         }
-    }  
+    }
+    
+    public void executeUpdate(PreparedStatement st) throws SQLException{
+        int affectedRows = st.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Update failed, no rows affected.");
+        }
+    }
 }

@@ -23,11 +23,10 @@ import model.extensores.ProdutoCombo;
  * @author ice
  */
 public class ComboProdutoDAO  extends DAO{
-        private static ComboProdutoDAO instance = new ComboProdutoDAO();
+    private static final ComboProdutoDAO instance = new ComboProdutoDAO();
     public static ComboProdutoDAO getInstance(){
         return instance;
-    }
-    
+    }   
     
     public void insert(Long id_produto, Long id_combo) throws SQLException, ClassNotFoundException{
         Connection conn = null;
@@ -37,13 +36,9 @@ public class ComboProdutoDAO  extends DAO{
             st = conn.prepareStatement("insert into comboProduto(id_combo,id_produto) values (?,?)",Statement.RETURN_GENERATED_KEYS);
             st.setLong(1,id_combo);
             st.setLong(2,id_produto);
-            int affectedRows = st.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Creating ComboProduto failed, no rows affected.");
-            }
+            executeUpdate(st);
         } catch(SQLException e) {
-            throw e;//  
+            throw e;
         } finally {
             closeResources(conn, st);
         }
@@ -55,10 +50,7 @@ public class ComboProdutoDAO  extends DAO{
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.prepareStatement("delete from comboProduto where id_produto="+id_produto,Statement.RETURN_GENERATED_KEYS);
-            int affectedRows = st.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Delete comboProduto failed, no rows affected.");
-            }
+            executeUpdate(st);
         } catch(SQLException e) {
             throw e;
         } finally {
@@ -72,10 +64,7 @@ public class ComboProdutoDAO  extends DAO{
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.prepareStatement("delete from comboProduto where id_combo="+id_combo,Statement.RETURN_GENERATED_KEYS);
-            int affectedRows = st.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Delete comboProduto failed, no rows affected.");
-            }
+            executeUpdate(st);
         } catch(SQLException e) {
             throw e;
         } finally {
@@ -89,10 +78,7 @@ public class ComboProdutoDAO  extends DAO{
         try {
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.prepareStatement("delete from comboProduto where id_combo= "+id_combo+" AND " + " id_produto= "+id_produto,Statement.RETURN_GENERATED_KEYS);
-            int affectedRows = st.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Delete comboProduto failed, no rows affected.");
-            }
+            executeUpdate(st);
         } catch(SQLException e) {
             throw e;
         } finally {
@@ -123,9 +109,6 @@ public class ComboProdutoDAO  extends DAO{
                 String estado = rs.getString("estado");
                 
                 Produto novoProduto =  ProdutoFactory.create(categoria);
-                //categoria não é mais um elemento setável, 
-                // utilização do produtoFactory para criação de novo produtos
-                //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
                 novoProduto.setId(id);
                 novoProduto.setNome(nome);
                 novoProduto.setId_empresa(id_empresa);
@@ -169,9 +152,6 @@ public class ComboProdutoDAO  extends DAO{
                 String estado = rs.getString("estado");
                 
                 Produto novoProduto =  ProdutoFactory.create(categoria);
-                //categoria não é mais um elemento setável, 
-                // utilização do produtoFactory para criação de novo produtos
-                //new Produto(id,nome,descricao, categoria, quantidade, preco,id_empresa);
                 novoProduto.setId(id);
                 novoProduto.setNome(nome);
                 novoProduto.setId_empresa(id_empresa);
@@ -247,4 +227,9 @@ public class ComboProdutoDAO  extends DAO{
             delete(novoProduto.getId(),combo.getId());
         }
     }
+    
+    private void setAllObjects(){
+        
+    }
+    
 }
