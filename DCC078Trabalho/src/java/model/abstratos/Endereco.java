@@ -26,16 +26,6 @@ public abstract class Endereco {
     
     private boolean principal;
 
-    public Endereco(String numero, String cep, Long id, String logradouro, String complemento, String bairro, String estado, String cidade) {
-        this.numero = numero;
-        this.cep = cep;
-        this.id = id;
-        this.logradouro = logradouro;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.estado = estado;
-        this.cidade = cidade;
-    }   
     public Endereco(){
     }
 
