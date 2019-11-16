@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.extensores;
 
 import helper.HelperPedido;
@@ -16,10 +11,6 @@ import model.EntregadorChainResponsibility;
 import model.Pedido;
 import persistence.PedidoDAO;
 
-/**
- *
- * @author andradeld
- */
 public class Entregador extends Usuario {
     private Entregador proxEntregador;
     private int avaliacao;
