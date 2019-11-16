@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.extensores;
 
 import java.util.ArrayList;
@@ -10,10 +5,6 @@ import java.util.List;
 import model.abstratos.Produto;
 import java.util.Iterator;
 
-/**
- *
- * @author Andre William
- */
 public class ProdutoCombo extends Produto{
     List<Produto> produtos;
     
