@@ -13,9 +13,6 @@ import model.abstratos.Endereco;
  */
 public class EnderecoAvenida extends Endereco{
 
-    public EnderecoAvenida(String numero, String cep, long id, String lagradouro, String complemento, String bairro, String estado, String cidade) {
-        super(numero, cep, id, lagradouro, complemento, bairro, estado, cidade);
-    }
     public EnderecoAvenida(){
         super();
     }
