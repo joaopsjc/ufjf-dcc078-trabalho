@@ -13,7 +13,6 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
 import java.util.List;
-import model.DadosBancarios;
 import model.Pedido;
 import java.util.Observable;
 import java.util.Observer;
@@ -42,11 +41,6 @@ public class Cliente extends Usuario implements Observer {
 
     }
 
-    public Cliente(String documento, Long id, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
-        super(id, documento, nome, login, dadosBancarios, senha);
-
-    }
-
     public Cliente(String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
         super(id, documento, nome, login, senha, enderecos);
 
@@ -62,8 +56,8 @@ public class Cliente extends Usuario implements Observer {
 
     }
 
-    public Cliente(String documento, Long id, String nome, String login, String senha, List<DadosBancarios> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id, documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Cliente(String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id, documento, nome, login, senha, enderecos, contatos, pedidos);
 
     }
 
