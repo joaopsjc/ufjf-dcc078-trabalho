@@ -1,11 +1,8 @@
 package model.extensores;
 
-import helper.HelperPedido;
 import java.sql.SQLException;
 import java.util.Iterator;
-import model.abstratos.Endereco;
 import model.abstratos.Usuario;
-import model.interfaces.Contato;
 import java.util.List;
 import model.EntregadorChainResponsibility;
 import model.Pedido;
