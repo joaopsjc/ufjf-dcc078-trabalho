@@ -16,23 +16,9 @@ import java.util.Iterator;
  */
 public class ProdutoCombo extends Produto{
     List<Produto> produtos;
-
-    public ProdutoCombo(Long id, String nome, String descricao, Double preco) {
-        super(id, nome, descricao, preco);
-        produtos = new ArrayList<>();
-    }
-
-    public ProdutoCombo(Long id, String nome, String descricao, int quantidade, Double preco) {
-        super(id, nome, descricao, quantidade, preco);
-        produtos = new ArrayList<>();
-    }
-
-    public ProdutoCombo(Long id, String nome, String descricao, int quantidade, Double preco, Long id_empresa) {
-        super(id, nome, descricao, quantidade, preco, id_empresa);
-        produtos = new ArrayList<>();
-    }
     
     public ProdutoCombo() {
+        super();
         produtos = new ArrayList<>();
     }
     
