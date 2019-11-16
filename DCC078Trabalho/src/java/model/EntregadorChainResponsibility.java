@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.SQLException;
@@ -14,10 +9,6 @@ import model.abstratos.Usuario;
 import model.extensores.Entregador;
 import persistence.PedidoDAO;
 
-/**
- *
- * @author John
- */
 public class EntregadorChainResponsibility {
     private List<Pedido> listaPedidosPendentes;
     public Entregador primeiroEntregador=null;
