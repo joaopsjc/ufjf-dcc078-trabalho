@@ -1,6 +1,5 @@
 package model.abstratos;
 
-import model.interfaces.Contato;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +12,6 @@ public abstract class Usuario {
             senha,
             documento;
     private final List<Endereco> enderecos;
-    private final List<Contato> contatos;
     private final List<Pedido> pedidos;
     private List<Produto> produtos;
     private Pedido carrinho;
@@ -22,7 +20,6 @@ public abstract class Usuario {
 
     public Usuario(){
         enderecos = new ArrayList<>();
-        contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
         produtos = new ArrayList<>();
     }
@@ -68,10 +65,6 @@ public abstract class Usuario {
         return enderecos;
     }
 
-    public List<Contato> getContatos() {
-        return contatos;
-    }
-
     public List<Pedido> getPedidos() {
         return pedidos;
     }
@@ -96,10 +89,6 @@ public abstract class Usuario {
         this.documento = documento;
     }
     
-    public void addContato(Contato novoContato)
-    {
-        contatos.add(novoContato);
-    }
     
     public void addEndereco(Endereco novoEndereco)
     {
