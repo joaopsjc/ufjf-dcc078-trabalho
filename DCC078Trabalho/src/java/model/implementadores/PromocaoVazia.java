@@ -3,7 +3,6 @@ package model.implementadores;
 import model.interfaces.Promocao;
 
 public class PromocaoVazia implements Promocao{
-    private Long id;
     private final String nome = "Sem Promoção";
     private final String tipo = "Vazia";
     
