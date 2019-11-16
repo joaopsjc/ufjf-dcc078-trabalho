@@ -4,17 +4,10 @@ import java.sql.SQLException;
 import model.Notificacao;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import model.abstratos.Endereco;
 import model.abstratos.Usuario;
-import model.interfaces.Contato;
-import java.util.List;
 import model.Pedido;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.mail.*;  
-import javax.mail.internet.*;  
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistence.NotificacaoDAO;
