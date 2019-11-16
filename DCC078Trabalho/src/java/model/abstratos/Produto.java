@@ -24,41 +24,11 @@ public abstract class Produto {
     private ProdutoEstado estado;
     private Long id_empresa;
     private String nomeEmpresa;
-    private ProdutoMemento estadoDesbloqueado = new ProdutoMemento();
-
-    public Produto(Long id, String nome, String descricao, Double preco) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-
-        this.preco = preco;
-        this.quantidade = 0;
-        this.estado = new ProdutoEstadoDisponivel();
-    }
-
-    public Produto(Long id, String nome, String descricao, int quantidade, Double preco) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.estado = new ProdutoEstadoDisponivel();
-    }
-    
-    public Produto(Long id, String nome, String descricao, int quantidade, Double preco, Long id_empresa) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.id_empresa = id_empresa;
-        this.estado = new ProdutoEstadoDisponivel();
-    }
+    private ProdutoMemento estadoDesbloqueado;
 
     public Produto() {
         this.estado = new ProdutoEstadoDisponivel();
+        this.estadoDesbloqueado = new ProdutoMemento();
     }
     public Long getId() {
         return id;
