@@ -9,7 +9,6 @@ import model.interfaces.Contato;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import model.DadosBancarios;
 import model.Pedido;
 
 /**
@@ -22,7 +21,6 @@ public abstract class Usuario {
             login,
             senha,
             documento;
-    private final List<DadosBancarios> dadosBancarios;
     private final List<Endereco> enderecos;
     private final List<Contato> contatos;
     private final List<Pedido> pedidos;
@@ -32,7 +30,6 @@ public abstract class Usuario {
     private Endereco enderecoPrincipal;
 
     public Usuario(){
-        dadosBancarios = new ArrayList<>();
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
@@ -45,19 +42,6 @@ public abstract class Usuario {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        dadosBancarios = new ArrayList<>();
-        enderecos = new ArrayList<>();
-        contatos = new ArrayList<>();
-        pedidos = new ArrayList<>();
-        produtos = new ArrayList<>();
-    }
-    public Usuario(Long id, String documento, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
-        this.id = id;
-        this.documento = documento;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.dadosBancarios = dadosBancarios;
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
@@ -69,7 +53,6 @@ public abstract class Usuario {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        dadosBancarios = new ArrayList<>();
         this.enderecos = enderecos;
         contatos = new ArrayList<>();
         pedidos = new ArrayList<>();
@@ -81,7 +64,6 @@ public abstract class Usuario {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        dadosBancarios = new ArrayList<>();
         enderecos = new ArrayList<>();
         this.contatos = contatos;
         pedidos = new ArrayList<>();
@@ -93,21 +75,19 @@ public abstract class Usuario {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        dadosBancarios = new ArrayList<>();
         enderecos = new ArrayList<>();
         contatos = new ArrayList<>();
         this.pedidos = pedidos;
         produtos = new ArrayList<>();
     }
     public Usuario(Long id, String documento, String nome, String login, String senha,
-             List<DadosBancarios> dadosBancarios, List<Endereco> enderecos,
+              List<Endereco> enderecos,
              List<Contato> contatos,List<Pedido> pedidos) {
         this.id = id;
         this.documento = documento;
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        this.dadosBancarios = dadosBancarios;
         this.enderecos = enderecos;
         this.contatos = contatos;
         this.pedidos = pedidos;
@@ -149,10 +129,7 @@ public abstract class Usuario {
     public String getDocumento() {
         return documento;
     }
-    
-    public List<DadosBancarios> getDadosBancarios() {
-        return dadosBancarios;
-    }
+
 
     public List<Endereco> getEnderecos() {
         return enderecos;
@@ -191,10 +168,7 @@ public abstract class Usuario {
     {
         contatos.add(novoContato);
     }
-    public void addDadoBancario(DadosBancarios novoDadoBancario)
-    {
-        dadosBancarios.add(novoDadoBancario);
-    }
+    
     public void addEndereco(Endereco novoEndereco)
     {
         enderecos.add(novoEndereco);
@@ -245,8 +219,5 @@ public abstract class Usuario {
                 result.add(p);                   
         }
         return result;
-    }
-    
-    
-    
+    }   
 }
