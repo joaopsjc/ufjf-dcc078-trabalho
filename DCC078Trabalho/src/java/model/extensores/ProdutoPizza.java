@@ -13,20 +13,9 @@ import model.abstratos.Produto;
  */
 public class ProdutoPizza extends Produto{
 
-    public ProdutoPizza(Long id, String nome, String descricao, Double preco) {
-        super(id, nome, descricao, preco);
-    }
-
-    public ProdutoPizza(Long id, String nome, String descricao, int quantidade, Double preco) {
-        super(id, nome, descricao, quantidade, preco);
-    }
-
-    public ProdutoPizza(Long id, String nome, String descricao, int quantidade, Double preco, Long id_empresa) {
-        super(id, nome, descricao, quantidade, preco, id_empresa);
-    }
     public ProdutoPizza()
     {
-            
+        super();
     }
     @Override
     public String getCategoria()
