@@ -27,64 +27,6 @@ public abstract class Usuario {
         produtos = new ArrayList<>();
     }
     
-    public Usuario(Long id, String documento, String nome, String login, String senha) {
-        this.id = id;
-        this.documento = documento;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        enderecos = new ArrayList<>();
-        contatos = new ArrayList<>();
-        pedidos = new ArrayList<>();
-        produtos = new ArrayList<>();
-    }
-    public Usuario(Long id, String documento, String nome, String login, String senha, List<Endereco> enderecos) {
-        this.id = id;
-        this.documento = documento;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.enderecos = enderecos;
-        contatos = new ArrayList<>();
-        pedidos = new ArrayList<>();
-        produtos = new ArrayList<>();
-    }
-    public Usuario(Long id, String documento, String nome,List<Contato> contatos, String login, String senha) {
-        this.id = id;
-        this.documento = documento;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        enderecos = new ArrayList<>();
-        this.contatos = contatos;
-        pedidos = new ArrayList<>();
-        produtos = new ArrayList<>();
-    }
-    public Usuario(Long id, String documento,List<Pedido> pedidos, String nome, String login, String senha) {
-        this.id = id;
-        this.documento = documento;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        enderecos = new ArrayList<>();
-        contatos = new ArrayList<>();
-        this.pedidos = pedidos;
-        produtos = new ArrayList<>();
-    }
-    public Usuario(Long id, String documento, String nome, String login, String senha,
-              List<Endereco> enderecos,
-             List<Contato> contatos,List<Pedido> pedidos) {
-        this.id = id;
-        this.documento = documento;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.enderecos = enderecos;
-        this.contatos = contatos;
-        this.pedidos = pedidos;
-        produtos = new ArrayList<>();
-    }
-
     public String getTipo()
     {
         return "Usuario";
