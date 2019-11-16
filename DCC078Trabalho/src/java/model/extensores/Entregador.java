@@ -19,42 +19,6 @@ public class Entregador extends Usuario {
     public Entregador(){
         super();
     }
-    
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha) {
-        super(id,documento, nome, login, senha);
-        this.proxEntregador = proxEntregador;
-        this.avaliacao = avaliacao;
-        pedidoDisponivel=null;
-
-    }
-
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
-        super(id,documento, nome, login, senha, enderecos);
-        this.proxEntregador = proxEntregador;
-        this.avaliacao = avaliacao;
-        pedidoDisponivel=null;
-    }
-
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, List<Contato> contatos, String login, String senha) {
-        super(id,documento, nome, contatos, login, senha);
-        this.proxEntregador = proxEntregador;
-        this.avaliacao = avaliacao;
-        pedidoDisponivel=null;
-    }
-
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
-        super(id,documento, pedidos, nome, login, senha);
-        this.proxEntregador = proxEntregador;
-        this.avaliacao = avaliacao;
-        pedidoDisponivel=null;
-    }
-
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id,documento, nome, login, senha, enderecos, contatos, pedidos);
-        this.proxEntregador = proxEntregador;
-        this.avaliacao = avaliacao;
-        pedidoDisponivel=null;
-    }
 
     public void setProxEntregador(Entregador proxEntregador) {
         this.proxEntregador = proxEntregador;
