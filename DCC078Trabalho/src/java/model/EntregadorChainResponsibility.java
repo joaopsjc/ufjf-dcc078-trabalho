@@ -11,15 +11,18 @@ import persistence.PedidoDAO;
 
 public class EntregadorChainResponsibility {
     private List<Pedido> listaPedidosPendentes;
-    public Entregador primeiroEntregador=null;
-    public Entregador ultimoEntregador=null;
+    public Entregador primeiroEntregador;
+    public Entregador ultimoEntregador;
     private static final EntregadorChainResponsibility instance = new EntregadorChainResponsibility();
+    
     public static EntregadorChainResponsibility getInstance(){
         return instance;
     }
     
     private EntregadorChainResponsibility(){
         try {
+            primeiroEntregador=null;
+            ultimoEntregador=null;
             populaListaPendente();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(EntregadorChainResponsibility.class.getName()).log(Level.SEVERE, null, ex);
