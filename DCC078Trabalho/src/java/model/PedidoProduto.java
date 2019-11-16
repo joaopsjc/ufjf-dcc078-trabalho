@@ -7,7 +7,7 @@ import model.interfaces.Promocao;
 public class PedidoProduto {
     
 
-    private int quantidade=0;
+    private int quantidade;
     private Produto produto;
     private Promocao promocao;
 
@@ -37,7 +37,6 @@ public class PedidoProduto {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
-        //this.id_produto = produto.getId();
     }
 
     public void setPromocao(Promocao promocao) {
@@ -51,27 +50,4 @@ public class PedidoProduto {
     public void incrementaQuantidade() {
         this.quantidade++;
     }
-    
-//NÃO SÃO NECESSÁRIAS, É POSSIVEL ACESSAR O PEDIDO E O PRODUTO ATRAVÉS DE
-//OUTROS MEIOS
-/*
-    private Long id_pedido;
-    private Long id_produto;
-    public Long getId_pedido() {
-        return id_pedido;
-    }
-
-    public void setId_pedido(Long id_pedido) {
-        this.id_pedido = id_pedido;
-    }
-
-    public Long getId_produto() {
-        return id_produto;
-    }
-
-    public void setId_produto(Long id_produto) {
-        this.id_produto = id_produto;
-    }
-            
-    */
 }
