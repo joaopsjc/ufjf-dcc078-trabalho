@@ -10,7 +10,6 @@ import model.abstratos.Usuario;
 import model.interfaces.Contato;
 import java.util.List;
 import model.Cardapio;
-import model.DadosBancarios;
 import model.Pedido;
 import model.abstratos.Produto;
 
@@ -28,13 +27,6 @@ public class Empresa extends Usuario{
     
     public Empresa(Cardapio cardapio, String documento, int avaliacao, Long id, String nome, String login, String senha) {
         super(id,documento, nome, login, senha);
-        this.cardapio = cardapio;
-
-        this.avaliacao = avaliacao;
-    }
-
-    public Empresa(Cardapio cardapio, String documento, int avaliacao, Long id, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
-        super(id,documento, nome, login, dadosBancarios, senha);
         this.cardapio = cardapio;
 
         this.avaliacao = avaliacao;
@@ -61,21 +53,14 @@ public class Empresa extends Usuario{
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(Cardapio cardapio, String documento, int avaliacao, Long id, String nome, String login, String senha, List<DadosBancarios> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Empresa(Cardapio cardapio, String documento, int avaliacao, Long id, String nome, String login, String senha, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id,documento, nome, login, senha, enderecos, contatos, pedidos);
         this.cardapio = cardapio;
 
         this.avaliacao = avaliacao;
     }
     public Empresa(String documento, int avaliacao, Long id, String nome, String login, String senha) {
         super(id,documento, nome, login, senha);
-        this.cardapio = new Cardapio();
-
-        this.avaliacao = avaliacao;
-    }
-
-    public Empresa(String documento, int avaliacao, Long id, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
-        super(id,documento, nome, login, dadosBancarios, senha);
         this.cardapio = new Cardapio();
 
         this.avaliacao = avaliacao;
@@ -102,8 +87,8 @@ public class Empresa extends Usuario{
         this.avaliacao = avaliacao;
     }
 
-    public Empresa(String documento, int avaliacao, Long id, String nome, String login, String senha, List<DadosBancarios> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Empresa(String documento, int avaliacao, Long id, String nome, String login, String senha, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id,documento, nome, login, senha, enderecos, contatos, pedidos);
         this.cardapio = new Cardapio();
 
         this.avaliacao = avaliacao;
