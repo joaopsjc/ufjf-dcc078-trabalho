@@ -12,7 +12,6 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.interfaces.Contato;
 import java.util.List;
-import model.DadosBancarios;
 import model.EntregadorChainResponsibility;
 import model.Pedido;
 import persistence.PedidoDAO;
@@ -38,13 +37,6 @@ public class Entregador extends Usuario {
 
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, List<DadosBancarios> dadosBancarios, String senha) {
-        super(id,documento, nome, login, dadosBancarios, senha);
-        this.proxEntregador = proxEntregador;
-        this.avaliacao = avaliacao;
-        pedidoDisponivel=null;
-    }
-
     public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
         super(id,documento, nome, login, senha, enderecos);
         this.proxEntregador = proxEntregador;
@@ -66,8 +58,8 @@ public class Entregador extends Usuario {
         pedidoDisponivel=null;
     }
 
-    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<DadosBancarios> dadosBancarios, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id,documento, nome, login, senha, dadosBancarios, enderecos, contatos, pedidos);
+    public Entregador(Entregador proxEntregador, int avaliacao, String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
+        super(id,documento, nome, login, senha, enderecos, contatos, pedidos);
         this.proxEntregador = proxEntregador;
         this.avaliacao = avaliacao;
         pedidoDisponivel=null;
