@@ -96,7 +96,6 @@ public abstract class Usuario {
         this.documento = documento;
     }
     
-    
     public void addContato(Contato novoContato)
     {
         contatos.add(novoContato);
@@ -146,10 +145,10 @@ public abstract class Usuario {
 
     public List<Pedido> getPedidos(List<String> idsList) {
         List<Pedido> result = new ArrayList<>();
-        for(Iterator i = getPedidos().iterator(); i.hasNext();){
-            Pedido p = (Pedido) i.next();
-            if (idsList.contains(p.getId().toString()))
-                result.add(p);                   
+        for(Iterator pedidosIteraor = getPedidos().iterator(); pedidosIteraor.hasNext();){
+            Pedido pedidoAtual = (Pedido) pedidosIteraor.next();
+            if (idsList.contains(pedidoAtual.getId().toString()))
+                result.add(pedidoAtual);                   
         }
         return result;
     }   
