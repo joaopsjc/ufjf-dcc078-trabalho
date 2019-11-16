@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import model.abstratos.Produto;
 import model.implementadores.PromocaoVazia;
 import model.interfaces.Promocao;
 
-/**
- *
- * @author jjsfa
- */
 public class PedidoProduto {
     
 
