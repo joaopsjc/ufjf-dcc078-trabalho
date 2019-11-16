@@ -26,31 +26,6 @@ public class Cliente extends Usuario implements Observer {
     public Cliente(){
         super();
     }
-    
-    public Cliente(String documento, Long id, String nome, String login, String senha) {
-        super(id, documento, nome, login, senha);
-
-    }
-
-    public Cliente(String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos) {
-        super(id, documento, nome, login, senha, enderecos);
-
-    }
-
-    public Cliente(String documento, Long id, String nome, List<Contato> contatos, String login, String senha) {
-        super(id, documento, nome, contatos, login, senha);
-
-    }
-
-    public Cliente(String documento, Long id, List<Pedido> pedidos, String nome, String login, String senha) {
-        super(id, documento, pedidos, nome, login, senha);
-
-    }
-
-    public Cliente(String documento, Long id, String nome, String login, String senha, List<Endereco> enderecos, List<Contato> contatos, List<Pedido> pedidos) {
-        super(id, documento, nome, login, senha, enderecos, contatos, pedidos);
-
-    }
 
     @Override
     public String getTipo()
