@@ -1,10 +1,7 @@
 package model.extensores;
 
-import model.abstratos.Endereco;
 import model.abstratos.Usuario;
-import java.util.List;
 import model.Cardapio;
-import model.Pedido;
 import model.abstratos.Produto;
 
 public class Empresa extends Usuario{
