@@ -51,11 +51,11 @@ public class Entregador extends Usuario {
 
     public void repassarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
         getPedidos().removeAll(pedidos);
-        Entregador e = getProxEntregador();
-        if (e.getId().equals(getId()))
+        Entregador proximoEntregador = getProxEntregador();
+        if (proximoEntregador.getId().equals(getId()))
             EntregadorChainResponsibility.getInstance().populaListaPendente();
         else
-            e.addPedido(pedidos);
+            proximoEntregador.addPedido(pedidos);
     }
     
     public void aceitarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException{
