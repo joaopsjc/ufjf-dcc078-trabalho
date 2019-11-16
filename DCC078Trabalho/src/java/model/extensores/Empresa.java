@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.extensores;
 
 import model.abstratos.Endereco;
@@ -13,10 +8,6 @@ import model.Cardapio;
 import model.Pedido;
 import model.abstratos.Produto;
 
-/**
- *
- * @author jjsfa
- */
 public class Empresa extends Usuario{
     private Cardapio cardapio;
     private int avaliacao;
