@@ -32,4 +32,19 @@ public abstract class DAO {
             throw new SQLException("Update failed, no rows affected.");
         }
     }
+    
+    
+    public void executeQueryDelete(String query) throws ClassNotFoundException, SQLException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConection();
+            st = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            executeUpdate(st);
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
 }

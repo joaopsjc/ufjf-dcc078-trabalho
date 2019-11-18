@@ -45,45 +45,18 @@ public class ComboProdutoDAO  extends DAO{
     }
     
     public void deleteByProdutoId(Long id_produto) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from comboProduto where id_produto="+id_produto,Statement.RETURN_GENERATED_KEYS);
-            executeUpdate(st);
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        String query = "delete from comboProduto where id_produto="+id_produto;
+        executeQueryDelete(query);
     }
     
     public void deleteByComboId(Long id_combo) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from comboProduto where id_combo="+id_combo,Statement.RETURN_GENERATED_KEYS);
-            executeUpdate(st);
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        String query = "delete from comboProduto where id_combo="+id_combo;
+        executeQueryDelete(query);
     }
     
     public void delete(Long id_produto, Long id_combo) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("delete from comboProduto where id_combo= "+id_combo+" AND " + " id_produto= "+id_produto,Statement.RETURN_GENERATED_KEYS);
-            executeUpdate(st);
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        String query = "delete from comboProduto where id_combo= "+id_combo+" AND " + " id_produto= "+id_produto;
+        executeQueryDelete(query);
     }
     
     public List<Produto> getNotAllProdutosByComboId(Long id_combo, long id_empresa) throws SQLException, ClassNotFoundException{
@@ -100,23 +73,7 @@ public class ComboProdutoDAO  extends DAO{
                     ") and P.categoria!='Combo' and P.id_empresa="+id_empresa);
             while (rs.next())
             {
-                Long id = rs.getLong("id");
-                String nome = rs.getString("nome");
-                String categoria = rs.getString("categoria");
-                String descricao = rs.getString("descricao");
-                int quantidadeProduto = rs.getInt("quantidade");
-                double preco = rs.getDouble("preco");
-                String estado = rs.getString("estado");
-                
-                Produto novoProduto =  ProdutoFactory.create(categoria);
-                novoProduto.setId(id);
-                novoProduto.setNome(nome);
-                novoProduto.setId_empresa(id_empresa);
-                novoProduto.setDescricao(descricao);
-                novoProduto.setQuantidade(quantidadeProduto);
-                novoProduto.setPreco(preco);
-                novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
-                
+                Produto novoProduto = populateProdutoObjectFromDataset(rs);
                 produtos.add(novoProduto);
             }
         } catch(SQLException e) {
@@ -142,24 +99,8 @@ public class ComboProdutoDAO  extends DAO{
                             + "WHERE CP.id_combo = "+id_combo);
             while (rs.next())
             {
-                Long id = rs.getLong("id");
-                Long id_empresa = rs.getLong("id_empresa");
-                String nome = rs.getString("nome");
-                String categoria = rs.getString("categoria");
-                String descricao = rs.getString("descricao");
-                int quantidade = rs.getInt("quantidade");
-                double preco = rs.getDouble("preco");
-                String estado = rs.getString("estado");
                 
-                Produto novoProduto =  ProdutoFactory.create(categoria);
-                novoProduto.setId(id);
-                novoProduto.setNome(nome);
-                novoProduto.setId_empresa(id_empresa);
-                novoProduto.setDescricao(descricao);
-                novoProduto.setQuantidade(quantidade);
-                novoProduto.setPreco(preco);
-                novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
-
+                Produto novoProduto = populateProdutoObjectFromDataset(rs);
                 produtos.add(novoProduto);
             }
         } catch(SQLException e) {
@@ -168,51 +109,6 @@ public class ComboProdutoDAO  extends DAO{
             closeResources(conn, st);
         }
         return produtos;
-    }
-    
-    //provavelmente nada boa
-    public List<ProdutoCombo> getAllComboByProdutoId(Long id_produto) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        Statement st = null;
-        List<ProdutoCombo> combos = new ArrayList<>();
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.createStatement();
-
-            ResultSet rs = st.executeQuery(
-                    "SELECT * from produto P "
-                            + "INNER JOIN comboProduto CP "
-                            + "ON P.id = CP.id_combo "
-                            + "WHERE CP.id_produto = "+id_produto);
-            while (rs.next())
-            {
-                Long id = rs.getLong("id");
-                Long id_empresa = rs.getLong("id_empresa");
-                String nome = rs.getString("nome");
-                String categoria = rs.getString("categoria");
-                String descricao = rs.getString("descricao");
-                int quantidade = rs.getInt("quantidade");
-                double preco = rs.getDouble("preco");
-                String estado = rs.getString("estado");
-                
-                ProdutoCombo novoCombo = (ProdutoCombo) ProdutoFactory.create(estado);
-                novoCombo.setId(id);
-                novoCombo.setNome(nome);
-                novoCombo.setId_empresa(id_empresa);
-                novoCombo.setDescricao(descricao);
-                novoCombo.setQuantidade(quantidade);
-                novoCombo.setPreco(preco);
-                novoCombo.setEstado(ProdutoEstadoFactory.create(estado));
-                
-                
-                combos.add(novoCombo);
-            }
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return combos;
     }
     
     public void insert(ProdutoCombo combo) throws SQLException, ClassNotFoundException{
@@ -228,8 +124,25 @@ public class ComboProdutoDAO  extends DAO{
         }
     }
     
-    private void setAllObjects(){
+    private Produto populateProdutoObjectFromDataset(ResultSet rs) throws SQLException{
+        Long id = rs.getLong("id");
+        String nome = rs.getString("nome");
+        String categoria = rs.getString("categoria");
+        String descricao = rs.getString("descricao");
+        int quantidadeProduto = rs.getInt("quantidade");
+        double preco = rs.getDouble("preco");
+        String estado = rs.getString("estado");
+        Long id_empresa = rs.getLong("id_empresa");
+
+        Produto novoProduto =  ProdutoFactory.create(categoria);
+        novoProduto.setId(id);
+        novoProduto.setNome(nome);
+        novoProduto.setId_empresa(id_empresa);
+        novoProduto.setDescricao(descricao);
+        novoProduto.setQuantidade(quantidadeProduto);
+        novoProduto.setPreco(preco);
+        novoProduto.setEstado(ProdutoEstadoFactory.create(estado));
         
+        return novoProduto;
     }
-    
 }
