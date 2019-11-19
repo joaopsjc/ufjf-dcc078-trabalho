@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -19,23 +14,19 @@ import model.abstratos.Produto;
 import persistence.ComboProdutoDAO;
 import persistence.ProdutoDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class FormDetalheProdutoAction implements Action{
     
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response)
             throws IOException{ 
         try{
-            Long id = Long.parseLong(request.getParameter("id"));
-            Produto currentProduto = ProdutoDAO.getInstance().getById(id);
+            Long id_produto = Long.parseLong(request.getParameter("id"));
+            Produto currentProduto = ProdutoDAO.getInstance().getById(id_produto);
             if (currentProduto.getCategoria().equals("Combo")){
                 Long id_empresa = Helper.getInstance().getLoggedUser(request).getId();
 
-                List<Produto> listProdutosNotCombo = ComboProdutoDAO.getInstance().getNotAllProdutosByComboId(id,id_empresa);
-                List<Produto> listProdutosCombo = ComboProdutoDAO.getInstance().getAllProdutosByComboId(id);
+                List<Produto> listProdutosNotCombo = ComboProdutoDAO.getInstance().getNotAllProdutosByComboId(id_produto,id_empresa);
+                List<Produto> listProdutosCombo = ComboProdutoDAO.getInstance().getAllProdutosByComboId(id_produto);
 
                 request.setAttribute("currentProduto",currentProduto);
                 request.setAttribute("listProdutosNotCombo",listProdutosNotCombo);
