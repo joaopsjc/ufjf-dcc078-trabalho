@@ -25,26 +25,24 @@ public abstract class DAO {
         }
     }
     
-    public void executeUpdate(PreparedStatement st) throws SQLException{
-        int affectedRows = st.executeUpdate();
+    public void executeQuery(PreparedStatement st) throws SQLException, ClassNotFoundException{
+        try {
+            int affectedRows = st.executeUpdate();
 
-        if (affectedRows == 0) {
-            throw new SQLException("Update failed, no rows affected.");
+            if (affectedRows == 0) {
+                throw new SQLException("Query failed, no rows affected.");
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(st.getConnection(), st);
         }
     }
     
     
     public void executeQueryDelete(String query) throws ClassNotFoundException, SQLException{
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-            executeUpdate(st);
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        Connection conn = DatabaseLocator.getInstance().getConection();
+        PreparedStatement st = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+        executeQuery(st);
     }
 }
