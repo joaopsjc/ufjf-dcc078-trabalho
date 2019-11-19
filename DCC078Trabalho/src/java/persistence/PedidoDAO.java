@@ -58,7 +58,7 @@ public class PedidoDAO  extends DAO{
         st.setString(6, pedido.getEstado().getEstado());
         Long generatedId = executeQuery(st);
         pedido.setId(generatedId);
-        PedidoProdutoDAO.getInstance().insert(pedido);
+        PedidoProdutoDAO.getInstance().insert(pedido,tipoPromocao);
     }
     
     public void insert(List<Pedido> pedidos) throws SQLException, ClassNotFoundException{
