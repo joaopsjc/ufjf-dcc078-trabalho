@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;import model.EntregadorChainResponsibility;
 import model.extensores.Entregador;
-import persistence.UsuarioDAO;
 
 public class RemoveEntregadorFromChainResponsibilityAction implements Action{
 
