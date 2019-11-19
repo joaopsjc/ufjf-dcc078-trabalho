@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -20,10 +15,6 @@ import model.implementadores.PromocaoDiaMaes;
 import model.implementadores.PromocaoNatal;
 import model.interfaces.Promocao;
 
-/**
- *
- * @author jjsfa
- */
 public class ResumoCarrinhoAction implements Action{
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response)

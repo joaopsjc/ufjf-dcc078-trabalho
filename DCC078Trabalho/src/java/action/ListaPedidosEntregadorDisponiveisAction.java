@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -18,16 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import model.Pedido;
 import model.extensores.Entregador;
 
-/**
- *
- * @author jjsfa
- */
 public class ListaPedidosEntregadorDisponiveisAction  implements Action{
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response)
             throws IOException{ 
         try{
-            
             Entregador entregador = (Entregador) Helper.getInstance().getLoggedUser(request);
             List<Pedido> listaPedidos = new ArrayList<>();
             listaPedidos.add(entregador.getPedidoDisponivel());

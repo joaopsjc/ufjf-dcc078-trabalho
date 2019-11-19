@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -17,10 +12,6 @@ import javax.servlet.http.HttpSession;
 import model.abstratos.Usuario;
 import persistence.UsuarioDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class ModificarPerfilAction implements Action{
 
     @Override
@@ -31,9 +22,9 @@ public class ModificarPerfilAction implements Action{
         
         
         try {
-            HttpSession sess = request.getSession(true);
+            HttpSession sessaoAtual = request.getSession(true);
             
-            Usuario usuario = (Usuario)sess.getAttribute("loggedUser");
+            Usuario usuario = (Usuario)sessaoAtual.getAttribute("loggedUser");
             usuario.setLogin(login);
             usuario.setNome(nome);
             usuario.setDocumento(documento);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -15,12 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;import model.EntregadorChainResponsibility;
 import model.extensores.Entregador;
-import persistence.UsuarioDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class RemoveEntregadorFromChainResponsibilityAction implements Action{
 
     @Override
@@ -28,9 +18,9 @@ public class RemoveEntregadorFromChainResponsibilityAction implements Action{
         try {
             String url = request.getHeader("referer");
             
-            Entregador entregadorAdiciona = (Entregador) Helper.getInstance().getLoggedUser(request);
+            Entregador entregadorRemover = (Entregador) Helper.getInstance().getLoggedUser(request);
             try {
-                EntregadorChainResponsibility.getInstance().removeFromChain(entregadorAdiciona);
+                EntregadorChainResponsibility.getInstance().removeFromChain(entregadorRemover);
             } catch (SQLException ex) {
                 Logger.getLogger(RemoveEntregadorFromChainResponsibilityAction.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

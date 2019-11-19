@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -19,14 +14,10 @@ import controller.ProdutoEstadoFactory;
 import controller.ProdutoFactory;
 import persistence.ProdutoDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class SaveProdutoAction  implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");
+        String id_produto = request.getParameter("id");
         String nome = request.getParameter("nome");
         String categoria = request.getParameter("categoria");
         String descricao = request.getParameter("descricao");
@@ -37,8 +28,8 @@ public class SaveProdutoAction  implements Action{
         Usuario currentUser = Helper.getInstance().getLoggedUser(request);
         try {
             Produto produto;
-            if (id.length() != 0)
-                produto= ProdutoDAO.getInstance().getById(id);
+            if (id_produto.length() != 0)
+                produto= ProdutoDAO.getInstance().getById(id_produto);
             else
                 produto= ProdutoFactory.create(categoria);
             produto.setNome(nome);
@@ -54,9 +45,9 @@ public class SaveProdutoAction  implements Action{
             else
                 produto.getEstado().disponivel(produto);
             
-            if (id.length() != 0)
-                produto.setId(Long.parseLong(id));
-            if (id.length() == 0)
+            if (id_produto.length() != 0)
+                produto.setId(Long.parseLong(id_produto));
+            if (id_produto.length() == 0)
                 ProdutoDAO.getInstance().insert(produto);
             else
                 ProdutoDAO.getInstance().update(produto);

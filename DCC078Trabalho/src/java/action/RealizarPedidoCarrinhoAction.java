@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -21,10 +16,6 @@ import model.Pedido;
 import model.estados.PedidoAguardandoRestaurante;
 import persistence.PedidoDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class RealizarPedidoCarrinhoAction implements Action{
 
     @Override
