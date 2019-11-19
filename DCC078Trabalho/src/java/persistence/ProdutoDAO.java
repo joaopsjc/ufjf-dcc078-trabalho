@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import model.abstratos.Produto;
-import model.estados.ProdutoEstadoDisponivel;
-import controller.ProdutoEstadoFactory;
-import controller.ProdutoFactory;
 
 /**
  *

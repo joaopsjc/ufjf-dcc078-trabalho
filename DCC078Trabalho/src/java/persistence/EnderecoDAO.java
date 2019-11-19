@@ -21,15 +21,14 @@ import model.abstratos.Endereco;
  * @author ice
  */
 public class EnderecoDAO  extends DAO{
-        private static EnderecoDAO instance = new EnderecoDAO();
+    private static EnderecoDAO instance = new EnderecoDAO();
     public static EnderecoDAO getInstance(){
         return instance;
     }
     
     public void insert(Endereco endereco) throws SQLException, ClassNotFoundException{
         Connection conn = DatabaseLocator.getInstance().getConection();
-        PreparedStatement st = null;
-        st = conn.prepareStatement("insert into endereco(id_usuario,numero,complemento,logradouro,bairro,cidade,estado,tipoEndereco,cep) values (?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement st = conn.prepareStatement("insert into endereco(id_usuario,numero,complemento,logradouro,bairro,cidade,estado,tipoEndereco,cep) values (?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
         st.setLong(1,endereco.getId_usuario());
         st.setString(2,endereco.getNumero());
         st.setString(3,endereco.getComplemento());
@@ -146,7 +145,6 @@ public class EnderecoDAO  extends DAO{
     }
     
     public Endereco populateEnderecoObjectFromDataset(ResultSet rs) throws SQLException{
-        Endereco endereco = null;
         String numero = rs.getString("numero");
         String complemento = rs.getString("complemento");
         String logradouro = rs.getString("logradouro");
@@ -159,7 +157,7 @@ public class EnderecoDAO  extends DAO{
         Long id_usuario = rs.getLong("id_usuario");
         Long id_endereco = rs.getLong("id");
         
-        endereco = EnderecoFactory.create(tipoEndereco);
+        Endereco endereco = EnderecoFactory.create(tipoEndereco);
         endereco.setId(id_endereco);
         endereco.setNumero(numero);
         endereco.setComplemento(complemento);
