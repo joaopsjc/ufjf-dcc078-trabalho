@@ -17,6 +17,7 @@ import model.abstratos.Produto;
 import controller.ProdutoEstadoFactory;
 import controller.ProdutoFactory;
 import controller.PromocaoFactory;
+import java.sql.Types;
 import java.util.Iterator;
 import model.PedidoProduto;
 import model.interfaces.Promocao;
@@ -32,25 +33,17 @@ public class PedidoProdutoDAO  extends DAO{
     }
     
     public void insert(Long idPedido, PedidoProduto pedido, String promocaoTipo) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,quantidade,tipoPromocao) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1,idPedido);
-            st.setLong(2,pedido.getProduto().getId());
-            st.setInt(3,pedido.getQuantidade());
+        Connection conn = DatabaseLocator.getInstance().getConection();
+        PreparedStatement st = conn.prepareStatement("insert into pedidoProduto(id_pedido,id_produto,quantidade,tipoPromocao) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+        st.setLong(1,idPedido);
+        st.setLong(2,pedido.getProduto().getId());
+        st.setInt(3,pedido.getQuantidade());
+        
+        if (promocaoTipo.length() >0)
             st.setString(4,promocaoTipo);
-            int affectedRows = st.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Creating pedidoProduto failed, no rows affected.");
-            }
-        } catch(SQLException e) {
-            throw e;  
-        } finally {
-            closeResources(conn, st);
-        }
+        else
+            st.setNull(4, Types.VARCHAR);
+        executeQuery(st);
     }
     
     public List<PedidoProduto> getAllPedidoProdutosByPedidoId(Long id_pedido) throws SQLException, ClassNotFoundException{
