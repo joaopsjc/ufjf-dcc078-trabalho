@@ -46,15 +46,14 @@ public class Helper {
     }
     
     public void setListProdutos(List<Produto> produtos,HttpServletRequest request){
-        Produto p2;
         List<Produto> listProdutos = getListProdutos(request);
         if (listProdutos != null){
-            for(Iterator i = produtos.iterator();i.hasNext();){
-                Produto p = (Produto)i.next();
+            for(Iterator produtosIterator = produtos.iterator();produtosIterator.hasNext();){
+                Produto produtoAtual = (Produto)produtosIterator.next();
                 for(Iterator j = listProdutos.iterator();j.hasNext();){
-                    p2 = (Produto)j.next();
-                    if (Objects.equals(p2.getId(), p.getId()))
-                        p.saveToMemento(p2.getEstadoSalvo());
+                    Produto proximoProduto = (Produto)j.next();
+                    if (Objects.equals(proximoProduto.getId(), produtoAtual.getId()))
+                        produtoAtual.saveToMemento(proximoProduto.getEstadoSalvo());
                 }   
 
             }
