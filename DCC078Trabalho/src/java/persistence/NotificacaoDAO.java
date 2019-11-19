@@ -26,43 +26,19 @@ public class NotificacaoDAO  extends DAO{
     }
     
     public void insert(Notificacao notificacao) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("insert into notificacao(id_cliente,mensagem,dataHoraNotificacao) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1,notificacao.getId_cliente());
-            st.setString(2,notificacao.getMensagem());
-            st.setString(3,notificacao.getDataHoraNotificacao());
-            int affectedRows = st.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Creating endereco failed, no rows affected.");
-            }
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        Connection conn = DatabaseLocator.getInstance().getConection();
+        PreparedStatement st = conn.prepareStatement("insert into notificacao(id_cliente,mensagem,dataHoraNotificacao) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
+        st.setLong(1,notificacao.getId_cliente());
+        st.setString(2,notificacao.getMensagem());
+        st.setString(3,notificacao.getDataHoraNotificacao());
+        executeQuery(st);
     }
     
     public void marcarComoLida(Long id) throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConection();
-            st = conn.prepareStatement("update notificacao set lida=1 where id=?",Statement.RETURN_GENERATED_KEYS);
-            st.setLong(1,id);
-            int affectedRows = st.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Update notificacao failed, no rows affected.");
-            }
-        } catch(SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        Connection conn = DatabaseLocator.getInstance().getConection();
+        PreparedStatement st = conn.prepareStatement("update notificacao set lida=1 where id=?",Statement.RETURN_GENERATED_KEYS);
+        st.setLong(1,id);
+        executeQuery(st);
     }
     
     public void marcarComoLida(List<String> idsList) throws SQLException,  ClassNotFoundException {
@@ -71,6 +47,29 @@ public class NotificacaoDAO  extends DAO{
     }
     
     public List<Notificacao> getNotificacoesNaoLidasByUserId(Long id_cliente) throws SQLException, ClassNotFoundException{
+        
+        String query = "select * from notificacao where lida=0 and id_cliente="+id_cliente;
+        return getListNotificacoes(query);
+    }
+
+    public int getCountNotificacoesCliente(Long id) throws SQLException, ClassNotFoundException {
+        return getNotificacoesNaoLidasByUserId(id).size();
+    }
+    
+    
+    public Notificacao populateNotificacaoObjectFromDataset(ResultSet rs) throws SQLException{
+        Long id = rs.getLong("id");
+        String mensagem = rs.getString("mensagem");
+        String dataHoraNotificacao = rs.getString("dataHoraNotificacao");
+        boolean lida = rs.getInt("lida")==1;
+        Long id_cliente = rs.getLong("id_cliente");
+
+        Notificacao notificacao = new Notificacao(id,id_cliente, mensagem, dataHoraNotificacao,lida);
+        return notificacao;
+    }
+    
+
+    private List<Notificacao> getListNotificacoes(String query) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Statement st = null;
         List<Notificacao> notificacoes = new ArrayList<>();
@@ -78,17 +77,12 @@ public class NotificacaoDAO  extends DAO{
             conn = DatabaseLocator.getInstance().getConection();
             st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from notificacao where lida=0 and id_cliente="+id_cliente);
+            ResultSet rs = st.executeQuery(query);
 
-            while (rs.next())
-            {
-                Long id = rs.getLong("id");
-                String mensagem = rs.getString("mensagem");
-                String dataHoraNotificacao = rs.getString("dataHoraNotificacao");
-                boolean lida = rs.getInt("lida")==1;
+            while (rs.next()){
                 
-                Notificacao n = new Notificacao(id,id_cliente, mensagem, dataHoraNotificacao,lida);
-                notificacoes.add(n);
+                Notificacao notificacao = populateNotificacaoObjectFromDataset(rs);
+                notificacoes.add(notificacao);
                 
             }
         } catch(SQLException e) {
@@ -97,10 +91,6 @@ public class NotificacaoDAO  extends DAO{
             closeResources(conn, st);
         }
         return notificacoes;
-    }
-
-    public int getCountNotificacoesCliente(Long id) throws SQLException, ClassNotFoundException {
-        return getNotificacoesNaoLidasByUserId(id).size();
     }
     
 }
