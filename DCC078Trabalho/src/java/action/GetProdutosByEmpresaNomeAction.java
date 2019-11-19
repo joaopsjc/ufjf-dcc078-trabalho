@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -19,10 +14,6 @@ import model.abstratos.Usuario;
 import persistence.ProdutoDAO;
 import persistence.UsuarioDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class GetProdutosByEmpresaNomeAction implements Action{
 
     @Override
