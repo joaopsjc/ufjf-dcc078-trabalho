@@ -7,14 +7,10 @@ package persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import model.abstratos.Produto;
-import controller.ProdutoEstadoFactory;
-import controller.ProdutoFactory;
 import java.util.Iterator;
 import model.extensores.ProdutoCombo;
 
