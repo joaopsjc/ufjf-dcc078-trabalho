@@ -22,7 +22,9 @@ public abstract class DAO {
             if(st!=null) st.close();
             if(conn!=null) conn.close();
         } catch(SQLException e) {
-
+            System.out.println(e.getMessage());
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
     
@@ -40,7 +42,7 @@ public abstract class DAO {
             }
             ResultSet rs = st.getGeneratedKeys();
 
-            if (rs.next()) {
+            if (rs!=null && rs.next()) {
                 generatedKey = rs.getLong(1);
             }
         } catch(SQLException e) {
