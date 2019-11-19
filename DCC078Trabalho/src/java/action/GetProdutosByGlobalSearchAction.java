@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -17,17 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.abstratos.Produto;
 import persistence.ProdutoDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class GetProdutosByGlobalSearchAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String stringSearch = request.getParameter("stringSearch");
-            String url = request.getHeader("referer");
             List<Produto> listaProdutos = ProdutoDAO.getInstance().getProdutosDisponiveisByCategoria(stringSearch);
             request.setAttribute("listProdutos", listaProdutos);
             request.getRequestDispatcher("Produto/resumoProdutosCliente.jsp").forward(request, response);
@@ -36,5 +26,4 @@ public class GetProdutosByGlobalSearchAction implements Action{
             Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
