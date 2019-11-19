@@ -7,6 +7,7 @@ package persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,16 +26,22 @@ public abstract class DAO {
         }
     }
     
-    public void executeQuery(PreparedStatement st) throws SQLException, ClassNotFoundException{
-        executeQuery(st,true);
+    public Long executeQuery(PreparedStatement st) throws SQLException, ClassNotFoundException{
+        return executeQuery(st,true);
     }
     
-    public void executeQuery(PreparedStatement st, boolean closeConnection) throws SQLException, ClassNotFoundException{
+    public Long executeQuery(PreparedStatement st, boolean closeConnection) throws SQLException, ClassNotFoundException{
+        Long generatedKey = null;
         try {
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
                 throw new SQLException("Query failed, no rows affected.");
+            }
+            ResultSet rs = st.getGeneratedKeys();
+
+            if (rs.next()) {
+                generatedKey = rs.getLong(1);
             }
         } catch(SQLException e) {
             throw e;
@@ -42,6 +49,7 @@ public abstract class DAO {
             if (closeConnection)
                 closeResources(st.getConnection(), st);
         }
+        return generatedKey;
     }
     
     

@@ -20,7 +20,6 @@ import model.abstratos.Endereco;
 import model.abstratos.Usuario;
 import model.extensores.Cliente;
 import model.interfaces.PedidoEstado;
-import model.interfaces.Promocao;
 
 /**
  *
