@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helper;
 
 import java.sql.SQLException;
@@ -21,10 +16,6 @@ import model.extensores.Entregador;
 import persistence.PedidoDAO;
 import persistence.UsuarioDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class HelperPedido {
     private static final HelperPedido instance = new HelperPedido();
     public static HelperPedido getInstance(){
@@ -34,21 +25,21 @@ public class HelperPedido {
     public List<Pedido> dividePedidoPorEmpresa(Pedido pedido) throws SQLException, ClassNotFoundException {
         
         HashMap<Long, Pedido> pedidosPorEmpresa = new HashMap<>();
-        for(Iterator i = pedido.getProdutos().iterator();i.hasNext();){
-            PedidoProduto pedidoProduto = (PedidoProduto)i.next();
-            Pedido p;
+        for(Iterator pedidosIterator = pedido.getProdutos().iterator();pedidosIterator.hasNext();){
+            PedidoProduto pedidoProduto = (PedidoProduto)pedidosIterator.next();
+            Pedido pedidoAtual;
             if (pedidosPorEmpresa.containsKey(pedidoProduto.getProduto().getId_empresa())){
-                p = pedidosPorEmpresa.get(pedidoProduto.getProduto().getId_empresa());
+                pedidoAtual = pedidosPorEmpresa.get(pedidoProduto.getProduto().getId_empresa());
             }else{
-                p = new Pedido();
+                pedidoAtual = new Pedido();
                 Empresa empresa = (Empresa)UsuarioDAO.getInstance().getById(pedidoProduto.getProduto().getId_empresa());
-                p.setEmpresa(empresa);
-                pedidosPorEmpresa.put(empresa.getId(),p);
-                p.setCliente(pedido.getCliente());
-                p.setEstado(pedido.getEstado());
-                p.setEndereco(pedido.getEndereco());
+                pedidoAtual.setEmpresa(empresa);
+                pedidosPorEmpresa.put(empresa.getId(),pedidoAtual);
+                pedidoAtual.setCliente(pedido.getCliente());
+                pedidoAtual.setEstado(pedido.getEstado());
+                pedidoAtual.setEndereco(pedido.getEndereco());
             }
-            p.addProduto(pedidoProduto);
+            pedidoAtual.addProduto(pedidoProduto);
         }       
         List<Pedido> result = new ArrayList<>(pedidosPorEmpresa.values());
         
@@ -56,16 +47,16 @@ public class HelperPedido {
     }    
     
     public void iniciarPreparoPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
-        for(Iterator i = pedidos.iterator();i.hasNext();){
-            Pedido pedido = (Pedido)i.next();
+        for(Iterator pedidosIterator = pedidos.iterator();pedidosIterator.hasNext();){
+            Pedido pedido = (Pedido)pedidosIterator.next();
             pedido.getEstado().emPreparo(pedido);
         }
         PedidoDAO.getInstance().updateEstado(pedidos);
     }
     
     public void FinalizarPreparoPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
-        for(Iterator i = pedidos.iterator();i.hasNext();){
-            Pedido pedido = (Pedido)i.next();
+        for(Iterator pedidosIterator = pedidos.iterator();pedidosIterator.hasNext();){
+            Pedido pedido = (Pedido)pedidosIterator.next();
             pedido.getEstado().aguardandoEntregador(pedido);
             pedido.getEstado().aCaminho(pedido);
             
@@ -75,8 +66,8 @@ public class HelperPedido {
     }
     
     public void cancelarPedidos(List<Pedido> pedidos) throws SQLException, ClassNotFoundException {
-        for(Iterator i = pedidos.iterator();i.hasNext();){
-            Pedido pedido = (Pedido)i.next();
+        for(Iterator pedidosIterator = pedidos.iterator();pedidosIterator.hasNext();){
+            Pedido pedido = (Pedido)pedidosIterator.next();
             pedido.getEstado().cancelado(pedido);
         }
         PedidoDAO.getInstance().updateEstado(pedidos);
@@ -87,9 +78,9 @@ public class HelperPedido {
     }
 
     public void adicionarPedidoListaPendentesEntregador(Pedido pedido) {
-        Usuario usuario = EntregadorChainResponsibility.getInstance().getPrimeiroEntregador();
-        if (usuario!=null)
-            usuario.addPedido(pedido);
+        Usuario primeiroEntregador = EntregadorChainResponsibility.getInstance().getPrimeiroEntregador();
+        if (primeiroEntregador!=null)
+            primeiroEntregador.addPedido(pedido);
         else
             EntregadorChainResponsibility.getInstance().addPedidoListaPendente(pedido);
     }
