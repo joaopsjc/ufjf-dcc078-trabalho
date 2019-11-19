@@ -9,13 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.abstratos.Produto;
 import model.abstratos.Usuario;
-import controller.ProdutoEstadoFactory;
-import controller.ProdutoFactory;
 import model.abstratos.Endereco;
 import persistence.EnderecoDAO;
-import persistence.ProdutoDAO;
 
 public class SaveEnderecoAction  implements Action{
     @Override
