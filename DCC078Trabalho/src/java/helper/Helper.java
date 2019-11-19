@@ -1,33 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.Pedido;
-import model.PedidoProduto;
 import model.abstratos.Endereco;
 import model.abstratos.Produto;
 import model.abstratos.Usuario;
-import model.extensores.Empresa;
 import persistence.EnderecoDAO;
 import persistence.NotificacaoDAO;
-import persistence.UsuarioDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class Helper {
     
     
