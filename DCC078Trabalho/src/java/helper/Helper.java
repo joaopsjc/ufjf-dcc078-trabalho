@@ -24,10 +24,10 @@ public class Helper {
     }
     
     public Usuario getLoggedUser(HttpServletRequest httpRequest){
-        HttpSession sess = httpRequest.getSession(true);
+        HttpSession sessaoAtual = httpRequest.getSession(true);
 
-        Usuario user = (Usuario)sess.getAttribute("loggedUser");
-        return user;
+        Usuario usuatioLogado = (Usuario)sessaoAtual.getAttribute("loggedUser");
+        return usuatioLogado;
     }
     
     public List<Produto> getListProdutos(HttpServletRequest httpRequest){
@@ -37,10 +37,10 @@ public class Helper {
     public List<Produto> getListProdutosByIds(String selectedIds,HttpServletRequest request){
         List<String> listSelectedIds = stringTolist(selectedIds);
         List<Produto> result = new ArrayList<>();
-        for(Iterator i = getListProdutos(request).iterator();i.hasNext();){
-            Produto p = (Produto)i.next();
-            if (listSelectedIds.contains(p.getId().toString()))
-                result.add(p);
+        for(Iterator produtosIterator = getListProdutos(request).iterator();produtosIterator.hasNext();){
+            Produto produtoAtual = (Produto)produtosIterator.next();
+            if (listSelectedIds.contains(produtoAtual.getId().toString()))
+                result.add(produtoAtual);
         }
         return result;
     }
