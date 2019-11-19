@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -16,21 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import model.abstratos.Usuario;
 import persistence.EnderecoDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class TornarEnderecoPrincipalAction   implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("selectedId");
+        String id_endereco = request.getParameter("selectedId");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("");
             
         Usuario currentUser = Helper.getInstance().getLoggedUser(request);
         try {
-            EnderecoDAO.getInstance().setEnderecoPrincipal(Long.parseLong(id),currentUser.getId());            
+            EnderecoDAO.getInstance().setEnderecoPrincipal(Long.parseLong(id_endereco),currentUser.getId());            
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DoRegisterAction.class.getName()).log(Level.SEVERE, null, ex);
             response.getWriter().write(ex.getMessage());
