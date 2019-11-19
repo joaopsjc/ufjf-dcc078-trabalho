@@ -82,25 +82,25 @@ public class Helper {
     
     public void setDynamicInfoLoggedUser(HttpServletRequest request) throws SQLException, ClassNotFoundException{
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpSession sess = httpRequest.getSession(false);
+        HttpSession sessaoAtual = httpRequest.getSession(false);
 
-        if (sess == null)
+        if (sessaoAtual == null)
             return;
         
-        Usuario user = (Usuario)sess.getAttribute("loggedUser");
+        Usuario user = (Usuario)sessaoAtual.getAttribute("loggedUser");
         if (user == null)
             return;
-        sess.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");       
+        sessaoAtual.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");       
         
         switch(user.getTipo()){
             case "Entregador":
-                setDynamicInfoEntregador(sess,user);
+                setDynamicInfoEntregador(sessaoAtual,user);
                 break;
             case "Empresa":
-                setDynamicInfoEmpresa(sess,user);
+                setDynamicInfoEmpresa(sessaoAtual,user);
                 break;
             case "Cliente":
-                setDynamicInfoCliente(sess,user);
+                setDynamicInfoCliente(sessaoAtual,user);
                 break;
         }
     }
