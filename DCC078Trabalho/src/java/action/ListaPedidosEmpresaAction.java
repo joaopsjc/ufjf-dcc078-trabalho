@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -19,17 +14,13 @@ import model.Pedido;
 import model.abstratos.Usuario;
 import persistence.PedidoDAO;
 
-/**
- *
- * @author jjsfa
- */
 public class ListaPedidosEmpresaAction  implements Action{
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response)
             throws IOException{ 
         try{
-            Usuario usuario = Helper.getInstance().getLoggedUser(request);
-            Long id_empresa = usuario.getId();
+            Usuario usuarioEmpresa = Helper.getInstance().getLoggedUser(request);
+            Long id_empresa = usuarioEmpresa.getId();
             List<Pedido> listaPedidos = PedidoDAO.getInstance().getPedidosByEmpresaId(id_empresa);
             request.setAttribute("listPedidos", listaPedidos);
             request.getRequestDispatcher("Pedido/listaPedidosEmpreparoEmpresa.jsp").forward(request, response);
