@@ -26,6 +26,10 @@ public abstract class DAO {
     }
     
     public void executeQuery(PreparedStatement st) throws SQLException, ClassNotFoundException{
+        executeQuery(st,true);
+    }
+    
+    public void executeQuery(PreparedStatement st, boolean closeConnection) throws SQLException, ClassNotFoundException{
         try {
             int affectedRows = st.executeUpdate();
 
@@ -35,7 +39,8 @@ public abstract class DAO {
         } catch(SQLException e) {
             throw e;
         } finally {
-            closeResources(st.getConnection(), st);
+            if (closeConnection)
+                closeResources(st.getConnection(), st);
         }
     }
     
