@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -19,11 +14,7 @@ import model.abstratos.Usuario;
 import model.extensores.Entregador;
 import persistence.UsuarioDAO;
 
-/**
- *
- * @author jjsfa
- */
-public class DoLoginAction implements Action{
+    public class DoLoginAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -31,15 +22,14 @@ public class DoLoginAction implements Action{
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         
-        
         try{
             Usuario usuario = UsuarioDAO.getInstance().authenticate(login,senha);
             if (usuario == null){
                 request.setAttribute("messageError", "Login e/ou senha estão incorretos.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);                
             }else{
-                HttpSession sess = request.getSession(true);
-                sess.setAttribute("loggedUser", usuario);
+                HttpSession sessaoAtual = request.getSession(true);
+                sessaoAtual.setAttribute("loggedUser", usuario);
                 if (usuario instanceof  Entregador)
                     EntregadorChainResponsibility.getInstance().addToChain((Entregador) usuario);
                 response.sendRedirect("FrontController?action=Home");
