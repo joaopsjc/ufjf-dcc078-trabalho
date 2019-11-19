@@ -87,35 +87,33 @@ public class Helper {
         if (sessaoAtual == null)
             return;
         
-        Usuario user = (Usuario)sessaoAtual.getAttribute("loggedUser");
-        if (user == null)
+        Usuario usuarioLogado = (Usuario)sessaoAtual.getAttribute("loggedUser");
+        if (usuarioLogado == null)
             return;
-        sessaoAtual.setAttribute("menuPageName", "menu"+user.getTipo()+".jsp");       
+        sessaoAtual.setAttribute("menuPageName", "menu"+usuarioLogado.getTipo()+".jsp");       
         
-        switch(user.getTipo()){
+        switch(usuarioLogado.getTipo()){
             case "Entregador":
-                setDynamicInfoEntregador(sessaoAtual,user);
+                setDynamicInfoEntregador(sessaoAtual,usuarioLogado);
                 break;
             case "Empresa":
-                setDynamicInfoEmpresa(sessaoAtual,user);
+                setDynamicInfoEmpresa(sessaoAtual,usuarioLogado);
                 break;
             case "Cliente":
-                setDynamicInfoCliente(sessaoAtual,user);
+                setDynamicInfoCliente(sessaoAtual,usuarioLogado);
                 break;
         }
     }
     
-    private void setDynamicInfoEntregador(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
-        sess.setAttribute("countPedidosPendentesEntregador", HelperPedido.getInstance().getCountPedidosPendentesEntregador(user.getId()));
+    private void setDynamicInfoEntregador(HttpSession sessaoAtual, Usuario usuarioLogado) throws SQLException, ClassNotFoundException{
+        sessaoAtual.setAttribute("countPedidosPendentesEntregador", HelperPedido.getInstance().getCountPedidosPendentesEntregador(usuarioLogado.getId()));
     }
-    private void setDynamicInfoEmpresa(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
-        sess.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(user.getId()));
+    private void setDynamicInfoEmpresa(HttpSession sess, Usuario usuarioLogado) throws SQLException, ClassNotFoundException{
+        sess.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(usuarioLogado.getId()));
     }
-    private void setDynamicInfoCliente(HttpSession sess, Usuario user) throws SQLException, ClassNotFoundException{
-        Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(user.getId());
-        user.setEnderecoPrincipal(endereco);
-        sess.setAttribute("countNotificacoesCliente", NotificacaoDAO.getInstance().getCountNotificacoesCliente(user.getId()));
+    private void setDynamicInfoCliente(HttpSession sessaonAtual, Usuario usuarioLogado) throws SQLException, ClassNotFoundException{
+        Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(usuarioLogado.getId());
+        usuarioLogado.setEnderecoPrincipal(endereco);
+        sessaonAtual.setAttribute("countNotificacoesCliente", NotificacaoDAO.getInstance().getCountNotificacoesCliente(usuarioLogado.getId()));
     }
-
-    
 }
