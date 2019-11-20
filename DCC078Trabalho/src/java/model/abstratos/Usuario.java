@@ -3,6 +3,7 @@ package model.abstratos;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import model.Pedido;
 
 public abstract class Usuario {
@@ -140,5 +141,7 @@ public abstract class Usuario {
                 result.add(pedidoAtual);                   
         }
         return result;
-    }   
+    }
+    
+    public abstract void setDynamicInfo(HttpSession sessaonAtual);
 }

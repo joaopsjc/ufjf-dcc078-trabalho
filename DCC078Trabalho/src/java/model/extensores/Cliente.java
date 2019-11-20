@@ -10,6 +10,9 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
+import model.abstratos.Endereco;
+import persistence.EnderecoDAO;
 import persistence.NotificacaoDAO;
 
 public class Cliente extends Usuario implements Observer {
@@ -63,5 +66,16 @@ public class Cliente extends Usuario implements Observer {
     @Override
     public String getQtdCarrinho() {
         return getCarrinho().getCountProdutos()+"";
+    }
+
+    @Override
+    public void setDynamicInfo(HttpSession sessaoAtual) {
+        try {
+            Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(this.getId());   
+            this.setEnderecoPrincipal(endereco);
+            sessaoAtual.setAttribute("countNotificacoesCliente", NotificacaoDAO.getInstance().getCountNotificacoesCliente(this.getId()));
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

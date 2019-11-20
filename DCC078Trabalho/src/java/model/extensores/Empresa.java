@@ -1,5 +1,10 @@
 package model.extensores;
 
+import helper.HelperPedido;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import model.abstratos.Usuario;
 import model.Cardapio;
 import model.abstratos.Produto;
@@ -32,5 +37,14 @@ public class Empresa extends Usuario{
     @Override
     public String getQtdCarrinho() {
         return "";
+    }
+
+    @Override
+    public void setDynamicInfo(HttpSession sessaoAtual) {
+        try {
+            sessaoAtual.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(this.getId()));
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

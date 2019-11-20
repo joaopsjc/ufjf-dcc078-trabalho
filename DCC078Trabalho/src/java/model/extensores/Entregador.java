@@ -1,9 +1,13 @@
 package model.extensores;
 
+import helper.HelperPedido;
 import java.sql.SQLException;
 import java.util.Iterator;
 import model.abstratos.Usuario;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import model.EntregadorChainResponsibility;
 import model.Pedido;
 import persistence.PedidoDAO;
@@ -69,4 +73,12 @@ public class Entregador extends Usuario {
         }
     }
     
+    @Override
+    public void setDynamicInfo(HttpSession sessaoAtual) {
+        try {
+            sessaoAtual.setAttribute("countPedidosPendentesEntregador", HelperPedido.getInstance().getCountPedidosPendentesEntregador(this.getId()));
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
