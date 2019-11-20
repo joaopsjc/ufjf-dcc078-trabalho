@@ -5,8 +5,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>UFJF Food | Login</title>
+    <%@page contentType="text/html" pageEncoding="windows-1252"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <title><c:out value="${initParam.systemName}"/> | Login</title>
 
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -24,11 +25,11 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-
+                
                 <h1 class="logo-name">UFJF</h1>
 
             </div>
-            <h3>Bem vindo ao UFJF Food</h3>
+            <h3>Bem vindo ao <c:out value="${initParam.systemName}"/></h3>
             <form class="m-t" role="form" method="post" action="FrontController">
                 <input type="hidden" name="action" value="DoLogin" />
                 <div class="form-group">

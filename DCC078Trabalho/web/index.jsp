@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="text-center m-t-lg">
                         <h1>
-                            UFJF Food
+                            <c:out value="${initParam.systemName}"/>
                         </h1>
                         <small>Navegue pelo menu ao lado.</small>
                     </div>

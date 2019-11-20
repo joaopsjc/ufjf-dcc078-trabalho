@@ -4,8 +4,10 @@
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%@page contentType="text/html" pageEncoding="windows-1252"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <title>UFJF Food | Registro</title>
+    <title><c:out value="${initParam.systemName}"/> | Registro</title>
 
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -16,8 +18,6 @@
     <!-- Sweet Alert -->
     <link href="../DCC078Trabalho/assets/css/plugins/sweetalert/sweetalert2.css" rel="stylesheet">
     
-    <%@page contentType="text/html" pageEncoding="windows-1252"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 </head>
 
@@ -30,7 +30,7 @@
                 <h1 class="logo-name">UFJF</h1>
 
             </div>
-            <h3>Registro no UFJF Food</h3>
+            <h3>Registro no <c:out value="${initParam.systemName}"/></h3>
             <p>Crie sua conta agora.</p>
             <form class="m-t" role="form" action="FrontController" method="post">
                 <input type="hidden" value="DoRegister" name="action"/>

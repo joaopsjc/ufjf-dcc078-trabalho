@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>UFJF Food | Erro</title>
+    <title><c:out value="${initParam.systemName}"/> | Erro</title>
 
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">

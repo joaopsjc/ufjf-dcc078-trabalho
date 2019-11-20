@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>UFJF Food</title>
+    <title><c:out value="${initParam.systemName}"/></title>
 
     <link href="../DCC078Trabalho/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../DCC078Trabalho/assets/font-awesome/css/font-awesome.css" rel="stylesheet">

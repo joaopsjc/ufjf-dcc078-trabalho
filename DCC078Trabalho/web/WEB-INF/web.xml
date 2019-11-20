@@ -18,10 +18,14 @@
             index.jsp
         </welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>systemName</param-name>
+        <param-value>UFJF Food</param-value>
+    </context-param>
     <filter>
-         <filter-name>SessionControl</filter-name>
-         <filter-class>controller.SessionControl</filter-class>
-    </filter>  
+        <filter-name>SessionControl</filter-name>
+        <filter-class>controller.SessionControl</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>SessionControl</filter-name>
         <url-pattern>/*</url-pattern>
