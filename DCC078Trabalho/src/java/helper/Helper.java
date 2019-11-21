@@ -92,28 +92,7 @@ public class Helper {
             return;
         sessaoAtual.setAttribute("menuPageName", "menu"+usuarioLogado.getTipo()+".jsp");       
         
-        switch(usuarioLogado.getTipo()){
-            case "Entregador":
-                setDynamicInfoEntregador(sessaoAtual,usuarioLogado);
-                break;
-            case "Empresa":
-                setDynamicInfoEmpresa(sessaoAtual,usuarioLogado);
-                break;
-            case "Cliente":
-                setDynamicInfoCliente(sessaoAtual,usuarioLogado);
-                break;
-        }
+        usuarioLogado.setDynamicInfo(sessaoAtual);
     }
     
-    private void setDynamicInfoEntregador(HttpSession sessaoAtual, Usuario usuarioLogado) throws SQLException, ClassNotFoundException{
-        sessaoAtual.setAttribute("countPedidosPendentesEntregador", HelperPedido.getInstance().getCountPedidosPendentesEntregador(usuarioLogado.getId()));
-    }
-    private void setDynamicInfoEmpresa(HttpSession sess, Usuario usuarioLogado) throws SQLException, ClassNotFoundException{
-        sess.setAttribute("countPedidosPendentesEmpresa", HelperPedido.getInstance().getCountPedidosPendentesEmpresa(usuarioLogado.getId()));
-    }
-    private void setDynamicInfoCliente(HttpSession sessaonAtual, Usuario usuarioLogado) throws SQLException, ClassNotFoundException{
-        Endereco endereco = EnderecoDAO.getInstance().getPrincipalByUserId(usuarioLogado.getId());
-        usuarioLogado.setEnderecoPrincipal(endereco);
-        sessaonAtual.setAttribute("countNotificacoesCliente", NotificacaoDAO.getInstance().getCountNotificacoesCliente(usuarioLogado.getId()));
-    }
 }
