@@ -25,10 +25,7 @@ public abstract class Usuario {
         produtos = new ArrayList<>();
     }
     
-    public String getTipo()
-    {
-        return "Usuario";
-    }
+    public abstract String getTipo();
     
     public Long getId() {
         return id;
@@ -144,4 +141,9 @@ public abstract class Usuario {
     }
     
     public abstract void setDynamicInfo(HttpSession sessaonAtual);
+
+    public void setViewInfo(HttpSession sessaoAtual) {
+        sessaoAtual.setAttribute("menuPageName", "menu"+getTipo()+".jsp");
+        setDynamicInfo(sessaoAtual);
+    }
 }

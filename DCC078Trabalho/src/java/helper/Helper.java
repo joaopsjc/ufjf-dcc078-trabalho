@@ -77,8 +77,6 @@ public class Helper {
     public void zeraCarrinhoByClienteId(HttpServletRequest request) {
         getLoggedUser(request).setCarrinho(new Pedido());
     }
-
-    
     
     public void setDynamicInfoLoggedUser(HttpServletRequest request) throws SQLException, ClassNotFoundException{
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -90,9 +88,8 @@ public class Helper {
         Usuario usuarioLogado = (Usuario)sessaoAtual.getAttribute("loggedUser");
         if (usuarioLogado == null)
             return;
-        sessaoAtual.setAttribute("menuPageName", "menu"+usuarioLogado.getTipo()+".jsp");       
-        
-        usuarioLogado.setDynamicInfo(sessaoAtual);
+                
+        usuarioLogado.setViewInfo(sessaoAtual);
     }
     
 }
